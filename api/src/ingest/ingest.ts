@@ -294,34 +294,6 @@ export async function ingestFile(filename: string, content: string): Promise<Upl
       return report;
     }
 
-    // --- resolve branches, fridges and loggers -----------------------------
-    const branchIdByCanonical = new Map<string, number>();
-    const fridgeIdByKey = new Map<string, number>();
-    const loggerByCode = new Map<string, LoggerRecord>();
-
-    for (const row of parsed.rows) {
-      if (!branchIdByCanonical.has(row.branchCanonical)) {
-        branchIdByCanonical.set(
-          row.branchCanonical,
-          await resolveBranch(client, row.branchCanonical, row.branchName),
-        );
-      }
-      const fridgeKey = `${row.branchCanonical}|${row.fridgeCanonical}`;
-      if (!fridgeIdByKey.has(fridgeKey)) {
-        const fridgeId = await resolveFridge(
-          client,
-          branchIdByCanonical.get(row.branchCanonical)!,
-          row.fridgeCanonical,
-          row.fridgeName,
-        );
-        fridgeIdByKey.set(fridgeKey, fridgeId);
-      }
-      if (!loggerByCode.has(row.loggerCode)) {
-        loggerByCode.set(row.loggerCode, await resolveLogger(client, row.loggerCode));
-      }
-    }
-
-    // --- resolve each logger's unit, then convert --------------------------
     const rowsByLogger = new Map<string, ParsedRow[]>();
     for (const row of parsed.rows) {
       const list = rowsByLogger.get(row.loggerCode);
@@ -329,10 +301,18 @@ export async function ingestFile(filename: string, content: string): Promise<Upl
       else rowsByLogger.set(row.loggerCode, [row]);
     }
 
-    const readings: PreparedReading[] = [];
+    // --- work out each logger's unit, and drop any file we cannot trust ----
+    //
+    // Deliberately before branches and fridges are created. A file rejected
+    // for a bad unit should leave no trace: creating the branch and fridge
+    // first left a phantom fridge on the dashboard, permanently "no data",
+    // for an upload that was never accepted.
+    const loggerByCode = new Map<string, LoggerRecord>();
+    const unitByLogger = new Map<string, TemperatureUnit>();
 
     for (const [loggerCode, loggerRows] of rowsByLogger) {
-      const logger = loggerByCode.get(loggerCode)!;
+      const logger = await resolveLogger(client, loggerCode);
+      loggerByCode.set(loggerCode, logger);
 
       const declaredInFile = new Set(
         loggerRows
@@ -360,12 +340,12 @@ export async function ingestFile(filename: string, content: string): Promise<Upl
         );
       }
 
-      const numericValues = loggerRows
-        .map((row) => row.rawNumber)
-        .filter((value): value is number => value !== null);
-
       if (unit === 'C') {
+        const numericValues = loggerRows
+          .map((row) => row.rawNumber)
+          .filter((value): value is number => value !== null);
         const suspicion = assessDeclaredUnit(loggerCode, 'C', numericValues);
+
         if (suspicion.level === 'reject') {
           warnings.push(suspicion.message);
           for (const row of loggerRows) {
@@ -375,6 +355,7 @@ export async function ingestFile(filename: string, content: string): Promise<Upl
               raw: `${row.rawValue} at ${row.recordedAt.toISOString()}`,
             });
           }
+          rowsByLogger.delete(loggerCode);
           continue;
         }
         if (suspicion.level === 'warn') {
@@ -383,6 +364,43 @@ export async function ingestFile(filename: string, content: string): Promise<Upl
       } else {
         convertedFromFahrenheit.push(loggerCode);
       }
+
+      unitByLogger.set(loggerCode, unit);
+    }
+
+    // --- resolve branches and fridges, for surviving rows only -------------
+    const branchIdByCanonical = new Map<string, number>();
+    const fridgeIdByKey = new Map<string, number>();
+
+    for (const loggerRows of rowsByLogger.values()) {
+      for (const row of loggerRows) {
+        if (!branchIdByCanonical.has(row.branchCanonical)) {
+          branchIdByCanonical.set(
+            row.branchCanonical,
+            await resolveBranch(client, row.branchCanonical, row.branchName),
+          );
+        }
+        const fridgeKey = `${row.branchCanonical}|${row.fridgeCanonical}`;
+        if (!fridgeIdByKey.has(fridgeKey)) {
+          fridgeIdByKey.set(
+            fridgeKey,
+            await resolveFridge(
+              client,
+              branchIdByCanonical.get(row.branchCanonical)!,
+              row.fridgeCanonical,
+              row.fridgeName,
+            ),
+          );
+        }
+      }
+    }
+
+    // --- convert and stage the readings ------------------------------------
+    const readings: PreparedReading[] = [];
+
+    for (const [loggerCode, loggerRows] of rowsByLogger) {
+      const logger = loggerByCode.get(loggerCode)!;
+      const unit = unitByLogger.get(loggerCode)!;
 
       moves.push(
         ...(await syncAssignments(client, logger.id, loggerCode, loggerRows, fridgeIdByKey)),

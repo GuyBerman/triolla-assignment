@@ -69,6 +69,14 @@ export interface FridgeSummary {
   drift: Drift | null;
 }
 
+export interface FridgeListResponse {
+  /** The newest reading in the data; shown as "data as of". */
+  asOf: string | null;
+  from: string | null;
+  to: string | null;
+  fridges: FridgeSummary[];
+}
+
 export interface FridgeDetail {
   fridge: FridgeSummary;
   from: string;

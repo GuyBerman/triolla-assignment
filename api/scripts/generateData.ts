@@ -34,6 +34,15 @@ const round1 = (value: number) => Math.round(value * 10) / 10;
 
 const MINUTE = 60_000;
 
+/**
+ * Every logger reports up to the same moment, apart from one that is
+ * deliberately dead and one whose logger was moved out. Without that, the most
+ * recent fridge in the data makes every other fridge look like it stopped
+ * reporting, and the whole dashboard reads "no data".
+ */
+const SPAN_START = '2026-09-14T06:00';
+const SPAN_END = '2026-09-18T18:00';
+
 /** Wall-clock Israeli time in, UTC-naive Date out. Only used for formatting. */
 function at(iso: string): number {
   return new Date(`${iso}:00Z`).getTime();
@@ -161,7 +170,7 @@ const jerusalem: Series = {
   synth: [
     {
       from: '2026-09-14T08:45',
-      to: '2026-09-16T22:00',
+      to: SPAN_END,
       stepMin: 15,
       baseC: 3.9,
       behaviour: 'normal',
@@ -186,7 +195,7 @@ const haifa: Series = {
   synth: [
     {
       from: '2026-09-14T06:45',
-      to: '2026-09-16T22:00',
+      to: SPAN_END,
       stepMin: 15,
       baseC: 3.6,
       behaviour: 'errors',
@@ -214,8 +223,10 @@ const telAvivWalkIn: Series = {
   ],
   synth: [
     {
+      // Stops the moment the logger is moved out. After this the walk-in has
+      // no logger in it at all, which is a thing Summer should be told.
       from: '2026-09-14T06:45',
-      to: '2026-09-16T23:45',
+      to: '2026-09-17T05:45',
       stepMin: 15,
       baseC: 4.2,
       behaviour: 'doorOpens',
@@ -235,7 +246,7 @@ const telAvivDisplay: Series = {
   synth: [
     {
       from: '2026-09-17T06:15',
-      to: '2026-09-19T22:00',
+      to: SPAN_END,
       stepMin: 15,
       baseC: 3.8,
       behaviour: 'doorOpens',
@@ -269,7 +280,7 @@ const rishon: Series = {
     },
     {
       from: '2026-09-14T10:15',
-      to: '2026-09-16T20:00',
+      to: SPAN_END,
       stepMin: 15,
       baseC: 4.4,
       behaviour: 'normal',
@@ -284,6 +295,11 @@ const rishon: Series = {
 // one fridge that drifts upward for two days while staying under five degrees
 // for most of it - the case that only the trend check catches.
 // ---------------------------------------------------------------------------
+/** These loggers report hourly rather than every fifteen minutes. */
+const plain = (baseC: number, behaviour: Behaviour = 'normal'): SynthSpec[] => [
+  { from: SPAN_START, to: SPAN_END, stepMin: 60, baseC, behaviour },
+];
+
 const otherBranches: Series[] = [
   {
     loggerCode: 'TL-0604',
@@ -291,44 +307,65 @@ const otherBranches: Series[] = [
     fridge: 'Dairy',
     synth: [
       {
-        from: '2026-09-14T06:00',
-        to: '2026-09-16T18:00',
-        stepMin: 30,
+        // The Rishon story again, but drawn out: this one creeps up for four
+        // days. It stays under five degrees for the first two, which is the
+        // window in which someone could still save the stock.
+        from: SPAN_START,
+        to: SPAN_END,
+        stepMin: 60,
         baseC: 2.4,
         behaviour: 'slowDrift',
         driftPerHour: 0.055,
       },
     ],
   },
-  { loggerCode: 'TL-0605', branch: 'Netanya', fridge: 'Cream cakes', synth: [{ from: '2026-09-14T06:00', to: '2026-09-16T18:00', stepMin: 30, baseC: 4.1, behaviour: 'normal' }] },
-  { loggerCode: 'TL-0711', branch: "Be'er Sheva", fridge: 'Dairy', synth: [{ from: '2026-09-14T06:00', to: '2026-09-16T18:00', stepMin: 30, baseC: 3.4, behaviour: 'doorOpens' }] },
-  { loggerCode: 'TL-0712', branch: "Be'er Sheva", fridge: 'Walk-in', synth: [{ from: '2026-09-14T06:00', to: '2026-09-16T18:00', stepMin: 30, baseC: 2.9, behaviour: 'normal' }] },
-  { loggerCode: 'TL-0820', branch: 'Petah Tikva', fridge: 'Dairy', synth: [{ from: '2026-09-14T06:00', to: '2026-09-16T18:00', stepMin: 30, baseC: 3.7, behaviour: 'normal' }] },
+  { loggerCode: 'TL-0605', branch: 'Netanya', fridge: 'Cream cakes', synth: plain(4.1) },
+  { loggerCode: 'TL-0711', branch: "Be'er Sheva", fridge: 'Dairy', synth: plain(3.4, 'doorOpens') },
+  { loggerCode: 'TL-0712', branch: "Be'er Sheva", fridge: 'Walk-in', synth: plain(2.9) },
+  { loggerCode: 'TL-0820', branch: 'Petah Tikva', fridge: 'Dairy', synth: plain(3.7) },
   {
     loggerCode: 'TL-0821',
     branch: 'Petah Tikva',
     fridge: 'Display 1',
     synth: [
       {
-        from: '2026-09-14T06:00',
-        to: '2026-09-16T18:00',
-        stepMin: 30,
+        // Stops reporting halfway through and never comes back. Battery, dead
+        // logger, or nobody downloaded it - the file cannot say which, and
+        // neither can we. It must not read as a fridge that is fine.
+        from: SPAN_START,
+        to: '2026-09-16T09:00',
+        stepMin: 60,
         baseC: 4.0,
         behaviour: 'normal',
-        // This logger simply stopped reporting halfway through the week.
-        gaps: [['2026-09-15T09:00', '2026-09-16T18:00']],
       },
     ],
   },
-  { loggerCode: 'TL-0933', branch: 'Ashdod', fridge: 'Dairy', synth: [{ from: '2026-09-14T06:00', to: '2026-09-16T18:00', stepMin: 30, baseC: 3.1, behaviour: 'normal' }] },
-  { loggerCode: 'TL-0934', branch: 'Ashdod', fridge: 'Cream cakes', synth: [{ from: '2026-09-14T06:00', to: '2026-09-16T18:00', stepMin: 30, baseC: 4.3, behaviour: 'doorOpens' }] },
-  { loggerCode: 'TL-1041', branch: 'Holon', fridge: 'Dairy', synth: [{ from: '2026-09-14T06:00', to: '2026-09-16T18:00', stepMin: 30, baseC: 3.6, behaviour: 'normal' }] },
-  { loggerCode: 'TL-1042', branch: 'Holon', fridge: 'Walk-in', synth: [{ from: '2026-09-14T06:00', to: '2026-09-16T18:00', stepMin: 30, baseC: 2.7, behaviour: 'normal' }] },
-  { loggerCode: 'TL-1150', branch: 'Bat Yam', fridge: 'Dairy', synth: [{ from: '2026-09-14T06:00', to: '2026-09-16T18:00', stepMin: 30, baseC: 3.9, behaviour: 'normal' }] },
-  { loggerCode: 'TL-1261', branch: 'Herzliya', fridge: 'Dairy', synth: [{ from: '2026-09-14T06:00', to: '2026-09-16T18:00', stepMin: 30, baseC: 3.3, behaviour: 'normal' }] },
-  { loggerCode: 'TL-1262', branch: 'Herzliya', fridge: 'Display 1', synth: [{ from: '2026-09-14T06:00', to: '2026-09-16T18:00', stepMin: 30, baseC: 4.5, behaviour: 'doorOpens' }] },
-  { loggerCode: 'TL-1370', branch: "Ra'anana", fridge: 'Dairy', synth: [{ from: '2026-09-14T06:00', to: '2026-09-16T18:00', stepMin: 30, baseC: 3.8, behaviour: 'normal' }] },
-  { loggerCode: 'TL-1371', branch: "Ra'anana", fridge: 'Cream cakes', synth: [{ from: '2026-09-14T06:00', to: '2026-09-16T18:00', stepMin: 30, baseC: 4.2, behaviour: 'normal' }] },
+  { loggerCode: 'TL-0933', branch: 'Ashdod', fridge: 'Dairy', synth: plain(3.1) },
+  { loggerCode: 'TL-0934', branch: 'Ashdod', fridge: 'Cream cakes', synth: plain(4.3, 'doorOpens') },
+  { loggerCode: 'TL-1041', branch: 'Holon', fridge: 'Dairy', synth: plain(3.6) },
+  {
+    loggerCode: 'TL-1042',
+    branch: 'Holon',
+    fridge: 'Walk-in',
+    synth: [
+      { from: SPAN_START, to: '2026-09-17T17:00', stepMin: 60, baseC: 2.7, behaviour: 'normal' },
+      {
+        // Starts climbing in the last day but is still inside the limit at the
+        // end, so only the trend check has anything to say about it.
+        from: '2026-09-17T18:00',
+        to: SPAN_END,
+        stepMin: 60,
+        baseC: 2.8,
+        behaviour: 'slowDrift',
+        driftPerHour: 0.075,
+      },
+    ],
+  },
+  { loggerCode: 'TL-1150', branch: 'Bat Yam', fridge: 'Dairy', synth: plain(3.9) },
+  { loggerCode: 'TL-1261', branch: 'Herzliya', fridge: 'Dairy', synth: plain(3.3) },
+  { loggerCode: 'TL-1262', branch: 'Herzliya', fridge: 'Display 1', synth: plain(4.5, 'doorOpens') },
+  { loggerCode: 'TL-1370', branch: "Ra'anana", fridge: 'Dairy', synth: plain(3.8) },
+  { loggerCode: 'TL-1371', branch: "Ra'anana", fridge: 'Cream cakes', synth: plain(4.2) },
 ];
 
 // ---------------------------------------------------------------------------
