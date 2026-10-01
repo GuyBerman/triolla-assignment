@@ -69,11 +69,6 @@ export function determineStatus(input: StatusInput): StatusResult {
     };
   }
 
-  const recentCutoff = asOfMs - ANALYSIS.recentExcursionHours * 3_600_000;
-  const recent = excursions
-    .filter((excursion) => new Date(excursion.endedAt ?? excursion.startedAt).getTime() >= recentCutoff)
-    .at(-1);
-
   if (drift) {
     // Derived from the values as displayed, so the figures in the sentence add
     // up. Taking the difference before rounding produced "4.0°C to 4.4°C
@@ -94,18 +89,32 @@ export function determineStatus(input: StatusInput): StatusResult {
     };
   }
 
-  if (recent) {
+  // A breach that has since recovered keeps the fridge amber for the rest of
+  // the period being shown, rather than reverting to green once the
+  // temperature comes back down.
+  //
+  // This started as a 24-hour rule, which quietly turned the Rishon cream
+  // cakes fridge green three days after it had spent nearly four hours at
+  // 8 degrees, under the sentence "nothing above 5.0°C for long enough to
+  // matter". The status was arguably defensible - the fridge was working by
+  // then - but the sentence was false, and Summer scans colours, not
+  // sentences. Stock sat warm for four hours and somebody still has to decide
+  // what to do about it.
+  const latest = excursions.at(-1);
+  if (latest) {
+    const earlier = excursions.length - 1;
     return {
       status: 'warning',
       reason:
-        `Was above ${formatTemperature(thresholdC)} for ` +
-        `${describeDuration(recent.durationMinutes)} on ` +
-        `${formatDateTime(recent.startedAt, timeZone)}, back to normal since.`,
+        `${formatTemperature(last.tempC)} now, but it was above ` +
+        `${formatTemperature(thresholdC)} for ${describeDuration(latest.durationMinutes)} on ` +
+        `${formatDateTime(latest.startedAt, timeZone)}` +
+        (earlier > 0 ? `, and ${earlier} other ${earlier === 1 ? 'time' : 'times'}.` : '.'),
     };
   }
 
   const recentGap = gaps.find(
-    (gap) => new Date(gap.endedAt).getTime() >= asOfMs - ANALYSIS.recentExcursionHours * 3_600_000,
+    (gap) => new Date(gap.endedAt).getTime() >= asOfMs - ANALYSIS.recentGapHours * 3_600_000,
   );
   if (recentGap) {
     return {

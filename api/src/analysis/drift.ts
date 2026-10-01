@@ -19,8 +19,18 @@ export function findDrift(samples: Sample[], asOfMs: number): Drift | null {
 
   if (window.length < ANALYSIS.driftMinReadings) return null;
 
+  // A slope on its own is not enough evidence.
+  //
+  // 0.05 C/hour across the full twelve hours is a real 0.6 degree climb, but
+  // the same slope across the hour and a half of data a fridge might have just
+  // after an upload is a tenth of a degree - noise, reported as "warming up".
+  // Both a long enough window and a large enough actual rise are required.
+  const spanHours = (window[window.length - 1]!.at - window[0]!.at) / 3_600_000;
+  if (spanHours < ANALYSIS.driftMinWindowHours) return null;
+
   const trend = robustTrend(window);
   if (trend === null || trend.slopeCPerHour < ANALYSIS.driftMinSlopeCPerHour) return null;
+  if (trend.secondHalfC - trend.firstHalfC < ANALYSIS.driftMinRiseC) return null;
 
   return {
     slopeCPerHour: Math.round(trend.slopeCPerHour * 1000) / 1000,

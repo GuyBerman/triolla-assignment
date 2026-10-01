@@ -45,12 +45,26 @@ export const ANALYSIS = {
   driftMinReadings: 8,
 
   /**
+   * Guards against calling noise a trend. Both must be met as well as the
+   * slope: at least this many hours of readings to judge from, and at least
+   * this much genuine rise across them.
+   */
+  driftMinWindowHours: 4,
+  driftMinRiseC: 0.4,
+
+  /**
    * How long after its last reading a fridge becomes "no data" rather than
    * "fine". Measured against the newest reading in the data, not against the
    * clock - see `asOf` in src/analysis/index.ts.
    */
   staleAfterHours: 6,
 
-  /** A finished excursion still shows as a warning for this long afterwards. */
-  recentExcursionHours: 24,
+  /**
+   * How recent a hole in the readings has to be to show as a warning on a
+   * fridge that is otherwise behaving.
+   *
+   * A finished excursion has no equivalent setting on purpose: it stays a
+   * warning for the whole period on screen. See the comment in status.ts.
+   */
+  recentGapHours: 24,
 } as const;

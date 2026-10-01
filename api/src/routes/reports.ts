@@ -4,7 +4,7 @@ import { analyseReadings } from '../analysis';
 import { config } from '../config';
 import { getAsOf, listFridges, readingsByFridge } from '../repository';
 import type { ExcursionReport, ExcursionReportRow } from '../types';
-import { daysBefore, parseDateParam, parseIntParam } from './params';
+import { clamp, daysBefore, parseDateParam, parseIntParam } from './params';
 
 export const reportsRouter = Router();
 
@@ -21,8 +21,9 @@ const REPORT_WINDOW_DAYS = 30;
  */
 reportsRouter.get('/reports/excursions', async (req, res) => {
   const asOf = (await getAsOf()) ?? new Date();
+  const days = clamp(Number(req.query.days ?? REPORT_WINDOW_DAYS) || REPORT_WINDOW_DAYS, 1, 365);
   const to = parseDateParam(req.query.to, asOf);
-  const from = parseDateParam(req.query.from, daysBefore(to, REPORT_WINDOW_DAYS));
+  const from = parseDateParam(req.query.from, daysBefore(to, days));
   const fridgeId = parseIntParam(req.query.fridgeId);
 
   if (from.getTime() > to.getTime()) {

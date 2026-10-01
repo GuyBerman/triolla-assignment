@@ -347,6 +347,63 @@ describe('which state wins', () => {
   });
 });
 
+describe('a fridge that recovered on its own', () => {
+  const base = { thresholdC: 5, timeZone: TZ };
+
+  /**
+   * The Rishon cream cakes fridge from the brief: four hours at 8 degrees, then
+   * back to normal for the rest of the week. An earlier version turned it green
+   * after 24 hours and captioned it "nothing above 5.0°C for long enough to
+   * matter", which is the kind of thing Summer means when she says she still
+   * misses things.
+   */
+  const spikedThenFine = [
+    ...series('2026-09-14T06:00:00Z', 15, [4.6, 5.4, 6.3, 7.1, 7.7, 7.9, 7.5, 8.0, 7.8, 7.6, 8.0, 7.5, 7.6, 4.8, 4.2]),
+    ...series('2026-09-17T06:00:00Z', 15, [4.1, 4.2, 4.0, 4.1, 4.3, 4.2, 4.1, 4.0]),
+  ];
+
+  it('is still flagged days later, not quietly turned green', () => {
+    const result = analyseReadings({
+      ...base,
+      readings: spikedThenFine,
+      asOfMs: lastAt(spikedThenFine),
+    });
+
+    expect(result.excursions).toHaveLength(1);
+    expect(result.status).toBe('warning');
+  });
+
+  it('never says nothing happened when something did', () => {
+    const result = analyseReadings({
+      ...base,
+      readings: spikedThenFine,
+      asOfMs: lastAt(spikedThenFine),
+    });
+
+    expect(result.statusReason).toContain('it was above');
+    expect(result.statusReason).not.toContain('nothing above');
+  });
+
+  it('does not call a tenth of a degree of noise a warming trend', () => {
+    // Enough readings to qualify, but only a short stretch of them and barely
+    // any movement. Reporting this as "warming up" trains Summer to ignore the
+    // one warning that would have saved the Rishon stock.
+    const jittery = series('2026-09-14T06:00:00Z', 15, [4.1, 4.2, 4.0, 4.1, 4.3, 4.2, 4.1, 4.0]);
+    const result = analyseReadings({ ...base, readings: jittery, asOfMs: lastAt(jittery) });
+
+    expect(result.drift).toBeNull();
+    expect(result.status).toBe('ok');
+  });
+
+  it('still says nothing happened when genuinely nothing did', () => {
+    const calm = series('2026-09-14T06:00:00Z', 15, Array.from({ length: 40 }, () => 4));
+    const result = analyseReadings({ ...base, readings: calm, asOfMs: lastAt(calm) });
+
+    expect(result.status).toBe('ok');
+    expect(result.statusReason).toContain('nothing above');
+  });
+});
+
 describe('working out how often a logger reports', () => {
   it('reads the interval off the data rather than assuming', () => {
     expect(inferCadenceMinutes(samples('2026-09-14T06:00:00Z', 15, [1, 2, 3, 4]).map((s) => s.at))).toBe(15);

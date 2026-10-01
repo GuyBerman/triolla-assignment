@@ -118,8 +118,9 @@ fridgesRouter.get('/fridges/:id', async (req, res) => {
   }
 
   const asOf = (await getAsOf()) ?? new Date();
+  const days = clamp(Number(req.query.days ?? DETAIL_WINDOW_DAYS) || DETAIL_WINDOW_DAYS, 1, 90);
   const to = parseDateParam(req.query.to, asOf);
-  const from = parseDateParam(req.query.from, daysBefore(to, DETAIL_WINDOW_DAYS));
+  const from = parseDateParam(req.query.from, daysBefore(to, days));
 
   if (from.getTime() > to.getTime()) {
     res.status(400).json({ error: 'The start of the range is after the end of it.' });

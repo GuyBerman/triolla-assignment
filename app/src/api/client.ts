@@ -1,4 +1,7 @@
 import Constants from 'expo-constants';
+import { Platform } from 'react-native';
+
+import type { UploadReport } from './types';
 
 /**
  * Resolving the API base URL is the one piece of plumbing that decides whether
@@ -77,3 +80,34 @@ export const api = {
       // boundary itself, and setting it by hand breaks the upload.
     }),
 };
+
+/** The subset of a document-picker asset we need; avoids importing the picker here. */
+export interface PickedFile {
+  uri: string;
+  name: string;
+  mimeType?: string | null;
+  file?: File | null;
+}
+
+/**
+ * React Native and the web disagree about what goes into a FormData file part.
+ *
+ * On web the picker hands back a real `File`, which FormData understands. On a
+ * phone there is no `File`: the part has to be the `{ uri, name, type }` shape
+ * React Native's own fetch recognises, which is not valid DOM FormData and so
+ * needs the cast.
+ */
+export async function uploadFile(asset: PickedFile): Promise<UploadReport> {
+  const form = new FormData();
+  const name = asset.name || 'upload.csv';
+  const type = asset.mimeType ?? 'text/csv';
+
+  if (Platform.OS === 'web') {
+    const blob = asset.file ?? (await (await fetch(asset.uri)).blob());
+    form.append('file', blob, name);
+  } else {
+    form.append('file', { uri: asset.uri, name, type } as unknown as Blob);
+  }
+
+  return api.postFile<UploadReport>('/api/uploads', form);
+}
