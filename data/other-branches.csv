@@ -1,0 +1,1750 @@
+Logger,Branch,Fridge,Time,Temp
+TL-0604,Netanya,Dairy,2026-09-14 06:00,2.5
+TL-0604,Netanya,Dairy,2026-09-14 06:30,2.4
+TL-0604,Netanya,Dairy,2026-09-14 07:00,2.5
+TL-0604,Netanya,Dairy,2026-09-14 07:30,2.7
+TL-0604,Netanya,Dairy,2026-09-14 08:00,2.4
+TL-0604,Netanya,Dairy,2026-09-14 08:30,2.5
+TL-0604,Netanya,Dairy,2026-09-14 09:00,2.6
+TL-0604,Netanya,Dairy,2026-09-14 09:30,2.7
+TL-0604,Netanya,Dairy,2026-09-14 10:00,2.5
+TL-0604,Netanya,Dairy,2026-09-14 10:30,2.8
+TL-0604,Netanya,Dairy,2026-09-14 11:00,2.7
+TL-0604,Netanya,Dairy,2026-09-14 11:30,2.9
+TL-0604,Netanya,Dairy,2026-09-14 12:00,2.6
+TL-0604,Netanya,Dairy,2026-09-14 12:30,2.8
+TL-0604,Netanya,Dairy,2026-09-14 13:00,2.9
+TL-0604,Netanya,Dairy,2026-09-14 13:30,2.8
+TL-0604,Netanya,Dairy,2026-09-14 14:00,3.0
+TL-0604,Netanya,Dairy,2026-09-14 14:30,3.0
+TL-0604,Netanya,Dairy,2026-09-14 15:00,3.1
+TL-0604,Netanya,Dairy,2026-09-14 15:30,3.0
+TL-0604,Netanya,Dairy,2026-09-14 16:00,2.8
+TL-0604,Netanya,Dairy,2026-09-14 16:30,3.1
+TL-0604,Netanya,Dairy,2026-09-14 17:00,3.1
+TL-0604,Netanya,Dairy,2026-09-14 17:30,3.1
+TL-0604,Netanya,Dairy,2026-09-14 18:00,3.1
+TL-0604,Netanya,Dairy,2026-09-14 18:30,3.0
+TL-0604,Netanya,Dairy,2026-09-14 19:00,3.0
+TL-0604,Netanya,Dairy,2026-09-14 19:30,3.2
+TL-0604,Netanya,Dairy,2026-09-14 20:00,3.0
+TL-0604,Netanya,Dairy,2026-09-14 20:30,3.3
+TL-0604,Netanya,Dairy,2026-09-14 21:00,3.2
+TL-0604,Netanya,Dairy,2026-09-14 21:30,3.1
+TL-0604,Netanya,Dairy,2026-09-14 22:00,3.4
+TL-0604,Netanya,Dairy,2026-09-14 22:30,3.1
+TL-0604,Netanya,Dairy,2026-09-14 23:00,3.2
+TL-0604,Netanya,Dairy,2026-09-14 23:30,3.4
+TL-0604,Netanya,Dairy,2026-09-15 00:00,3.4
+TL-0604,Netanya,Dairy,2026-09-15 00:30,3.4
+TL-0604,Netanya,Dairy,2026-09-15 01:00,3.5
+TL-0604,Netanya,Dairy,2026-09-15 01:30,3.7
+TL-0604,Netanya,Dairy,2026-09-15 02:00,3.5
+TL-0604,Netanya,Dairy,2026-09-15 02:30,3.4
+TL-0604,Netanya,Dairy,2026-09-15 03:00,3.6
+TL-0604,Netanya,Dairy,2026-09-15 03:30,3.6
+TL-0604,Netanya,Dairy,2026-09-15 04:00,3.4
+TL-0604,Netanya,Dairy,2026-09-15 04:30,3.6
+TL-0604,Netanya,Dairy,2026-09-15 05:00,3.7
+TL-0604,Netanya,Dairy,2026-09-15 05:30,3.7
+TL-0604,Netanya,Dairy,2026-09-15 06:00,3.7
+TL-0604,Netanya,Dairy,2026-09-15 06:30,3.8
+TL-0604,Netanya,Dairy,2026-09-15 07:00,3.7
+TL-0604,Netanya,Dairy,2026-09-15 07:30,3.7
+TL-0604,Netanya,Dairy,2026-09-15 08:00,3.9
+TL-0604,Netanya,Dairy,2026-09-15 08:30,3.8
+TL-0604,Netanya,Dairy,2026-09-15 09:00,4.0
+TL-0604,Netanya,Dairy,2026-09-15 09:30,3.8
+TL-0604,Netanya,Dairy,2026-09-15 10:00,4.1
+TL-0604,Netanya,Dairy,2026-09-15 10:30,3.8
+TL-0604,Netanya,Dairy,2026-09-15 11:00,4.0
+TL-0604,Netanya,Dairy,2026-09-15 11:30,3.9
+TL-0604,Netanya,Dairy,2026-09-15 12:00,4.0
+TL-0604,Netanya,Dairy,2026-09-15 12:30,4.0
+TL-0604,Netanya,Dairy,2026-09-15 13:00,4.1
+TL-0604,Netanya,Dairy,2026-09-15 13:30,4.0
+TL-0604,Netanya,Dairy,2026-09-15 14:00,4.2
+TL-0604,Netanya,Dairy,2026-09-15 14:30,4.3
+TL-0604,Netanya,Dairy,2026-09-15 15:00,4.4
+TL-0604,Netanya,Dairy,2026-09-15 15:30,4.2
+TL-0604,Netanya,Dairy,2026-09-15 16:00,4.1
+TL-0604,Netanya,Dairy,2026-09-15 16:30,4.2
+TL-0604,Netanya,Dairy,2026-09-15 17:00,4.3
+TL-0604,Netanya,Dairy,2026-09-15 17:30,4.3
+TL-0604,Netanya,Dairy,2026-09-15 18:00,4.3
+TL-0604,Netanya,Dairy,2026-09-15 18:30,4.3
+TL-0604,Netanya,Dairy,2026-09-15 19:00,4.5
+TL-0604,Netanya,Dairy,2026-09-15 19:30,4.5
+TL-0604,Netanya,Dairy,2026-09-15 20:00,4.4
+TL-0604,Netanya,Dairy,2026-09-15 20:30,4.5
+TL-0604,Netanya,Dairy,2026-09-15 21:00,4.6
+TL-0604,Netanya,Dairy,2026-09-15 21:30,4.7
+TL-0604,Netanya,Dairy,2026-09-15 22:00,4.6
+TL-0604,Netanya,Dairy,2026-09-15 22:30,4.6
+TL-0604,Netanya,Dairy,2026-09-15 23:00,4.5
+TL-0604,Netanya,Dairy,2026-09-15 23:30,4.7
+TL-0604,Netanya,Dairy,2026-09-16 00:00,4.5
+TL-0604,Netanya,Dairy,2026-09-16 00:30,4.6
+TL-0604,Netanya,Dairy,2026-09-16 01:00,4.9
+TL-0604,Netanya,Dairy,2026-09-16 01:30,4.9
+TL-0604,Netanya,Dairy,2026-09-16 02:00,4.9
+TL-0604,Netanya,Dairy,2026-09-16 02:30,5.0
+TL-0604,Netanya,Dairy,2026-09-16 03:00,4.7
+TL-0604,Netanya,Dairy,2026-09-16 03:30,5.0
+TL-0604,Netanya,Dairy,2026-09-16 04:00,4.8
+TL-0604,Netanya,Dairy,2026-09-16 04:30,5.1
+TL-0604,Netanya,Dairy,2026-09-16 05:00,4.9
+TL-0604,Netanya,Dairy,2026-09-16 05:30,4.9
+TL-0604,Netanya,Dairy,2026-09-16 06:00,5.2
+TL-0604,Netanya,Dairy,2026-09-16 06:30,5.0
+TL-0604,Netanya,Dairy,2026-09-16 07:00,5.3
+TL-0604,Netanya,Dairy,2026-09-16 07:30,5.1
+TL-0604,Netanya,Dairy,2026-09-16 08:00,5.0
+TL-0604,Netanya,Dairy,2026-09-16 08:30,5.4
+TL-0604,Netanya,Dairy,2026-09-16 09:00,5.1
+TL-0604,Netanya,Dairy,2026-09-16 09:30,5.1
+TL-0604,Netanya,Dairy,2026-09-16 10:00,5.1
+TL-0604,Netanya,Dairy,2026-09-16 10:30,5.5
+TL-0604,Netanya,Dairy,2026-09-16 11:00,5.5
+TL-0604,Netanya,Dairy,2026-09-16 11:30,5.2
+TL-0604,Netanya,Dairy,2026-09-16 12:00,5.3
+TL-0604,Netanya,Dairy,2026-09-16 12:30,5.4
+TL-0604,Netanya,Dairy,2026-09-16 13:00,5.5
+TL-0604,Netanya,Dairy,2026-09-16 13:30,5.6
+TL-0604,Netanya,Dairy,2026-09-16 14:00,5.5
+TL-0604,Netanya,Dairy,2026-09-16 14:30,5.5
+TL-0604,Netanya,Dairy,2026-09-16 15:00,5.7
+TL-0604,Netanya,Dairy,2026-09-16 15:30,5.7
+TL-0604,Netanya,Dairy,2026-09-16 16:00,5.6
+TL-0604,Netanya,Dairy,2026-09-16 16:30,5.5
+TL-0604,Netanya,Dairy,2026-09-16 17:00,5.5
+TL-0604,Netanya,Dairy,2026-09-16 17:30,5.5
+TL-0604,Netanya,Dairy,2026-09-16 18:00,5.5
+TL-0605,Netanya,Cream cakes,2026-09-14 06:00,4.1
+TL-0605,Netanya,Cream cakes,2026-09-14 06:30,3.8
+TL-0605,Netanya,Cream cakes,2026-09-14 07:00,4.3
+TL-0605,Netanya,Cream cakes,2026-09-14 07:30,4.4
+TL-0605,Netanya,Cream cakes,2026-09-14 08:00,4.0
+TL-0605,Netanya,Cream cakes,2026-09-14 08:30,3.8
+TL-0605,Netanya,Cream cakes,2026-09-14 09:00,4.3
+TL-0605,Netanya,Cream cakes,2026-09-14 09:30,4.2
+TL-0605,Netanya,Cream cakes,2026-09-14 10:00,3.9
+TL-0605,Netanya,Cream cakes,2026-09-14 10:30,4.0
+TL-0605,Netanya,Cream cakes,2026-09-14 11:00,4.0
+TL-0605,Netanya,Cream cakes,2026-09-14 11:30,4.3
+TL-0605,Netanya,Cream cakes,2026-09-14 12:00,4.0
+TL-0605,Netanya,Cream cakes,2026-09-14 12:30,3.8
+TL-0605,Netanya,Cream cakes,2026-09-14 13:00,4.0
+TL-0605,Netanya,Cream cakes,2026-09-14 13:30,3.8
+TL-0605,Netanya,Cream cakes,2026-09-14 14:00,4.3
+TL-0605,Netanya,Cream cakes,2026-09-14 14:30,4.4
+TL-0605,Netanya,Cream cakes,2026-09-14 15:00,3.8
+TL-0605,Netanya,Cream cakes,2026-09-14 15:30,4.4
+TL-0605,Netanya,Cream cakes,2026-09-14 16:00,3.8
+TL-0605,Netanya,Cream cakes,2026-09-14 16:30,3.9
+TL-0605,Netanya,Cream cakes,2026-09-14 17:00,4.4
+TL-0605,Netanya,Cream cakes,2026-09-14 17:30,4.1
+TL-0605,Netanya,Cream cakes,2026-09-14 18:00,3.9
+TL-0605,Netanya,Cream cakes,2026-09-14 18:30,3.9
+TL-0605,Netanya,Cream cakes,2026-09-14 19:00,3.8
+TL-0605,Netanya,Cream cakes,2026-09-14 19:30,4.0
+TL-0605,Netanya,Cream cakes,2026-09-14 20:00,4.2
+TL-0605,Netanya,Cream cakes,2026-09-14 20:30,4.0
+TL-0605,Netanya,Cream cakes,2026-09-14 21:00,3.9
+TL-0605,Netanya,Cream cakes,2026-09-14 21:30,4.3
+TL-0605,Netanya,Cream cakes,2026-09-14 22:00,3.9
+TL-0605,Netanya,Cream cakes,2026-09-14 22:30,4.0
+TL-0605,Netanya,Cream cakes,2026-09-14 23:00,4.3
+TL-0605,Netanya,Cream cakes,2026-09-14 23:30,3.8
+TL-0605,Netanya,Cream cakes,2026-09-15 00:00,4.4
+TL-0605,Netanya,Cream cakes,2026-09-15 00:30,4.3
+TL-0605,Netanya,Cream cakes,2026-09-15 01:00,4.0
+TL-0605,Netanya,Cream cakes,2026-09-15 01:30,3.9
+TL-0605,Netanya,Cream cakes,2026-09-15 02:00,4.3
+TL-0605,Netanya,Cream cakes,2026-09-15 02:30,3.8
+TL-0605,Netanya,Cream cakes,2026-09-15 03:00,4.0
+TL-0605,Netanya,Cream cakes,2026-09-15 03:30,4.3
+TL-0605,Netanya,Cream cakes,2026-09-15 04:00,3.9
+TL-0605,Netanya,Cream cakes,2026-09-15 04:30,4.3
+TL-0605,Netanya,Cream cakes,2026-09-15 05:00,4.2
+TL-0605,Netanya,Cream cakes,2026-09-15 05:30,4.4
+TL-0605,Netanya,Cream cakes,2026-09-15 06:00,4.1
+TL-0605,Netanya,Cream cakes,2026-09-15 06:30,4.2
+TL-0605,Netanya,Cream cakes,2026-09-15 07:00,4.1
+TL-0605,Netanya,Cream cakes,2026-09-15 07:30,4.2
+TL-0605,Netanya,Cream cakes,2026-09-15 08:00,4.4
+TL-0605,Netanya,Cream cakes,2026-09-15 08:30,3.9
+TL-0605,Netanya,Cream cakes,2026-09-15 09:00,3.8
+TL-0605,Netanya,Cream cakes,2026-09-15 09:30,4.1
+TL-0605,Netanya,Cream cakes,2026-09-15 10:00,3.9
+TL-0605,Netanya,Cream cakes,2026-09-15 10:30,4.0
+TL-0605,Netanya,Cream cakes,2026-09-15 11:00,4.0
+TL-0605,Netanya,Cream cakes,2026-09-15 11:30,3.9
+TL-0605,Netanya,Cream cakes,2026-09-15 12:00,4.4
+TL-0605,Netanya,Cream cakes,2026-09-15 12:30,4.2
+TL-0605,Netanya,Cream cakes,2026-09-15 13:00,4.1
+TL-0605,Netanya,Cream cakes,2026-09-15 13:30,4.4
+TL-0605,Netanya,Cream cakes,2026-09-15 14:00,4.0
+TL-0605,Netanya,Cream cakes,2026-09-15 14:30,4.2
+TL-0605,Netanya,Cream cakes,2026-09-15 15:00,4.3
+TL-0605,Netanya,Cream cakes,2026-09-15 15:30,3.8
+TL-0605,Netanya,Cream cakes,2026-09-15 16:00,3.8
+TL-0605,Netanya,Cream cakes,2026-09-15 16:30,3.9
+TL-0605,Netanya,Cream cakes,2026-09-15 17:00,4.0
+TL-0605,Netanya,Cream cakes,2026-09-15 17:30,4.1
+TL-0605,Netanya,Cream cakes,2026-09-15 18:00,4.0
+TL-0605,Netanya,Cream cakes,2026-09-15 18:30,4.1
+TL-0605,Netanya,Cream cakes,2026-09-15 19:00,3.9
+TL-0605,Netanya,Cream cakes,2026-09-15 19:30,4.0
+TL-0605,Netanya,Cream cakes,2026-09-15 20:00,4.4
+TL-0605,Netanya,Cream cakes,2026-09-15 20:30,4.3
+TL-0605,Netanya,Cream cakes,2026-09-15 21:00,4.4
+TL-0605,Netanya,Cream cakes,2026-09-15 21:30,4.1
+TL-0605,Netanya,Cream cakes,2026-09-15 22:00,4.2
+TL-0605,Netanya,Cream cakes,2026-09-15 22:30,4.4
+TL-0605,Netanya,Cream cakes,2026-09-15 23:00,4.4
+TL-0605,Netanya,Cream cakes,2026-09-15 23:30,3.9
+TL-0605,Netanya,Cream cakes,2026-09-16 00:00,4.4
+TL-0605,Netanya,Cream cakes,2026-09-16 00:30,4.4
+TL-0605,Netanya,Cream cakes,2026-09-16 01:00,4.4
+TL-0605,Netanya,Cream cakes,2026-09-16 01:30,4.1
+TL-0605,Netanya,Cream cakes,2026-09-16 02:00,4.4
+TL-0605,Netanya,Cream cakes,2026-09-16 02:30,4.2
+TL-0605,Netanya,Cream cakes,2026-09-16 03:00,4.0
+TL-0605,Netanya,Cream cakes,2026-09-16 03:30,3.9
+TL-0605,Netanya,Cream cakes,2026-09-16 04:00,3.9
+TL-0605,Netanya,Cream cakes,2026-09-16 04:30,4.2
+TL-0605,Netanya,Cream cakes,2026-09-16 05:00,3.9
+TL-0605,Netanya,Cream cakes,2026-09-16 05:30,4.2
+TL-0605,Netanya,Cream cakes,2026-09-16 06:00,4.3
+TL-0605,Netanya,Cream cakes,2026-09-16 06:30,4.3
+TL-0605,Netanya,Cream cakes,2026-09-16 07:00,4.0
+TL-0605,Netanya,Cream cakes,2026-09-16 07:30,4.1
+TL-0605,Netanya,Cream cakes,2026-09-16 08:00,3.8
+TL-0605,Netanya,Cream cakes,2026-09-16 08:30,4.0
+TL-0605,Netanya,Cream cakes,2026-09-16 09:00,4.2
+TL-0605,Netanya,Cream cakes,2026-09-16 09:30,4.3
+TL-0605,Netanya,Cream cakes,2026-09-16 10:00,4.4
+TL-0605,Netanya,Cream cakes,2026-09-16 10:30,4.0
+TL-0605,Netanya,Cream cakes,2026-09-16 11:00,4.3
+TL-0605,Netanya,Cream cakes,2026-09-16 11:30,4.4
+TL-0605,Netanya,Cream cakes,2026-09-16 12:00,3.8
+TL-0605,Netanya,Cream cakes,2026-09-16 12:30,4.3
+TL-0605,Netanya,Cream cakes,2026-09-16 13:00,4.4
+TL-0605,Netanya,Cream cakes,2026-09-16 13:30,3.9
+TL-0605,Netanya,Cream cakes,2026-09-16 14:00,4.2
+TL-0605,Netanya,Cream cakes,2026-09-16 14:30,3.9
+TL-0605,Netanya,Cream cakes,2026-09-16 15:00,4.1
+TL-0605,Netanya,Cream cakes,2026-09-16 15:30,4.2
+TL-0605,Netanya,Cream cakes,2026-09-16 16:00,4.1
+TL-0605,Netanya,Cream cakes,2026-09-16 16:30,4.1
+TL-0605,Netanya,Cream cakes,2026-09-16 17:00,4.1
+TL-0605,Netanya,Cream cakes,2026-09-16 17:30,4.1
+TL-0605,Netanya,Cream cakes,2026-09-16 18:00,4.1
+TL-0711,Be'er Sheva,Dairy,2026-09-14 06:00,3.5
+TL-0711,Be'er Sheva,Dairy,2026-09-14 06:30,3.2
+TL-0711,Be'er Sheva,Dairy,2026-09-14 07:00,3.4
+TL-0711,Be'er Sheva,Dairy,2026-09-14 07:30,3.3
+TL-0711,Be'er Sheva,Dairy,2026-09-14 08:00,3.3
+TL-0711,Be'er Sheva,Dairy,2026-09-14 08:30,3.6
+TL-0711,Be'er Sheva,Dairy,2026-09-14 09:00,3.7
+TL-0711,Be'er Sheva,Dairy,2026-09-14 09:30,3.6
+TL-0711,Be'er Sheva,Dairy,2026-09-14 10:00,3.2
+TL-0711,Be'er Sheva,Dairy,2026-09-14 10:30,3.3
+TL-0711,Be'er Sheva,Dairy,2026-09-14 11:00,3.2
+TL-0711,Be'er Sheva,Dairy,2026-09-14 11:30,3.5
+TL-0711,Be'er Sheva,Dairy,2026-09-14 12:00,3.3
+TL-0711,Be'er Sheva,Dairy,2026-09-14 12:30,3.7
+TL-0711,Be'er Sheva,Dairy,2026-09-14 13:00,3.4
+TL-0711,Be'er Sheva,Dairy,2026-09-14 13:30,3.7
+TL-0711,Be'er Sheva,Dairy,2026-09-14 14:00,3.1
+TL-0711,Be'er Sheva,Dairy,2026-09-14 14:30,3.3
+TL-0711,Be'er Sheva,Dairy,2026-09-14 15:00,3.3
+TL-0711,Be'er Sheva,Dairy,2026-09-14 15:30,3.5
+TL-0711,Be'er Sheva,Dairy,2026-09-14 16:00,3.7
+TL-0711,Be'er Sheva,Dairy,2026-09-14 16:30,3.5
+TL-0711,Be'er Sheva,Dairy,2026-09-14 17:00,3.3
+TL-0711,Be'er Sheva,Dairy,2026-09-14 17:30,3.7
+TL-0711,Be'er Sheva,Dairy,2026-09-14 18:00,3.3
+TL-0711,Be'er Sheva,Dairy,2026-09-14 18:30,3.6
+TL-0711,Be'er Sheva,Dairy,2026-09-14 19:00,3.6
+TL-0711,Be'er Sheva,Dairy,2026-09-14 19:30,3.4
+TL-0711,Be'er Sheva,Dairy,2026-09-14 20:00,3.5
+TL-0711,Be'er Sheva,Dairy,2026-09-14 20:30,3.3
+TL-0711,Be'er Sheva,Dairy,2026-09-14 21:00,3.2
+TL-0711,Be'er Sheva,Dairy,2026-09-14 21:30,3.6
+TL-0711,Be'er Sheva,Dairy,2026-09-14 22:00,3.6
+TL-0711,Be'er Sheva,Dairy,2026-09-14 22:30,3.4
+TL-0711,Be'er Sheva,Dairy,2026-09-14 23:00,3.1
+TL-0711,Be'er Sheva,Dairy,2026-09-14 23:30,3.1
+TL-0711,Be'er Sheva,Dairy,2026-09-15 00:00,3.5
+TL-0711,Be'er Sheva,Dairy,2026-09-15 00:30,3.4
+TL-0711,Be'er Sheva,Dairy,2026-09-15 01:00,3.5
+TL-0711,Be'er Sheva,Dairy,2026-09-15 01:30,3.7
+TL-0711,Be'er Sheva,Dairy,2026-09-15 02:00,3.7
+TL-0711,Be'er Sheva,Dairy,2026-09-15 02:30,3.4
+TL-0711,Be'er Sheva,Dairy,2026-09-15 03:00,3.5
+TL-0711,Be'er Sheva,Dairy,2026-09-15 03:30,3.1
+TL-0711,Be'er Sheva,Dairy,2026-09-15 04:00,3.6
+TL-0711,Be'er Sheva,Dairy,2026-09-15 04:30,3.5
+TL-0711,Be'er Sheva,Dairy,2026-09-15 05:00,3.2
+TL-0711,Be'er Sheva,Dairy,2026-09-15 05:30,9.3
+TL-0711,Be'er Sheva,Dairy,2026-09-15 06:00,3.2
+TL-0711,Be'er Sheva,Dairy,2026-09-15 06:30,3.6
+TL-0711,Be'er Sheva,Dairy,2026-09-15 07:00,3.4
+TL-0711,Be'er Sheva,Dairy,2026-09-15 07:30,3.4
+TL-0711,Be'er Sheva,Dairy,2026-09-15 08:00,3.1
+TL-0711,Be'er Sheva,Dairy,2026-09-15 08:30,3.5
+TL-0711,Be'er Sheva,Dairy,2026-09-15 09:00,3.6
+TL-0711,Be'er Sheva,Dairy,2026-09-15 09:30,3.2
+TL-0711,Be'er Sheva,Dairy,2026-09-15 10:00,3.6
+TL-0711,Be'er Sheva,Dairy,2026-09-15 10:30,3.7
+TL-0711,Be'er Sheva,Dairy,2026-09-15 11:00,3.2
+TL-0711,Be'er Sheva,Dairy,2026-09-15 11:30,3.4
+TL-0711,Be'er Sheva,Dairy,2026-09-15 12:00,3.2
+TL-0711,Be'er Sheva,Dairy,2026-09-15 12:30,3.5
+TL-0711,Be'er Sheva,Dairy,2026-09-15 13:00,3.2
+TL-0711,Be'er Sheva,Dairy,2026-09-15 13:30,3.7
+TL-0711,Be'er Sheva,Dairy,2026-09-15 14:00,3.4
+TL-0711,Be'er Sheva,Dairy,2026-09-15 14:30,3.3
+TL-0711,Be'er Sheva,Dairy,2026-09-15 15:00,3.1
+TL-0711,Be'er Sheva,Dairy,2026-09-15 15:30,3.2
+TL-0711,Be'er Sheva,Dairy,2026-09-15 16:00,3.2
+TL-0711,Be'er Sheva,Dairy,2026-09-15 16:30,3.4
+TL-0711,Be'er Sheva,Dairy,2026-09-15 17:00,3.5
+TL-0711,Be'er Sheva,Dairy,2026-09-15 17:30,3.1
+TL-0711,Be'er Sheva,Dairy,2026-09-15 18:00,3.1
+TL-0711,Be'er Sheva,Dairy,2026-09-15 18:30,3.4
+TL-0711,Be'er Sheva,Dairy,2026-09-15 19:00,3.1
+TL-0711,Be'er Sheva,Dairy,2026-09-15 19:30,3.7
+TL-0711,Be'er Sheva,Dairy,2026-09-15 20:00,3.1
+TL-0711,Be'er Sheva,Dairy,2026-09-15 20:30,3.2
+TL-0711,Be'er Sheva,Dairy,2026-09-15 21:00,3.1
+TL-0711,Be'er Sheva,Dairy,2026-09-15 21:30,3.3
+TL-0711,Be'er Sheva,Dairy,2026-09-15 22:00,3.4
+TL-0711,Be'er Sheva,Dairy,2026-09-15 22:30,3.4
+TL-0711,Be'er Sheva,Dairy,2026-09-15 23:00,3.3
+TL-0711,Be'er Sheva,Dairy,2026-09-15 23:30,3.1
+TL-0711,Be'er Sheva,Dairy,2026-09-16 00:00,3.5
+TL-0711,Be'er Sheva,Dairy,2026-09-16 00:30,3.1
+TL-0711,Be'er Sheva,Dairy,2026-09-16 01:00,3.3
+TL-0711,Be'er Sheva,Dairy,2026-09-16 01:30,3.6
+TL-0711,Be'er Sheva,Dairy,2026-09-16 02:00,3.6
+TL-0711,Be'er Sheva,Dairy,2026-09-16 02:30,3.2
+TL-0711,Be'er Sheva,Dairy,2026-09-16 03:00,3.4
+TL-0711,Be'er Sheva,Dairy,2026-09-16 03:30,3.4
+TL-0711,Be'er Sheva,Dairy,2026-09-16 04:00,3.6
+TL-0711,Be'er Sheva,Dairy,2026-09-16 04:30,3.4
+TL-0711,Be'er Sheva,Dairy,2026-09-16 05:00,9.4
+TL-0711,Be'er Sheva,Dairy,2026-09-16 05:30,3.6
+TL-0711,Be'er Sheva,Dairy,2026-09-16 06:00,3.5
+TL-0711,Be'er Sheva,Dairy,2026-09-16 06:30,3.6
+TL-0711,Be'er Sheva,Dairy,2026-09-16 07:00,3.4
+TL-0711,Be'er Sheva,Dairy,2026-09-16 07:30,3.2
+TL-0711,Be'er Sheva,Dairy,2026-09-16 08:00,3.3
+TL-0711,Be'er Sheva,Dairy,2026-09-16 08:30,3.2
+TL-0711,Be'er Sheva,Dairy,2026-09-16 09:00,3.4
+TL-0711,Be'er Sheva,Dairy,2026-09-16 09:30,3.7
+TL-0711,Be'er Sheva,Dairy,2026-09-16 10:00,3.5
+TL-0711,Be'er Sheva,Dairy,2026-09-16 10:30,3.5
+TL-0711,Be'er Sheva,Dairy,2026-09-16 11:00,3.2
+TL-0711,Be'er Sheva,Dairy,2026-09-16 11:30,3.6
+TL-0711,Be'er Sheva,Dairy,2026-09-16 12:00,3.4
+TL-0711,Be'er Sheva,Dairy,2026-09-16 12:30,3.5
+TL-0711,Be'er Sheva,Dairy,2026-09-16 13:00,3.6
+TL-0711,Be'er Sheva,Dairy,2026-09-16 13:30,3.5
+TL-0711,Be'er Sheva,Dairy,2026-09-16 14:00,3.3
+TL-0711,Be'er Sheva,Dairy,2026-09-16 14:30,3.4
+TL-0711,Be'er Sheva,Dairy,2026-09-16 15:00,3.3
+TL-0711,Be'er Sheva,Dairy,2026-09-16 15:30,3.7
+TL-0711,Be'er Sheva,Dairy,2026-09-16 16:00,3.3
+TL-0711,Be'er Sheva,Dairy,2026-09-16 16:30,3.5
+TL-0711,Be'er Sheva,Dairy,2026-09-16 17:00,3.4
+TL-0711,Be'er Sheva,Dairy,2026-09-16 17:30,3.1
+TL-0711,Be'er Sheva,Dairy,2026-09-16 18:00,3.6
+TL-0712,Be'er Sheva,Walk-in,2026-09-14 06:00,2.8
+TL-0712,Be'er Sheva,Walk-in,2026-09-14 06:30,2.7
+TL-0712,Be'er Sheva,Walk-in,2026-09-14 07:00,2.6
+TL-0712,Be'er Sheva,Walk-in,2026-09-14 07:30,2.6
+TL-0712,Be'er Sheva,Walk-in,2026-09-14 08:00,3.1
+TL-0712,Be'er Sheva,Walk-in,2026-09-14 08:30,2.7
+TL-0712,Be'er Sheva,Walk-in,2026-09-14 09:00,3.2
+TL-0712,Be'er Sheva,Walk-in,2026-09-14 09:30,3.1
+TL-0712,Be'er Sheva,Walk-in,2026-09-14 10:00,3.1
+TL-0712,Be'er Sheva,Walk-in,2026-09-14 10:30,2.8
+TL-0712,Be'er Sheva,Walk-in,2026-09-14 11:00,2.7
+TL-0712,Be'er Sheva,Walk-in,2026-09-14 11:30,3.0
+TL-0712,Be'er Sheva,Walk-in,2026-09-14 12:00,2.6
+TL-0712,Be'er Sheva,Walk-in,2026-09-14 12:30,2.8
+TL-0712,Be'er Sheva,Walk-in,2026-09-14 13:00,2.7
+TL-0712,Be'er Sheva,Walk-in,2026-09-14 13:30,2.7
+TL-0712,Be'er Sheva,Walk-in,2026-09-14 14:00,2.6
+TL-0712,Be'er Sheva,Walk-in,2026-09-14 14:30,3.2
+TL-0712,Be'er Sheva,Walk-in,2026-09-14 15:00,2.8
+TL-0712,Be'er Sheva,Walk-in,2026-09-14 15:30,3.2
+TL-0712,Be'er Sheva,Walk-in,2026-09-14 16:00,2.8
+TL-0712,Be'er Sheva,Walk-in,2026-09-14 16:30,2.8
+TL-0712,Be'er Sheva,Walk-in,2026-09-14 17:00,2.6
+TL-0712,Be'er Sheva,Walk-in,2026-09-14 17:30,3.0
+TL-0712,Be'er Sheva,Walk-in,2026-09-14 18:00,2.8
+TL-0712,Be'er Sheva,Walk-in,2026-09-14 18:30,3.1
+TL-0712,Be'er Sheva,Walk-in,2026-09-14 19:00,2.7
+TL-0712,Be'er Sheva,Walk-in,2026-09-14 19:30,3.0
+TL-0712,Be'er Sheva,Walk-in,2026-09-14 20:00,3.0
+TL-0712,Be'er Sheva,Walk-in,2026-09-14 20:30,2.6
+TL-0712,Be'er Sheva,Walk-in,2026-09-14 21:00,2.9
+TL-0712,Be'er Sheva,Walk-in,2026-09-14 21:30,2.6
+TL-0712,Be'er Sheva,Walk-in,2026-09-14 22:00,2.7
+TL-0712,Be'er Sheva,Walk-in,2026-09-14 22:30,2.6
+TL-0712,Be'er Sheva,Walk-in,2026-09-14 23:00,2.7
+TL-0712,Be'er Sheva,Walk-in,2026-09-14 23:30,2.9
+TL-0712,Be'er Sheva,Walk-in,2026-09-15 00:00,3.0
+TL-0712,Be'er Sheva,Walk-in,2026-09-15 00:30,3.1
+TL-0712,Be'er Sheva,Walk-in,2026-09-15 01:00,2.6
+TL-0712,Be'er Sheva,Walk-in,2026-09-15 01:30,2.8
+TL-0712,Be'er Sheva,Walk-in,2026-09-15 02:00,2.6
+TL-0712,Be'er Sheva,Walk-in,2026-09-15 02:30,3.0
+TL-0712,Be'er Sheva,Walk-in,2026-09-15 03:00,2.8
+TL-0712,Be'er Sheva,Walk-in,2026-09-15 03:30,2.6
+TL-0712,Be'er Sheva,Walk-in,2026-09-15 04:00,2.9
+TL-0712,Be'er Sheva,Walk-in,2026-09-15 04:30,2.9
+TL-0712,Be'er Sheva,Walk-in,2026-09-15 05:00,3.0
+TL-0712,Be'er Sheva,Walk-in,2026-09-15 05:30,2.7
+TL-0712,Be'er Sheva,Walk-in,2026-09-15 06:00,2.9
+TL-0712,Be'er Sheva,Walk-in,2026-09-15 06:30,2.6
+TL-0712,Be'er Sheva,Walk-in,2026-09-15 07:00,3.0
+TL-0712,Be'er Sheva,Walk-in,2026-09-15 07:30,2.6
+TL-0712,Be'er Sheva,Walk-in,2026-09-15 08:00,2.8
+TL-0712,Be'er Sheva,Walk-in,2026-09-15 08:30,2.7
+TL-0712,Be'er Sheva,Walk-in,2026-09-15 09:00,2.9
+TL-0712,Be'er Sheva,Walk-in,2026-09-15 09:30,3.0
+TL-0712,Be'er Sheva,Walk-in,2026-09-15 10:00,3.1
+TL-0712,Be'er Sheva,Walk-in,2026-09-15 10:30,3.1
+TL-0712,Be'er Sheva,Walk-in,2026-09-15 11:00,3.2
+TL-0712,Be'er Sheva,Walk-in,2026-09-15 11:30,3.2
+TL-0712,Be'er Sheva,Walk-in,2026-09-15 12:00,2.9
+TL-0712,Be'er Sheva,Walk-in,2026-09-15 12:30,2.6
+TL-0712,Be'er Sheva,Walk-in,2026-09-15 13:00,2.8
+TL-0712,Be'er Sheva,Walk-in,2026-09-15 13:30,2.6
+TL-0712,Be'er Sheva,Walk-in,2026-09-15 14:00,2.8
+TL-0712,Be'er Sheva,Walk-in,2026-09-15 14:30,2.6
+TL-0712,Be'er Sheva,Walk-in,2026-09-15 15:00,2.7
+TL-0712,Be'er Sheva,Walk-in,2026-09-15 15:30,3.1
+TL-0712,Be'er Sheva,Walk-in,2026-09-15 16:00,2.7
+TL-0712,Be'er Sheva,Walk-in,2026-09-15 16:30,2.7
+TL-0712,Be'er Sheva,Walk-in,2026-09-15 17:00,2.6
+TL-0712,Be'er Sheva,Walk-in,2026-09-15 17:30,2.7
+TL-0712,Be'er Sheva,Walk-in,2026-09-15 18:00,2.9
+TL-0712,Be'er Sheva,Walk-in,2026-09-15 18:30,2.7
+TL-0712,Be'er Sheva,Walk-in,2026-09-15 19:00,2.7
+TL-0712,Be'er Sheva,Walk-in,2026-09-15 19:30,2.8
+TL-0712,Be'er Sheva,Walk-in,2026-09-15 20:00,3.2
+TL-0712,Be'er Sheva,Walk-in,2026-09-15 20:30,2.9
+TL-0712,Be'er Sheva,Walk-in,2026-09-15 21:00,3.0
+TL-0712,Be'er Sheva,Walk-in,2026-09-15 21:30,2.9
+TL-0712,Be'er Sheva,Walk-in,2026-09-15 22:00,2.6
+TL-0712,Be'er Sheva,Walk-in,2026-09-15 22:30,3.1
+TL-0712,Be'er Sheva,Walk-in,2026-09-15 23:00,2.9
+TL-0712,Be'er Sheva,Walk-in,2026-09-15 23:30,3.0
+TL-0712,Be'er Sheva,Walk-in,2026-09-16 00:00,3.2
+TL-0712,Be'er Sheva,Walk-in,2026-09-16 00:30,3.1
+TL-0712,Be'er Sheva,Walk-in,2026-09-16 01:00,2.9
+TL-0712,Be'er Sheva,Walk-in,2026-09-16 01:30,3.1
+TL-0712,Be'er Sheva,Walk-in,2026-09-16 02:00,2.8
+TL-0712,Be'er Sheva,Walk-in,2026-09-16 02:30,2.8
+TL-0712,Be'er Sheva,Walk-in,2026-09-16 03:00,3.0
+TL-0712,Be'er Sheva,Walk-in,2026-09-16 03:30,3.1
+TL-0712,Be'er Sheva,Walk-in,2026-09-16 04:00,2.6
+TL-0712,Be'er Sheva,Walk-in,2026-09-16 04:30,2.9
+TL-0712,Be'er Sheva,Walk-in,2026-09-16 05:00,2.9
+TL-0712,Be'er Sheva,Walk-in,2026-09-16 05:30,2.8
+TL-0712,Be'er Sheva,Walk-in,2026-09-16 06:00,2.8
+TL-0712,Be'er Sheva,Walk-in,2026-09-16 06:30,2.7
+TL-0712,Be'er Sheva,Walk-in,2026-09-16 07:00,3.2
+TL-0712,Be'er Sheva,Walk-in,2026-09-16 07:30,3.2
+TL-0712,Be'er Sheva,Walk-in,2026-09-16 08:00,3.1
+TL-0712,Be'er Sheva,Walk-in,2026-09-16 08:30,3.1
+TL-0712,Be'er Sheva,Walk-in,2026-09-16 09:00,2.7
+TL-0712,Be'er Sheva,Walk-in,2026-09-16 09:30,3.2
+TL-0712,Be'er Sheva,Walk-in,2026-09-16 10:00,2.7
+TL-0712,Be'er Sheva,Walk-in,2026-09-16 10:30,2.6
+TL-0712,Be'er Sheva,Walk-in,2026-09-16 11:00,3.2
+TL-0712,Be'er Sheva,Walk-in,2026-09-16 11:30,2.6
+TL-0712,Be'er Sheva,Walk-in,2026-09-16 12:00,2.9
+TL-0712,Be'er Sheva,Walk-in,2026-09-16 12:30,2.9
+TL-0712,Be'er Sheva,Walk-in,2026-09-16 13:00,2.7
+TL-0712,Be'er Sheva,Walk-in,2026-09-16 13:30,2.8
+TL-0712,Be'er Sheva,Walk-in,2026-09-16 14:00,3.1
+TL-0712,Be'er Sheva,Walk-in,2026-09-16 14:30,3.1
+TL-0712,Be'er Sheva,Walk-in,2026-09-16 15:00,3.2
+TL-0712,Be'er Sheva,Walk-in,2026-09-16 15:30,3.0
+TL-0712,Be'er Sheva,Walk-in,2026-09-16 16:00,3.0
+TL-0712,Be'er Sheva,Walk-in,2026-09-16 16:30,2.9
+TL-0712,Be'er Sheva,Walk-in,2026-09-16 17:00,3.1
+TL-0712,Be'er Sheva,Walk-in,2026-09-16 17:30,3.0
+TL-0712,Be'er Sheva,Walk-in,2026-09-16 18:00,2.8
+TL-0820,Petah Tikva,Dairy,2026-09-14 06:00,3.4
+TL-0820,Petah Tikva,Dairy,2026-09-14 06:30,3.7
+TL-0820,Petah Tikva,Dairy,2026-09-14 07:00,3.6
+TL-0820,Petah Tikva,Dairy,2026-09-14 07:30,3.4
+TL-0820,Petah Tikva,Dairy,2026-09-14 08:00,3.6
+TL-0820,Petah Tikva,Dairy,2026-09-14 08:30,3.8
+TL-0820,Petah Tikva,Dairy,2026-09-14 09:00,3.9
+TL-0820,Petah Tikva,Dairy,2026-09-14 09:30,3.7
+TL-0820,Petah Tikva,Dairy,2026-09-14 10:00,3.7
+TL-0820,Petah Tikva,Dairy,2026-09-14 10:30,3.9
+TL-0820,Petah Tikva,Dairy,2026-09-14 11:00,3.5
+TL-0820,Petah Tikva,Dairy,2026-09-14 11:30,3.5
+TL-0820,Petah Tikva,Dairy,2026-09-14 12:00,3.4
+TL-0820,Petah Tikva,Dairy,2026-09-14 12:30,3.8
+TL-0820,Petah Tikva,Dairy,2026-09-14 13:00,3.9
+TL-0820,Petah Tikva,Dairy,2026-09-14 13:30,3.5
+TL-0820,Petah Tikva,Dairy,2026-09-14 14:00,3.4
+TL-0820,Petah Tikva,Dairy,2026-09-14 14:30,3.4
+TL-0820,Petah Tikva,Dairy,2026-09-14 15:00,3.9
+TL-0820,Petah Tikva,Dairy,2026-09-14 15:30,3.7
+TL-0820,Petah Tikva,Dairy,2026-09-14 16:00,3.5
+TL-0820,Petah Tikva,Dairy,2026-09-14 16:30,3.4
+TL-0820,Petah Tikva,Dairy,2026-09-14 17:00,3.4
+TL-0820,Petah Tikva,Dairy,2026-09-14 17:30,3.8
+TL-0820,Petah Tikva,Dairy,2026-09-14 18:00,3.8
+TL-0820,Petah Tikva,Dairy,2026-09-14 18:30,3.8
+TL-0820,Petah Tikva,Dairy,2026-09-14 19:00,3.4
+TL-0820,Petah Tikva,Dairy,2026-09-14 19:30,3.4
+TL-0820,Petah Tikva,Dairy,2026-09-14 20:00,4.0
+TL-0820,Petah Tikva,Dairy,2026-09-14 20:30,3.5
+TL-0820,Petah Tikva,Dairy,2026-09-14 21:00,3.6
+TL-0820,Petah Tikva,Dairy,2026-09-14 21:30,3.9
+TL-0820,Petah Tikva,Dairy,2026-09-14 22:00,4.0
+TL-0820,Petah Tikva,Dairy,2026-09-14 22:30,3.7
+TL-0820,Petah Tikva,Dairy,2026-09-14 23:00,3.4
+TL-0820,Petah Tikva,Dairy,2026-09-14 23:30,3.9
+TL-0820,Petah Tikva,Dairy,2026-09-15 00:00,4.0
+TL-0820,Petah Tikva,Dairy,2026-09-15 00:30,3.8
+TL-0820,Petah Tikva,Dairy,2026-09-15 01:00,3.6
+TL-0820,Petah Tikva,Dairy,2026-09-15 01:30,3.7
+TL-0820,Petah Tikva,Dairy,2026-09-15 02:00,4.0
+TL-0820,Petah Tikva,Dairy,2026-09-15 02:30,3.6
+TL-0820,Petah Tikva,Dairy,2026-09-15 03:00,3.7
+TL-0820,Petah Tikva,Dairy,2026-09-15 03:30,3.7
+TL-0820,Petah Tikva,Dairy,2026-09-15 04:00,3.7
+TL-0820,Petah Tikva,Dairy,2026-09-15 04:30,4.0
+TL-0820,Petah Tikva,Dairy,2026-09-15 05:00,3.6
+TL-0820,Petah Tikva,Dairy,2026-09-15 05:30,3.9
+TL-0820,Petah Tikva,Dairy,2026-09-15 06:00,4.0
+TL-0820,Petah Tikva,Dairy,2026-09-15 06:30,3.5
+TL-0820,Petah Tikva,Dairy,2026-09-15 07:00,3.6
+TL-0820,Petah Tikva,Dairy,2026-09-15 07:30,3.9
+TL-0820,Petah Tikva,Dairy,2026-09-15 08:00,3.6
+TL-0820,Petah Tikva,Dairy,2026-09-15 08:30,3.8
+TL-0820,Petah Tikva,Dairy,2026-09-15 09:00,3.7
+TL-0820,Petah Tikva,Dairy,2026-09-15 09:30,3.9
+TL-0820,Petah Tikva,Dairy,2026-09-15 10:00,3.5
+TL-0820,Petah Tikva,Dairy,2026-09-15 10:30,3.4
+TL-0820,Petah Tikva,Dairy,2026-09-15 11:00,3.4
+TL-0820,Petah Tikva,Dairy,2026-09-15 11:30,3.6
+TL-0820,Petah Tikva,Dairy,2026-09-15 12:00,3.6
+TL-0820,Petah Tikva,Dairy,2026-09-15 12:30,3.8
+TL-0820,Petah Tikva,Dairy,2026-09-15 13:00,3.5
+TL-0820,Petah Tikva,Dairy,2026-09-15 13:30,3.4
+TL-0820,Petah Tikva,Dairy,2026-09-15 14:00,3.4
+TL-0820,Petah Tikva,Dairy,2026-09-15 14:30,3.8
+TL-0820,Petah Tikva,Dairy,2026-09-15 15:00,3.8
+TL-0820,Petah Tikva,Dairy,2026-09-15 15:30,3.6
+TL-0820,Petah Tikva,Dairy,2026-09-15 16:00,3.4
+TL-0820,Petah Tikva,Dairy,2026-09-15 16:30,3.4
+TL-0820,Petah Tikva,Dairy,2026-09-15 17:00,3.4
+TL-0820,Petah Tikva,Dairy,2026-09-15 17:30,4.0
+TL-0820,Petah Tikva,Dairy,2026-09-15 18:00,3.5
+TL-0820,Petah Tikva,Dairy,2026-09-15 18:30,3.8
+TL-0820,Petah Tikva,Dairy,2026-09-15 19:00,3.8
+TL-0820,Petah Tikva,Dairy,2026-09-15 19:30,3.8
+TL-0820,Petah Tikva,Dairy,2026-09-15 20:00,3.5
+TL-0820,Petah Tikva,Dairy,2026-09-15 20:30,4.0
+TL-0820,Petah Tikva,Dairy,2026-09-15 21:00,4.0
+TL-0820,Petah Tikva,Dairy,2026-09-15 21:30,3.7
+TL-0820,Petah Tikva,Dairy,2026-09-15 22:00,3.4
+TL-0820,Petah Tikva,Dairy,2026-09-15 22:30,3.8
+TL-0820,Petah Tikva,Dairy,2026-09-15 23:00,3.4
+TL-0820,Petah Tikva,Dairy,2026-09-15 23:30,3.8
+TL-0820,Petah Tikva,Dairy,2026-09-16 00:00,3.6
+TL-0820,Petah Tikva,Dairy,2026-09-16 00:30,3.5
+TL-0820,Petah Tikva,Dairy,2026-09-16 01:00,4.0
+TL-0820,Petah Tikva,Dairy,2026-09-16 01:30,3.5
+TL-0820,Petah Tikva,Dairy,2026-09-16 02:00,3.9
+TL-0820,Petah Tikva,Dairy,2026-09-16 02:30,3.7
+TL-0820,Petah Tikva,Dairy,2026-09-16 03:00,3.5
+TL-0820,Petah Tikva,Dairy,2026-09-16 03:30,3.6
+TL-0820,Petah Tikva,Dairy,2026-09-16 04:00,3.9
+TL-0820,Petah Tikva,Dairy,2026-09-16 04:30,3.8
+TL-0820,Petah Tikva,Dairy,2026-09-16 05:00,4.0
+TL-0820,Petah Tikva,Dairy,2026-09-16 05:30,3.6
+TL-0820,Petah Tikva,Dairy,2026-09-16 06:00,3.7
+TL-0820,Petah Tikva,Dairy,2026-09-16 06:30,4.0
+TL-0820,Petah Tikva,Dairy,2026-09-16 07:00,3.7
+TL-0820,Petah Tikva,Dairy,2026-09-16 07:30,3.8
+TL-0820,Petah Tikva,Dairy,2026-09-16 08:00,3.6
+TL-0820,Petah Tikva,Dairy,2026-09-16 08:30,3.8
+TL-0820,Petah Tikva,Dairy,2026-09-16 09:00,3.4
+TL-0820,Petah Tikva,Dairy,2026-09-16 09:30,3.8
+TL-0820,Petah Tikva,Dairy,2026-09-16 10:00,3.4
+TL-0820,Petah Tikva,Dairy,2026-09-16 10:30,3.5
+TL-0820,Petah Tikva,Dairy,2026-09-16 11:00,3.9
+TL-0820,Petah Tikva,Dairy,2026-09-16 11:30,4.0
+TL-0820,Petah Tikva,Dairy,2026-09-16 12:00,3.9
+TL-0820,Petah Tikva,Dairy,2026-09-16 12:30,3.4
+TL-0820,Petah Tikva,Dairy,2026-09-16 13:00,3.5
+TL-0820,Petah Tikva,Dairy,2026-09-16 13:30,3.8
+TL-0820,Petah Tikva,Dairy,2026-09-16 14:00,4.0
+TL-0820,Petah Tikva,Dairy,2026-09-16 14:30,4.0
+TL-0820,Petah Tikva,Dairy,2026-09-16 15:00,3.8
+TL-0820,Petah Tikva,Dairy,2026-09-16 15:30,3.5
+TL-0820,Petah Tikva,Dairy,2026-09-16 16:00,3.8
+TL-0820,Petah Tikva,Dairy,2026-09-16 16:30,3.5
+TL-0820,Petah Tikva,Dairy,2026-09-16 17:00,4.0
+TL-0820,Petah Tikva,Dairy,2026-09-16 17:30,3.4
+TL-0820,Petah Tikva,Dairy,2026-09-16 18:00,3.9
+TL-0821,Petah Tikva,Display 1,2026-09-14 06:00,3.7
+TL-0821,Petah Tikva,Display 1,2026-09-14 06:30,3.7
+TL-0821,Petah Tikva,Display 1,2026-09-14 07:00,3.7
+TL-0821,Petah Tikva,Display 1,2026-09-14 07:30,4.2
+TL-0821,Petah Tikva,Display 1,2026-09-14 08:00,4.2
+TL-0821,Petah Tikva,Display 1,2026-09-14 08:30,3.9
+TL-0821,Petah Tikva,Display 1,2026-09-14 09:00,3.8
+TL-0821,Petah Tikva,Display 1,2026-09-14 09:30,3.7
+TL-0821,Petah Tikva,Display 1,2026-09-14 10:00,4.0
+TL-0821,Petah Tikva,Display 1,2026-09-14 10:30,4.0
+TL-0821,Petah Tikva,Display 1,2026-09-14 11:00,3.8
+TL-0821,Petah Tikva,Display 1,2026-09-14 11:30,3.8
+TL-0821,Petah Tikva,Display 1,2026-09-14 12:00,3.8
+TL-0821,Petah Tikva,Display 1,2026-09-14 12:30,3.7
+TL-0821,Petah Tikva,Display 1,2026-09-14 13:00,3.9
+TL-0821,Petah Tikva,Display 1,2026-09-14 13:30,3.9
+TL-0821,Petah Tikva,Display 1,2026-09-14 14:00,3.9
+TL-0821,Petah Tikva,Display 1,2026-09-14 14:30,4.1
+TL-0821,Petah Tikva,Display 1,2026-09-14 15:00,4.3
+TL-0821,Petah Tikva,Display 1,2026-09-14 15:30,3.9
+TL-0821,Petah Tikva,Display 1,2026-09-14 16:00,4.0
+TL-0821,Petah Tikva,Display 1,2026-09-14 16:30,4.3
+TL-0821,Petah Tikva,Display 1,2026-09-14 17:00,3.7
+TL-0821,Petah Tikva,Display 1,2026-09-14 17:30,3.8
+TL-0821,Petah Tikva,Display 1,2026-09-14 18:00,4.0
+TL-0821,Petah Tikva,Display 1,2026-09-14 18:30,3.9
+TL-0821,Petah Tikva,Display 1,2026-09-14 19:00,3.8
+TL-0821,Petah Tikva,Display 1,2026-09-14 19:30,3.8
+TL-0821,Petah Tikva,Display 1,2026-09-14 20:00,4.3
+TL-0821,Petah Tikva,Display 1,2026-09-14 20:30,3.7
+TL-0821,Petah Tikva,Display 1,2026-09-14 21:00,4.3
+TL-0821,Petah Tikva,Display 1,2026-09-14 21:30,3.9
+TL-0821,Petah Tikva,Display 1,2026-09-14 22:00,4.0
+TL-0821,Petah Tikva,Display 1,2026-09-14 22:30,4.2
+TL-0821,Petah Tikva,Display 1,2026-09-14 23:00,3.8
+TL-0821,Petah Tikva,Display 1,2026-09-14 23:30,4.1
+TL-0821,Petah Tikva,Display 1,2026-09-15 00:00,3.8
+TL-0821,Petah Tikva,Display 1,2026-09-15 00:30,4.2
+TL-0821,Petah Tikva,Display 1,2026-09-15 01:00,4.0
+TL-0821,Petah Tikva,Display 1,2026-09-15 01:30,3.9
+TL-0821,Petah Tikva,Display 1,2026-09-15 02:00,4.1
+TL-0821,Petah Tikva,Display 1,2026-09-15 02:30,3.9
+TL-0821,Petah Tikva,Display 1,2026-09-15 03:00,4.1
+TL-0821,Petah Tikva,Display 1,2026-09-15 03:30,4.3
+TL-0821,Petah Tikva,Display 1,2026-09-15 04:00,4.2
+TL-0821,Petah Tikva,Display 1,2026-09-15 04:30,3.8
+TL-0821,Petah Tikva,Display 1,2026-09-15 05:00,3.7
+TL-0821,Petah Tikva,Display 1,2026-09-15 05:30,3.7
+TL-0821,Petah Tikva,Display 1,2026-09-15 06:00,4.1
+TL-0821,Petah Tikva,Display 1,2026-09-15 06:30,3.8
+TL-0821,Petah Tikva,Display 1,2026-09-15 07:00,3.9
+TL-0821,Petah Tikva,Display 1,2026-09-15 07:30,3.8
+TL-0821,Petah Tikva,Display 1,2026-09-15 08:00,3.7
+TL-0821,Petah Tikva,Display 1,2026-09-15 08:30,3.8
+TL-0821,Petah Tikva,Display 1,2026-09-16 18:00,4.1
+TL-0933,Ashdod,Dairy,2026-09-14 06:00,2.8
+TL-0933,Ashdod,Dairy,2026-09-14 06:30,3.3
+TL-0933,Ashdod,Dairy,2026-09-14 07:00,2.9
+TL-0933,Ashdod,Dairy,2026-09-14 07:30,3.2
+TL-0933,Ashdod,Dairy,2026-09-14 08:00,3.4
+TL-0933,Ashdod,Dairy,2026-09-14 08:30,3.0
+TL-0933,Ashdod,Dairy,2026-09-14 09:00,3.4
+TL-0933,Ashdod,Dairy,2026-09-14 09:30,3.3
+TL-0933,Ashdod,Dairy,2026-09-14 10:00,3.4
+TL-0933,Ashdod,Dairy,2026-09-14 10:30,3.1
+TL-0933,Ashdod,Dairy,2026-09-14 11:00,3.0
+TL-0933,Ashdod,Dairy,2026-09-14 11:30,3.0
+TL-0933,Ashdod,Dairy,2026-09-14 12:00,3.4
+TL-0933,Ashdod,Dairy,2026-09-14 12:30,3.1
+TL-0933,Ashdod,Dairy,2026-09-14 13:00,2.8
+TL-0933,Ashdod,Dairy,2026-09-14 13:30,3.4
+TL-0933,Ashdod,Dairy,2026-09-14 14:00,2.9
+TL-0933,Ashdod,Dairy,2026-09-14 14:30,2.9
+TL-0933,Ashdod,Dairy,2026-09-14 15:00,3.2
+TL-0933,Ashdod,Dairy,2026-09-14 15:30,3.3
+TL-0933,Ashdod,Dairy,2026-09-14 16:00,3.1
+TL-0933,Ashdod,Dairy,2026-09-14 16:30,3.0
+TL-0933,Ashdod,Dairy,2026-09-14 17:00,3.1
+TL-0933,Ashdod,Dairy,2026-09-14 17:30,3.4
+TL-0933,Ashdod,Dairy,2026-09-14 18:00,3.0
+TL-0933,Ashdod,Dairy,2026-09-14 18:30,3.3
+TL-0933,Ashdod,Dairy,2026-09-14 19:00,2.8
+TL-0933,Ashdod,Dairy,2026-09-14 19:30,3.4
+TL-0933,Ashdod,Dairy,2026-09-14 20:00,2.9
+TL-0933,Ashdod,Dairy,2026-09-14 20:30,3.3
+TL-0933,Ashdod,Dairy,2026-09-14 21:00,3.2
+TL-0933,Ashdod,Dairy,2026-09-14 21:30,3.4
+TL-0933,Ashdod,Dairy,2026-09-14 22:00,2.8
+TL-0933,Ashdod,Dairy,2026-09-14 22:30,3.2
+TL-0933,Ashdod,Dairy,2026-09-14 23:00,3.2
+TL-0933,Ashdod,Dairy,2026-09-14 23:30,2.9
+TL-0933,Ashdod,Dairy,2026-09-15 00:00,3.0
+TL-0933,Ashdod,Dairy,2026-09-15 00:30,3.1
+TL-0933,Ashdod,Dairy,2026-09-15 01:00,3.1
+TL-0933,Ashdod,Dairy,2026-09-15 01:30,3.4
+TL-0933,Ashdod,Dairy,2026-09-15 02:00,2.8
+TL-0933,Ashdod,Dairy,2026-09-15 02:30,3.1
+TL-0933,Ashdod,Dairy,2026-09-15 03:00,2.9
+TL-0933,Ashdod,Dairy,2026-09-15 03:30,3.1
+TL-0933,Ashdod,Dairy,2026-09-15 04:00,3.4
+TL-0933,Ashdod,Dairy,2026-09-15 04:30,3.2
+TL-0933,Ashdod,Dairy,2026-09-15 05:00,2.9
+TL-0933,Ashdod,Dairy,2026-09-15 05:30,2.9
+TL-0933,Ashdod,Dairy,2026-09-15 06:00,3.3
+TL-0933,Ashdod,Dairy,2026-09-15 06:30,3.4
+TL-0933,Ashdod,Dairy,2026-09-15 07:00,3.3
+TL-0933,Ashdod,Dairy,2026-09-15 07:30,2.8
+TL-0933,Ashdod,Dairy,2026-09-15 08:00,3.0
+TL-0933,Ashdod,Dairy,2026-09-15 08:30,2.8
+TL-0933,Ashdod,Dairy,2026-09-15 09:00,2.8
+TL-0933,Ashdod,Dairy,2026-09-15 09:30,3.4
+TL-0933,Ashdod,Dairy,2026-09-15 10:00,3.2
+TL-0933,Ashdod,Dairy,2026-09-15 10:30,3.4
+TL-0933,Ashdod,Dairy,2026-09-15 11:00,2.9
+TL-0933,Ashdod,Dairy,2026-09-15 11:30,3.2
+TL-0933,Ashdod,Dairy,2026-09-15 12:00,2.8
+TL-0933,Ashdod,Dairy,2026-09-15 12:30,3.0
+TL-0933,Ashdod,Dairy,2026-09-15 13:00,3.3
+TL-0933,Ashdod,Dairy,2026-09-15 13:30,3.4
+TL-0933,Ashdod,Dairy,2026-09-15 14:00,3.0
+TL-0933,Ashdod,Dairy,2026-09-15 14:30,3.3
+TL-0933,Ashdod,Dairy,2026-09-15 15:00,3.3
+TL-0933,Ashdod,Dairy,2026-09-15 15:30,3.0
+TL-0933,Ashdod,Dairy,2026-09-15 16:00,3.0
+TL-0933,Ashdod,Dairy,2026-09-15 16:30,2.8
+TL-0933,Ashdod,Dairy,2026-09-15 17:00,3.2
+TL-0933,Ashdod,Dairy,2026-09-15 17:30,2.9
+TL-0933,Ashdod,Dairy,2026-09-15 18:00,3.0
+TL-0933,Ashdod,Dairy,2026-09-15 18:30,2.9
+TL-0933,Ashdod,Dairy,2026-09-15 19:00,3.0
+TL-0933,Ashdod,Dairy,2026-09-15 19:30,3.2
+TL-0933,Ashdod,Dairy,2026-09-15 20:00,3.4
+TL-0933,Ashdod,Dairy,2026-09-15 20:30,3.3
+TL-0933,Ashdod,Dairy,2026-09-15 21:00,2.9
+TL-0933,Ashdod,Dairy,2026-09-15 21:30,3.3
+TL-0933,Ashdod,Dairy,2026-09-15 22:00,3.2
+TL-0933,Ashdod,Dairy,2026-09-15 22:30,2.8
+TL-0933,Ashdod,Dairy,2026-09-15 23:00,3.1
+TL-0933,Ashdod,Dairy,2026-09-15 23:30,3.4
+TL-0933,Ashdod,Dairy,2026-09-16 00:00,3.0
+TL-0933,Ashdod,Dairy,2026-09-16 00:30,2.9
+TL-0933,Ashdod,Dairy,2026-09-16 01:00,3.2
+TL-0933,Ashdod,Dairy,2026-09-16 01:30,3.0
+TL-0933,Ashdod,Dairy,2026-09-16 02:00,3.1
+TL-0933,Ashdod,Dairy,2026-09-16 02:30,3.1
+TL-0933,Ashdod,Dairy,2026-09-16 03:00,3.1
+TL-0933,Ashdod,Dairy,2026-09-16 03:30,3.0
+TL-0933,Ashdod,Dairy,2026-09-16 04:00,3.0
+TL-0933,Ashdod,Dairy,2026-09-16 04:30,3.4
+TL-0933,Ashdod,Dairy,2026-09-16 05:00,3.1
+TL-0933,Ashdod,Dairy,2026-09-16 05:30,3.4
+TL-0933,Ashdod,Dairy,2026-09-16 06:00,2.8
+TL-0933,Ashdod,Dairy,2026-09-16 06:30,3.2
+TL-0933,Ashdod,Dairy,2026-09-16 07:00,2.9
+TL-0933,Ashdod,Dairy,2026-09-16 07:30,3.4
+TL-0933,Ashdod,Dairy,2026-09-16 08:00,3.3
+TL-0933,Ashdod,Dairy,2026-09-16 08:30,2.8
+TL-0933,Ashdod,Dairy,2026-09-16 09:00,2.9
+TL-0933,Ashdod,Dairy,2026-09-16 09:30,3.2
+TL-0933,Ashdod,Dairy,2026-09-16 10:00,2.9
+TL-0933,Ashdod,Dairy,2026-09-16 10:30,2.8
+TL-0933,Ashdod,Dairy,2026-09-16 11:00,3.4
+TL-0933,Ashdod,Dairy,2026-09-16 11:30,3.4
+TL-0933,Ashdod,Dairy,2026-09-16 12:00,2.9
+TL-0933,Ashdod,Dairy,2026-09-16 12:30,3.3
+TL-0933,Ashdod,Dairy,2026-09-16 13:00,3.4
+TL-0933,Ashdod,Dairy,2026-09-16 13:30,3.1
+TL-0933,Ashdod,Dairy,2026-09-16 14:00,2.8
+TL-0933,Ashdod,Dairy,2026-09-16 14:30,2.8
+TL-0933,Ashdod,Dairy,2026-09-16 15:00,3.3
+TL-0933,Ashdod,Dairy,2026-09-16 15:30,3.1
+TL-0933,Ashdod,Dairy,2026-09-16 16:00,3.2
+TL-0933,Ashdod,Dairy,2026-09-16 16:30,3.2
+TL-0933,Ashdod,Dairy,2026-09-16 17:00,3.1
+TL-0933,Ashdod,Dairy,2026-09-16 17:30,3.0
+TL-0933,Ashdod,Dairy,2026-09-16 18:00,3.2
+TL-0934,Ashdod,Cream cakes,2026-09-14 06:00,4.3
+TL-0934,Ashdod,Cream cakes,2026-09-14 06:30,4.4
+TL-0934,Ashdod,Cream cakes,2026-09-14 07:00,4.1
+TL-0934,Ashdod,Cream cakes,2026-09-14 07:30,4.0
+TL-0934,Ashdod,Cream cakes,2026-09-14 08:00,4.0
+TL-0934,Ashdod,Cream cakes,2026-09-14 08:30,4.6
+TL-0934,Ashdod,Cream cakes,2026-09-14 09:00,4.3
+TL-0934,Ashdod,Cream cakes,2026-09-14 09:30,4.6
+TL-0934,Ashdod,Cream cakes,2026-09-14 10:00,4.3
+TL-0934,Ashdod,Cream cakes,2026-09-14 10:30,4.0
+TL-0934,Ashdod,Cream cakes,2026-09-14 11:00,4.2
+TL-0934,Ashdod,Cream cakes,2026-09-14 11:30,4.2
+TL-0934,Ashdod,Cream cakes,2026-09-14 12:00,4.3
+TL-0934,Ashdod,Cream cakes,2026-09-14 12:30,4.3
+TL-0934,Ashdod,Cream cakes,2026-09-14 13:00,4.0
+TL-0934,Ashdod,Cream cakes,2026-09-14 13:30,4.6
+TL-0934,Ashdod,Cream cakes,2026-09-14 14:00,4.2
+TL-0934,Ashdod,Cream cakes,2026-09-14 14:30,4.0
+TL-0934,Ashdod,Cream cakes,2026-09-14 15:00,4.3
+TL-0934,Ashdod,Cream cakes,2026-09-14 15:30,4.3
+TL-0934,Ashdod,Cream cakes,2026-09-14 16:00,4.0
+TL-0934,Ashdod,Cream cakes,2026-09-14 16:30,4.3
+TL-0934,Ashdod,Cream cakes,2026-09-14 17:00,4.3
+TL-0934,Ashdod,Cream cakes,2026-09-14 17:30,4.4
+TL-0934,Ashdod,Cream cakes,2026-09-14 18:00,4.0
+TL-0934,Ashdod,Cream cakes,2026-09-14 18:30,4.5
+TL-0934,Ashdod,Cream cakes,2026-09-14 19:00,4.1
+TL-0934,Ashdod,Cream cakes,2026-09-14 19:30,4.6
+TL-0934,Ashdod,Cream cakes,2026-09-14 20:00,4.2
+TL-0934,Ashdod,Cream cakes,2026-09-14 20:30,4.3
+TL-0934,Ashdod,Cream cakes,2026-09-14 21:00,4.0
+TL-0934,Ashdod,Cream cakes,2026-09-14 21:30,4.6
+TL-0934,Ashdod,Cream cakes,2026-09-14 22:00,4.6
+TL-0934,Ashdod,Cream cakes,2026-09-14 22:30,4.0
+TL-0934,Ashdod,Cream cakes,2026-09-14 23:00,4.2
+TL-0934,Ashdod,Cream cakes,2026-09-14 23:30,4.6
+TL-0934,Ashdod,Cream cakes,2026-09-15 00:00,4.1
+TL-0934,Ashdod,Cream cakes,2026-09-15 00:30,4.5
+TL-0934,Ashdod,Cream cakes,2026-09-15 01:00,4.3
+TL-0934,Ashdod,Cream cakes,2026-09-15 01:30,4.1
+TL-0934,Ashdod,Cream cakes,2026-09-15 02:00,4.1
+TL-0934,Ashdod,Cream cakes,2026-09-15 02:30,4.1
+TL-0934,Ashdod,Cream cakes,2026-09-15 03:00,4.4
+TL-0934,Ashdod,Cream cakes,2026-09-15 03:30,4.2
+TL-0934,Ashdod,Cream cakes,2026-09-15 04:00,4.2
+TL-0934,Ashdod,Cream cakes,2026-09-15 04:30,4.6
+TL-0934,Ashdod,Cream cakes,2026-09-15 05:00,4.2
+TL-0934,Ashdod,Cream cakes,2026-09-15 05:30,9.6
+TL-0934,Ashdod,Cream cakes,2026-09-15 06:00,4.3
+TL-0934,Ashdod,Cream cakes,2026-09-15 06:30,4.1
+TL-0934,Ashdod,Cream cakes,2026-09-15 07:00,4.0
+TL-0934,Ashdod,Cream cakes,2026-09-15 07:30,4.5
+TL-0934,Ashdod,Cream cakes,2026-09-15 08:00,4.0
+TL-0934,Ashdod,Cream cakes,2026-09-15 08:30,4.2
+TL-0934,Ashdod,Cream cakes,2026-09-15 09:00,4.5
+TL-0934,Ashdod,Cream cakes,2026-09-15 09:30,4.6
+TL-0934,Ashdod,Cream cakes,2026-09-15 10:00,4.0
+TL-0934,Ashdod,Cream cakes,2026-09-15 10:30,4.0
+TL-0934,Ashdod,Cream cakes,2026-09-15 11:00,4.4
+TL-0934,Ashdod,Cream cakes,2026-09-15 11:30,4.0
+TL-0934,Ashdod,Cream cakes,2026-09-15 12:00,4.1
+TL-0934,Ashdod,Cream cakes,2026-09-15 12:30,4.1
+TL-0934,Ashdod,Cream cakes,2026-09-15 13:00,4.0
+TL-0934,Ashdod,Cream cakes,2026-09-15 13:30,4.3
+TL-0934,Ashdod,Cream cakes,2026-09-15 14:00,4.2
+TL-0934,Ashdod,Cream cakes,2026-09-15 14:30,4.2
+TL-0934,Ashdod,Cream cakes,2026-09-15 15:00,4.5
+TL-0934,Ashdod,Cream cakes,2026-09-15 15:30,4.6
+TL-0934,Ashdod,Cream cakes,2026-09-15 16:00,4.4
+TL-0934,Ashdod,Cream cakes,2026-09-15 16:30,4.6
+TL-0934,Ashdod,Cream cakes,2026-09-15 17:00,4.1
+TL-0934,Ashdod,Cream cakes,2026-09-15 17:30,4.1
+TL-0934,Ashdod,Cream cakes,2026-09-15 18:00,4.2
+TL-0934,Ashdod,Cream cakes,2026-09-15 18:30,4.4
+TL-0934,Ashdod,Cream cakes,2026-09-15 19:00,4.0
+TL-0934,Ashdod,Cream cakes,2026-09-15 19:30,4.6
+TL-0934,Ashdod,Cream cakes,2026-09-15 20:00,4.3
+TL-0934,Ashdod,Cream cakes,2026-09-15 20:30,4.1
+TL-0934,Ashdod,Cream cakes,2026-09-15 21:00,4.1
+TL-0934,Ashdod,Cream cakes,2026-09-15 21:30,4.0
+TL-0934,Ashdod,Cream cakes,2026-09-15 22:00,4.3
+TL-0934,Ashdod,Cream cakes,2026-09-15 22:30,4.3
+TL-0934,Ashdod,Cream cakes,2026-09-15 23:00,4.0
+TL-0934,Ashdod,Cream cakes,2026-09-15 23:30,4.2
+TL-0934,Ashdod,Cream cakes,2026-09-16 00:00,4.6
+TL-0934,Ashdod,Cream cakes,2026-09-16 00:30,4.0
+TL-0934,Ashdod,Cream cakes,2026-09-16 01:00,4.6
+TL-0934,Ashdod,Cream cakes,2026-09-16 01:30,4.5
+TL-0934,Ashdod,Cream cakes,2026-09-16 02:00,4.4
+TL-0934,Ashdod,Cream cakes,2026-09-16 02:30,4.3
+TL-0934,Ashdod,Cream cakes,2026-09-16 03:00,4.0
+TL-0934,Ashdod,Cream cakes,2026-09-16 03:30,4.3
+TL-0934,Ashdod,Cream cakes,2026-09-16 04:00,4.1
+TL-0934,Ashdod,Cream cakes,2026-09-16 04:30,4.5
+TL-0934,Ashdod,Cream cakes,2026-09-16 05:00,9.4
+TL-0934,Ashdod,Cream cakes,2026-09-16 05:30,4.3
+TL-0934,Ashdod,Cream cakes,2026-09-16 06:00,4.0
+TL-0934,Ashdod,Cream cakes,2026-09-16 06:30,4.1
+TL-0934,Ashdod,Cream cakes,2026-09-16 07:00,4.0
+TL-0934,Ashdod,Cream cakes,2026-09-16 07:30,4.4
+TL-0934,Ashdod,Cream cakes,2026-09-16 08:00,4.0
+TL-0934,Ashdod,Cream cakes,2026-09-16 08:30,4.0
+TL-0934,Ashdod,Cream cakes,2026-09-16 09:00,4.4
+TL-0934,Ashdod,Cream cakes,2026-09-16 09:30,4.0
+TL-0934,Ashdod,Cream cakes,2026-09-16 10:00,4.2
+TL-0934,Ashdod,Cream cakes,2026-09-16 10:30,4.5
+TL-0934,Ashdod,Cream cakes,2026-09-16 11:00,4.1
+TL-0934,Ashdod,Cream cakes,2026-09-16 11:30,4.0
+TL-0934,Ashdod,Cream cakes,2026-09-16 12:00,4.6
+TL-0934,Ashdod,Cream cakes,2026-09-16 12:30,4.2
+TL-0934,Ashdod,Cream cakes,2026-09-16 13:00,4.5
+TL-0934,Ashdod,Cream cakes,2026-09-16 13:30,4.3
+TL-0934,Ashdod,Cream cakes,2026-09-16 14:00,4.3
+TL-0934,Ashdod,Cream cakes,2026-09-16 14:30,4.0
+TL-0934,Ashdod,Cream cakes,2026-09-16 15:00,4.2
+TL-0934,Ashdod,Cream cakes,2026-09-16 15:30,4.5
+TL-0934,Ashdod,Cream cakes,2026-09-16 16:00,4.2
+TL-0934,Ashdod,Cream cakes,2026-09-16 16:30,4.6
+TL-0934,Ashdod,Cream cakes,2026-09-16 17:00,4.0
+TL-0934,Ashdod,Cream cakes,2026-09-16 17:30,4.5
+TL-0934,Ashdod,Cream cakes,2026-09-16 18:00,4.2
+TL-1041,Holon,Dairy,2026-09-14 06:00,3.5
+TL-1041,Holon,Dairy,2026-09-14 06:30,3.7
+TL-1041,Holon,Dairy,2026-09-14 07:00,3.8
+TL-1041,Holon,Dairy,2026-09-14 07:30,3.4
+TL-1041,Holon,Dairy,2026-09-14 08:00,3.7
+TL-1041,Holon,Dairy,2026-09-14 08:30,3.6
+TL-1041,Holon,Dairy,2026-09-14 09:00,3.9
+TL-1041,Holon,Dairy,2026-09-14 09:30,3.6
+TL-1041,Holon,Dairy,2026-09-14 10:00,3.9
+TL-1041,Holon,Dairy,2026-09-14 10:30,3.9
+TL-1041,Holon,Dairy,2026-09-14 11:00,3.4
+TL-1041,Holon,Dairy,2026-09-14 11:30,3.5
+TL-1041,Holon,Dairy,2026-09-14 12:00,3.7
+TL-1041,Holon,Dairy,2026-09-14 12:30,3.3
+TL-1041,Holon,Dairy,2026-09-14 13:00,3.3
+TL-1041,Holon,Dairy,2026-09-14 13:30,3.8
+TL-1041,Holon,Dairy,2026-09-14 14:00,3.9
+TL-1041,Holon,Dairy,2026-09-14 14:30,3.7
+TL-1041,Holon,Dairy,2026-09-14 15:00,3.7
+TL-1041,Holon,Dairy,2026-09-14 15:30,3.6
+TL-1041,Holon,Dairy,2026-09-14 16:00,3.4
+TL-1041,Holon,Dairy,2026-09-14 16:30,3.8
+TL-1041,Holon,Dairy,2026-09-14 17:00,3.8
+TL-1041,Holon,Dairy,2026-09-14 17:30,3.8
+TL-1041,Holon,Dairy,2026-09-14 18:00,3.4
+TL-1041,Holon,Dairy,2026-09-14 18:30,3.5
+TL-1041,Holon,Dairy,2026-09-14 19:00,3.5
+TL-1041,Holon,Dairy,2026-09-14 19:30,3.9
+TL-1041,Holon,Dairy,2026-09-14 20:00,3.6
+TL-1041,Holon,Dairy,2026-09-14 20:30,3.4
+TL-1041,Holon,Dairy,2026-09-14 21:00,3.5
+TL-1041,Holon,Dairy,2026-09-14 21:30,3.9
+TL-1041,Holon,Dairy,2026-09-14 22:00,3.6
+TL-1041,Holon,Dairy,2026-09-14 22:30,3.6
+TL-1041,Holon,Dairy,2026-09-14 23:00,3.6
+TL-1041,Holon,Dairy,2026-09-14 23:30,3.7
+TL-1041,Holon,Dairy,2026-09-15 00:00,3.6
+TL-1041,Holon,Dairy,2026-09-15 00:30,3.7
+TL-1041,Holon,Dairy,2026-09-15 01:00,3.8
+TL-1041,Holon,Dairy,2026-09-15 01:30,3.5
+TL-1041,Holon,Dairy,2026-09-15 02:00,3.7
+TL-1041,Holon,Dairy,2026-09-15 02:30,3.9
+TL-1041,Holon,Dairy,2026-09-15 03:00,3.5
+TL-1041,Holon,Dairy,2026-09-15 03:30,3.9
+TL-1041,Holon,Dairy,2026-09-15 04:00,3.4
+TL-1041,Holon,Dairy,2026-09-15 04:30,3.3
+TL-1041,Holon,Dairy,2026-09-15 05:00,3.7
+TL-1041,Holon,Dairy,2026-09-15 05:30,3.7
+TL-1041,Holon,Dairy,2026-09-15 06:00,3.8
+TL-1041,Holon,Dairy,2026-09-15 06:30,3.7
+TL-1041,Holon,Dairy,2026-09-15 07:00,3.7
+TL-1041,Holon,Dairy,2026-09-15 07:30,3.3
+TL-1041,Holon,Dairy,2026-09-15 08:00,3.4
+TL-1041,Holon,Dairy,2026-09-15 08:30,3.4
+TL-1041,Holon,Dairy,2026-09-15 09:00,3.7
+TL-1041,Holon,Dairy,2026-09-15 09:30,3.7
+TL-1041,Holon,Dairy,2026-09-15 10:00,3.8
+TL-1041,Holon,Dairy,2026-09-15 10:30,3.6
+TL-1041,Holon,Dairy,2026-09-15 11:00,3.9
+TL-1041,Holon,Dairy,2026-09-15 11:30,3.3
+TL-1041,Holon,Dairy,2026-09-15 12:00,3.4
+TL-1041,Holon,Dairy,2026-09-15 12:30,3.5
+TL-1041,Holon,Dairy,2026-09-15 13:00,3.3
+TL-1041,Holon,Dairy,2026-09-15 13:30,3.9
+TL-1041,Holon,Dairy,2026-09-15 14:00,3.9
+TL-1041,Holon,Dairy,2026-09-15 14:30,3.5
+TL-1041,Holon,Dairy,2026-09-15 15:00,3.4
+TL-1041,Holon,Dairy,2026-09-15 15:30,3.6
+TL-1041,Holon,Dairy,2026-09-15 16:00,3.6
+TL-1041,Holon,Dairy,2026-09-15 16:30,3.8
+TL-1041,Holon,Dairy,2026-09-15 17:00,3.6
+TL-1041,Holon,Dairy,2026-09-15 17:30,3.6
+TL-1041,Holon,Dairy,2026-09-15 18:00,3.9
+TL-1041,Holon,Dairy,2026-09-15 18:30,3.9
+TL-1041,Holon,Dairy,2026-09-15 19:00,3.6
+TL-1041,Holon,Dairy,2026-09-15 19:30,3.3
+TL-1041,Holon,Dairy,2026-09-15 20:00,3.5
+TL-1041,Holon,Dairy,2026-09-15 20:30,3.5
+TL-1041,Holon,Dairy,2026-09-15 21:00,3.6
+TL-1041,Holon,Dairy,2026-09-15 21:30,3.8
+TL-1041,Holon,Dairy,2026-09-15 22:00,3.3
+TL-1041,Holon,Dairy,2026-09-15 22:30,3.5
+TL-1041,Holon,Dairy,2026-09-15 23:00,3.6
+TL-1041,Holon,Dairy,2026-09-15 23:30,3.9
+TL-1041,Holon,Dairy,2026-09-16 00:00,3.7
+TL-1041,Holon,Dairy,2026-09-16 00:30,3.5
+TL-1041,Holon,Dairy,2026-09-16 01:00,3.4
+TL-1041,Holon,Dairy,2026-09-16 01:30,3.3
+TL-1041,Holon,Dairy,2026-09-16 02:00,3.5
+TL-1041,Holon,Dairy,2026-09-16 02:30,3.4
+TL-1041,Holon,Dairy,2026-09-16 03:00,3.5
+TL-1041,Holon,Dairy,2026-09-16 03:30,3.3
+TL-1041,Holon,Dairy,2026-09-16 04:00,3.6
+TL-1041,Holon,Dairy,2026-09-16 04:30,3.5
+TL-1041,Holon,Dairy,2026-09-16 05:00,3.3
+TL-1041,Holon,Dairy,2026-09-16 05:30,3.4
+TL-1041,Holon,Dairy,2026-09-16 06:00,3.8
+TL-1041,Holon,Dairy,2026-09-16 06:30,3.6
+TL-1041,Holon,Dairy,2026-09-16 07:00,3.5
+TL-1041,Holon,Dairy,2026-09-16 07:30,3.8
+TL-1041,Holon,Dairy,2026-09-16 08:00,3.3
+TL-1041,Holon,Dairy,2026-09-16 08:30,3.7
+TL-1041,Holon,Dairy,2026-09-16 09:00,3.3
+TL-1041,Holon,Dairy,2026-09-16 09:30,3.8
+TL-1041,Holon,Dairy,2026-09-16 10:00,3.3
+TL-1041,Holon,Dairy,2026-09-16 10:30,3.4
+TL-1041,Holon,Dairy,2026-09-16 11:00,3.6
+TL-1041,Holon,Dairy,2026-09-16 11:30,3.4
+TL-1041,Holon,Dairy,2026-09-16 12:00,3.9
+TL-1041,Holon,Dairy,2026-09-16 12:30,3.7
+TL-1041,Holon,Dairy,2026-09-16 13:00,3.5
+TL-1041,Holon,Dairy,2026-09-16 13:30,3.8
+TL-1041,Holon,Dairy,2026-09-16 14:00,3.5
+TL-1041,Holon,Dairy,2026-09-16 14:30,3.6
+TL-1041,Holon,Dairy,2026-09-16 15:00,3.7
+TL-1041,Holon,Dairy,2026-09-16 15:30,3.4
+TL-1041,Holon,Dairy,2026-09-16 16:00,3.6
+TL-1041,Holon,Dairy,2026-09-16 16:30,3.4
+TL-1041,Holon,Dairy,2026-09-16 17:00,3.9
+TL-1041,Holon,Dairy,2026-09-16 17:30,3.8
+TL-1041,Holon,Dairy,2026-09-16 18:00,3.7
+TL-1042,Holon,Walk-in,2026-09-14 06:00,2.9
+TL-1042,Holon,Walk-in,2026-09-14 06:30,2.7
+TL-1042,Holon,Walk-in,2026-09-14 07:00,3.0
+TL-1042,Holon,Walk-in,2026-09-14 07:30,2.7
+TL-1042,Holon,Walk-in,2026-09-14 08:00,2.6
+TL-1042,Holon,Walk-in,2026-09-14 08:30,2.7
+TL-1042,Holon,Walk-in,2026-09-14 09:00,2.5
+TL-1042,Holon,Walk-in,2026-09-14 09:30,3.0
+TL-1042,Holon,Walk-in,2026-09-14 10:00,3.0
+TL-1042,Holon,Walk-in,2026-09-14 10:30,2.4
+TL-1042,Holon,Walk-in,2026-09-14 11:00,2.6
+TL-1042,Holon,Walk-in,2026-09-14 11:30,2.5
+TL-1042,Holon,Walk-in,2026-09-14 12:00,3.0
+TL-1042,Holon,Walk-in,2026-09-14 12:30,3.0
+TL-1042,Holon,Walk-in,2026-09-14 13:00,3.0
+TL-1042,Holon,Walk-in,2026-09-14 13:30,3.0
+TL-1042,Holon,Walk-in,2026-09-14 14:00,2.6
+TL-1042,Holon,Walk-in,2026-09-14 14:30,2.8
+TL-1042,Holon,Walk-in,2026-09-14 15:00,2.7
+TL-1042,Holon,Walk-in,2026-09-14 15:30,2.5
+TL-1042,Holon,Walk-in,2026-09-14 16:00,2.6
+TL-1042,Holon,Walk-in,2026-09-14 16:30,3.0
+TL-1042,Holon,Walk-in,2026-09-14 17:00,2.5
+TL-1042,Holon,Walk-in,2026-09-14 17:30,2.7
+TL-1042,Holon,Walk-in,2026-09-14 18:00,2.7
+TL-1042,Holon,Walk-in,2026-09-14 18:30,3.0
+TL-1042,Holon,Walk-in,2026-09-14 19:00,3.0
+TL-1042,Holon,Walk-in,2026-09-14 19:30,2.6
+TL-1042,Holon,Walk-in,2026-09-14 20:00,2.8
+TL-1042,Holon,Walk-in,2026-09-14 20:30,2.9
+TL-1042,Holon,Walk-in,2026-09-14 21:00,2.6
+TL-1042,Holon,Walk-in,2026-09-14 21:30,3.0
+TL-1042,Holon,Walk-in,2026-09-14 22:00,2.9
+TL-1042,Holon,Walk-in,2026-09-14 22:30,2.6
+TL-1042,Holon,Walk-in,2026-09-14 23:00,3.0
+TL-1042,Holon,Walk-in,2026-09-14 23:30,2.9
+TL-1042,Holon,Walk-in,2026-09-15 00:00,2.6
+TL-1042,Holon,Walk-in,2026-09-15 00:30,2.7
+TL-1042,Holon,Walk-in,2026-09-15 01:00,2.9
+TL-1042,Holon,Walk-in,2026-09-15 01:30,2.7
+TL-1042,Holon,Walk-in,2026-09-15 02:00,2.7
+TL-1042,Holon,Walk-in,2026-09-15 02:30,2.8
+TL-1042,Holon,Walk-in,2026-09-15 03:00,2.4
+TL-1042,Holon,Walk-in,2026-09-15 03:30,3.0
+TL-1042,Holon,Walk-in,2026-09-15 04:00,2.5
+TL-1042,Holon,Walk-in,2026-09-15 04:30,2.7
+TL-1042,Holon,Walk-in,2026-09-15 05:00,3.0
+TL-1042,Holon,Walk-in,2026-09-15 05:30,3.0
+TL-1042,Holon,Walk-in,2026-09-15 06:00,2.7
+TL-1042,Holon,Walk-in,2026-09-15 06:30,2.5
+TL-1042,Holon,Walk-in,2026-09-15 07:00,2.4
+TL-1042,Holon,Walk-in,2026-09-15 07:30,2.4
+TL-1042,Holon,Walk-in,2026-09-15 08:00,2.5
+TL-1042,Holon,Walk-in,2026-09-15 08:30,2.4
+TL-1042,Holon,Walk-in,2026-09-15 09:00,2.9
+TL-1042,Holon,Walk-in,2026-09-15 09:30,2.5
+TL-1042,Holon,Walk-in,2026-09-15 10:00,2.5
+TL-1042,Holon,Walk-in,2026-09-15 10:30,3.0
+TL-1042,Holon,Walk-in,2026-09-15 11:00,2.9
+TL-1042,Holon,Walk-in,2026-09-15 11:30,3.0
+TL-1042,Holon,Walk-in,2026-09-15 12:00,2.8
+TL-1042,Holon,Walk-in,2026-09-15 12:30,2.8
+TL-1042,Holon,Walk-in,2026-09-15 13:00,3.0
+TL-1042,Holon,Walk-in,2026-09-15 13:30,2.7
+TL-1042,Holon,Walk-in,2026-09-15 14:00,2.5
+TL-1042,Holon,Walk-in,2026-09-15 14:30,2.6
+TL-1042,Holon,Walk-in,2026-09-15 15:00,2.7
+TL-1042,Holon,Walk-in,2026-09-15 15:30,2.4
+TL-1042,Holon,Walk-in,2026-09-15 16:00,2.5
+TL-1042,Holon,Walk-in,2026-09-15 16:30,2.8
+TL-1042,Holon,Walk-in,2026-09-15 17:00,2.8
+TL-1042,Holon,Walk-in,2026-09-15 17:30,2.7
+TL-1042,Holon,Walk-in,2026-09-15 18:00,2.6
+TL-1042,Holon,Walk-in,2026-09-15 18:30,2.8
+TL-1042,Holon,Walk-in,2026-09-15 19:00,2.5
+TL-1042,Holon,Walk-in,2026-09-15 19:30,2.7
+TL-1042,Holon,Walk-in,2026-09-15 20:00,3.0
+TL-1042,Holon,Walk-in,2026-09-15 20:30,2.9
+TL-1042,Holon,Walk-in,2026-09-15 21:00,3.0
+TL-1042,Holon,Walk-in,2026-09-15 21:30,2.6
+TL-1042,Holon,Walk-in,2026-09-15 22:00,2.8
+TL-1042,Holon,Walk-in,2026-09-15 22:30,2.6
+TL-1042,Holon,Walk-in,2026-09-15 23:00,2.4
+TL-1042,Holon,Walk-in,2026-09-15 23:30,2.4
+TL-1042,Holon,Walk-in,2026-09-16 00:00,2.5
+TL-1042,Holon,Walk-in,2026-09-16 00:30,3.0
+TL-1042,Holon,Walk-in,2026-09-16 01:00,2.5
+TL-1042,Holon,Walk-in,2026-09-16 01:30,2.7
+TL-1042,Holon,Walk-in,2026-09-16 02:00,2.9
+TL-1042,Holon,Walk-in,2026-09-16 02:30,2.9
+TL-1042,Holon,Walk-in,2026-09-16 03:00,2.7
+TL-1042,Holon,Walk-in,2026-09-16 03:30,2.7
+TL-1042,Holon,Walk-in,2026-09-16 04:00,3.0
+TL-1042,Holon,Walk-in,2026-09-16 04:30,2.8
+TL-1042,Holon,Walk-in,2026-09-16 05:00,2.5
+TL-1042,Holon,Walk-in,2026-09-16 05:30,2.9
+TL-1042,Holon,Walk-in,2026-09-16 06:00,2.7
+TL-1042,Holon,Walk-in,2026-09-16 06:30,2.7
+TL-1042,Holon,Walk-in,2026-09-16 07:00,2.5
+TL-1042,Holon,Walk-in,2026-09-16 07:30,2.8
+TL-1042,Holon,Walk-in,2026-09-16 08:00,3.0
+TL-1042,Holon,Walk-in,2026-09-16 08:30,2.5
+TL-1042,Holon,Walk-in,2026-09-16 09:00,2.6
+TL-1042,Holon,Walk-in,2026-09-16 09:30,2.5
+TL-1042,Holon,Walk-in,2026-09-16 10:00,3.0
+TL-1042,Holon,Walk-in,2026-09-16 10:30,2.8
+TL-1042,Holon,Walk-in,2026-09-16 11:00,3.0
+TL-1042,Holon,Walk-in,2026-09-16 11:30,2.6
+TL-1042,Holon,Walk-in,2026-09-16 12:00,2.8
+TL-1042,Holon,Walk-in,2026-09-16 12:30,2.7
+TL-1042,Holon,Walk-in,2026-09-16 13:00,2.8
+TL-1042,Holon,Walk-in,2026-09-16 13:30,2.5
+TL-1042,Holon,Walk-in,2026-09-16 14:00,2.6
+TL-1042,Holon,Walk-in,2026-09-16 14:30,2.9
+TL-1042,Holon,Walk-in,2026-09-16 15:00,2.9
+TL-1042,Holon,Walk-in,2026-09-16 15:30,2.7
+TL-1042,Holon,Walk-in,2026-09-16 16:00,2.6
+TL-1042,Holon,Walk-in,2026-09-16 16:30,2.8
+TL-1042,Holon,Walk-in,2026-09-16 17:00,3.0
+TL-1042,Holon,Walk-in,2026-09-16 17:30,3.0
+TL-1042,Holon,Walk-in,2026-09-16 18:00,2.5
+TL-1150,Bat Yam,Dairy,2026-09-14 06:00,3.8
+TL-1150,Bat Yam,Dairy,2026-09-14 06:30,3.8
+TL-1150,Bat Yam,Dairy,2026-09-14 07:00,3.6
+TL-1150,Bat Yam,Dairy,2026-09-14 07:30,4.1
+TL-1150,Bat Yam,Dairy,2026-09-14 08:00,4.0
+TL-1150,Bat Yam,Dairy,2026-09-14 08:30,4.1
+TL-1150,Bat Yam,Dairy,2026-09-14 09:00,3.9
+TL-1150,Bat Yam,Dairy,2026-09-14 09:30,3.9
+TL-1150,Bat Yam,Dairy,2026-09-14 10:00,3.8
+TL-1150,Bat Yam,Dairy,2026-09-14 10:30,4.2
+TL-1150,Bat Yam,Dairy,2026-09-14 11:00,4.2
+TL-1150,Bat Yam,Dairy,2026-09-14 11:30,4.2
+TL-1150,Bat Yam,Dairy,2026-09-14 12:00,4.1
+TL-1150,Bat Yam,Dairy,2026-09-14 12:30,4.2
+TL-1150,Bat Yam,Dairy,2026-09-14 13:00,4.1
+TL-1150,Bat Yam,Dairy,2026-09-14 13:30,3.8
+TL-1150,Bat Yam,Dairy,2026-09-14 14:00,3.9
+TL-1150,Bat Yam,Dairy,2026-09-14 14:30,4.2
+TL-1150,Bat Yam,Dairy,2026-09-14 15:00,3.8
+TL-1150,Bat Yam,Dairy,2026-09-14 15:30,3.7
+TL-1150,Bat Yam,Dairy,2026-09-14 16:00,3.6
+TL-1150,Bat Yam,Dairy,2026-09-14 16:30,4.2
+TL-1150,Bat Yam,Dairy,2026-09-14 17:00,4.1
+TL-1150,Bat Yam,Dairy,2026-09-14 17:30,3.8
+TL-1150,Bat Yam,Dairy,2026-09-14 18:00,3.7
+TL-1150,Bat Yam,Dairy,2026-09-14 18:30,3.9
+TL-1150,Bat Yam,Dairy,2026-09-14 19:00,3.7
+TL-1150,Bat Yam,Dairy,2026-09-14 19:30,3.8
+TL-1150,Bat Yam,Dairy,2026-09-14 20:00,4.1
+TL-1150,Bat Yam,Dairy,2026-09-14 20:30,3.9
+TL-1150,Bat Yam,Dairy,2026-09-14 21:00,4.1
+TL-1150,Bat Yam,Dairy,2026-09-14 21:30,3.9
+TL-1150,Bat Yam,Dairy,2026-09-14 22:00,4.2
+TL-1150,Bat Yam,Dairy,2026-09-14 22:30,4.0
+TL-1150,Bat Yam,Dairy,2026-09-14 23:00,3.8
+TL-1150,Bat Yam,Dairy,2026-09-14 23:30,3.6
+TL-1150,Bat Yam,Dairy,2026-09-15 00:00,3.7
+TL-1150,Bat Yam,Dairy,2026-09-15 00:30,3.7
+TL-1150,Bat Yam,Dairy,2026-09-15 01:00,3.8
+TL-1150,Bat Yam,Dairy,2026-09-15 01:30,4.1
+TL-1150,Bat Yam,Dairy,2026-09-15 02:00,3.7
+TL-1150,Bat Yam,Dairy,2026-09-15 02:30,3.9
+TL-1150,Bat Yam,Dairy,2026-09-15 03:00,3.8
+TL-1150,Bat Yam,Dairy,2026-09-15 03:30,3.8
+TL-1150,Bat Yam,Dairy,2026-09-15 04:00,4.2
+TL-1150,Bat Yam,Dairy,2026-09-15 04:30,3.6
+TL-1150,Bat Yam,Dairy,2026-09-15 05:00,4.2
+TL-1150,Bat Yam,Dairy,2026-09-15 05:30,4.2
+TL-1150,Bat Yam,Dairy,2026-09-15 06:00,3.8
+TL-1150,Bat Yam,Dairy,2026-09-15 06:30,3.7
+TL-1150,Bat Yam,Dairy,2026-09-15 07:00,4.1
+TL-1150,Bat Yam,Dairy,2026-09-15 07:30,4.1
+TL-1150,Bat Yam,Dairy,2026-09-15 08:00,3.8
+TL-1150,Bat Yam,Dairy,2026-09-15 08:30,3.7
+TL-1150,Bat Yam,Dairy,2026-09-15 09:00,3.6
+TL-1150,Bat Yam,Dairy,2026-09-15 09:30,4.2
+TL-1150,Bat Yam,Dairy,2026-09-15 10:00,3.6
+TL-1150,Bat Yam,Dairy,2026-09-15 10:30,4.2
+TL-1150,Bat Yam,Dairy,2026-09-15 11:00,3.8
+TL-1150,Bat Yam,Dairy,2026-09-15 11:30,3.7
+TL-1150,Bat Yam,Dairy,2026-09-15 12:00,4.0
+TL-1150,Bat Yam,Dairy,2026-09-15 12:30,4.2
+TL-1150,Bat Yam,Dairy,2026-09-15 13:00,4.0
+TL-1150,Bat Yam,Dairy,2026-09-15 13:30,3.6
+TL-1150,Bat Yam,Dairy,2026-09-15 14:00,4.0
+TL-1150,Bat Yam,Dairy,2026-09-15 14:30,4.2
+TL-1150,Bat Yam,Dairy,2026-09-15 15:00,4.1
+TL-1150,Bat Yam,Dairy,2026-09-15 15:30,4.0
+TL-1150,Bat Yam,Dairy,2026-09-15 16:00,4.1
+TL-1150,Bat Yam,Dairy,2026-09-15 16:30,4.2
+TL-1150,Bat Yam,Dairy,2026-09-15 17:00,3.6
+TL-1150,Bat Yam,Dairy,2026-09-15 17:30,3.6
+TL-1150,Bat Yam,Dairy,2026-09-15 18:00,3.9
+TL-1150,Bat Yam,Dairy,2026-09-15 18:30,4.1
+TL-1150,Bat Yam,Dairy,2026-09-15 19:00,3.7
+TL-1150,Bat Yam,Dairy,2026-09-15 19:30,4.2
+TL-1150,Bat Yam,Dairy,2026-09-15 20:00,3.6
+TL-1150,Bat Yam,Dairy,2026-09-15 20:30,3.9
+TL-1150,Bat Yam,Dairy,2026-09-15 21:00,4.0
+TL-1150,Bat Yam,Dairy,2026-09-15 21:30,4.1
+TL-1150,Bat Yam,Dairy,2026-09-15 22:00,3.9
+TL-1150,Bat Yam,Dairy,2026-09-15 22:30,3.6
+TL-1150,Bat Yam,Dairy,2026-09-15 23:00,4.2
+TL-1150,Bat Yam,Dairy,2026-09-15 23:30,4.1
+TL-1150,Bat Yam,Dairy,2026-09-16 00:00,3.9
+TL-1150,Bat Yam,Dairy,2026-09-16 00:30,4.2
+TL-1150,Bat Yam,Dairy,2026-09-16 01:00,3.9
+TL-1150,Bat Yam,Dairy,2026-09-16 01:30,3.6
+TL-1150,Bat Yam,Dairy,2026-09-16 02:00,3.8
+TL-1150,Bat Yam,Dairy,2026-09-16 02:30,3.6
+TL-1150,Bat Yam,Dairy,2026-09-16 03:00,3.9
+TL-1150,Bat Yam,Dairy,2026-09-16 03:30,3.7
+TL-1150,Bat Yam,Dairy,2026-09-16 04:00,3.9
+TL-1150,Bat Yam,Dairy,2026-09-16 04:30,3.7
+TL-1150,Bat Yam,Dairy,2026-09-16 05:00,3.6
+TL-1150,Bat Yam,Dairy,2026-09-16 05:30,3.6
+TL-1150,Bat Yam,Dairy,2026-09-16 06:00,3.9
+TL-1150,Bat Yam,Dairy,2026-09-16 06:30,3.9
+TL-1150,Bat Yam,Dairy,2026-09-16 07:00,4.1
+TL-1150,Bat Yam,Dairy,2026-09-16 07:30,4.1
+TL-1150,Bat Yam,Dairy,2026-09-16 08:00,4.0
+TL-1150,Bat Yam,Dairy,2026-09-16 08:30,3.6
+TL-1150,Bat Yam,Dairy,2026-09-16 09:00,4.2
+TL-1150,Bat Yam,Dairy,2026-09-16 09:30,4.0
+TL-1150,Bat Yam,Dairy,2026-09-16 10:00,3.8
+TL-1150,Bat Yam,Dairy,2026-09-16 10:30,3.8
+TL-1150,Bat Yam,Dairy,2026-09-16 11:00,3.7
+TL-1150,Bat Yam,Dairy,2026-09-16 11:30,3.6
+TL-1150,Bat Yam,Dairy,2026-09-16 12:00,3.7
+TL-1150,Bat Yam,Dairy,2026-09-16 12:30,4.0
+TL-1150,Bat Yam,Dairy,2026-09-16 13:00,4.0
+TL-1150,Bat Yam,Dairy,2026-09-16 13:30,4.1
+TL-1150,Bat Yam,Dairy,2026-09-16 14:00,3.6
+TL-1150,Bat Yam,Dairy,2026-09-16 14:30,3.9
+TL-1150,Bat Yam,Dairy,2026-09-16 15:00,4.2
+TL-1150,Bat Yam,Dairy,2026-09-16 15:30,3.8
+TL-1150,Bat Yam,Dairy,2026-09-16 16:00,4.2
+TL-1150,Bat Yam,Dairy,2026-09-16 16:30,3.8
+TL-1150,Bat Yam,Dairy,2026-09-16 17:00,4.0
+TL-1150,Bat Yam,Dairy,2026-09-16 17:30,3.9
+TL-1150,Bat Yam,Dairy,2026-09-16 18:00,3.6
+TL-1261,Herzliya,Dairy,2026-09-14 06:00,3.6
+TL-1261,Herzliya,Dairy,2026-09-14 06:30,3.1
+TL-1261,Herzliya,Dairy,2026-09-14 07:00,3.6
+TL-1261,Herzliya,Dairy,2026-09-14 07:30,3.1
+TL-1261,Herzliya,Dairy,2026-09-14 08:00,3.0
+TL-1261,Herzliya,Dairy,2026-09-14 08:30,3.5
+TL-1261,Herzliya,Dairy,2026-09-14 09:00,3.5
+TL-1261,Herzliya,Dairy,2026-09-14 09:30,3.6
+TL-1261,Herzliya,Dairy,2026-09-14 10:00,3.4
+TL-1261,Herzliya,Dairy,2026-09-14 10:30,3.0
+TL-1261,Herzliya,Dairy,2026-09-14 11:00,3.5
+TL-1261,Herzliya,Dairy,2026-09-14 11:30,3.6
+TL-1261,Herzliya,Dairy,2026-09-14 12:00,3.0
+TL-1261,Herzliya,Dairy,2026-09-14 12:30,3.6
+TL-1261,Herzliya,Dairy,2026-09-14 13:00,3.0
+TL-1261,Herzliya,Dairy,2026-09-14 13:30,3.1
+TL-1261,Herzliya,Dairy,2026-09-14 14:00,3.4
+TL-1261,Herzliya,Dairy,2026-09-14 14:30,3.6
+TL-1261,Herzliya,Dairy,2026-09-14 15:00,3.5
+TL-1261,Herzliya,Dairy,2026-09-14 15:30,3.6
+TL-1261,Herzliya,Dairy,2026-09-14 16:00,3.4
+TL-1261,Herzliya,Dairy,2026-09-14 16:30,3.1
+TL-1261,Herzliya,Dairy,2026-09-14 17:00,3.0
+TL-1261,Herzliya,Dairy,2026-09-14 17:30,3.1
+TL-1261,Herzliya,Dairy,2026-09-14 18:00,3.0
+TL-1261,Herzliya,Dairy,2026-09-14 18:30,3.0
+TL-1261,Herzliya,Dairy,2026-09-14 19:00,3.1
+TL-1261,Herzliya,Dairy,2026-09-14 19:30,3.0
+TL-1261,Herzliya,Dairy,2026-09-14 20:00,3.1
+TL-1261,Herzliya,Dairy,2026-09-14 20:30,3.6
+TL-1261,Herzliya,Dairy,2026-09-14 21:00,3.4
+TL-1261,Herzliya,Dairy,2026-09-14 21:30,3.0
+TL-1261,Herzliya,Dairy,2026-09-14 22:00,3.5
+TL-1261,Herzliya,Dairy,2026-09-14 22:30,3.6
+TL-1261,Herzliya,Dairy,2026-09-14 23:00,3.1
+TL-1261,Herzliya,Dairy,2026-09-14 23:30,3.0
+TL-1261,Herzliya,Dairy,2026-09-15 00:00,3.0
+TL-1261,Herzliya,Dairy,2026-09-15 00:30,3.1
+TL-1261,Herzliya,Dairy,2026-09-15 01:00,3.4
+TL-1261,Herzliya,Dairy,2026-09-15 01:30,3.6
+TL-1261,Herzliya,Dairy,2026-09-15 02:00,3.0
+TL-1261,Herzliya,Dairy,2026-09-15 02:30,3.3
+TL-1261,Herzliya,Dairy,2026-09-15 03:00,3.5
+TL-1261,Herzliya,Dairy,2026-09-15 03:30,3.1
+TL-1261,Herzliya,Dairy,2026-09-15 04:00,3.0
+TL-1261,Herzliya,Dairy,2026-09-15 04:30,3.2
+TL-1261,Herzliya,Dairy,2026-09-15 05:00,3.1
+TL-1261,Herzliya,Dairy,2026-09-15 05:30,3.2
+TL-1261,Herzliya,Dairy,2026-09-15 06:00,3.4
+TL-1261,Herzliya,Dairy,2026-09-15 06:30,3.2
+TL-1261,Herzliya,Dairy,2026-09-15 07:00,3.0
+TL-1261,Herzliya,Dairy,2026-09-15 07:30,3.5
+TL-1261,Herzliya,Dairy,2026-09-15 08:00,3.6
+TL-1261,Herzliya,Dairy,2026-09-15 08:30,3.0
+TL-1261,Herzliya,Dairy,2026-09-15 09:00,3.5
+TL-1261,Herzliya,Dairy,2026-09-15 09:30,3.3
+TL-1261,Herzliya,Dairy,2026-09-15 10:00,3.0
+TL-1261,Herzliya,Dairy,2026-09-15 10:30,3.1
+TL-1261,Herzliya,Dairy,2026-09-15 11:00,3.1
+TL-1261,Herzliya,Dairy,2026-09-15 11:30,3.6
+TL-1261,Herzliya,Dairy,2026-09-15 12:00,3.4
+TL-1261,Herzliya,Dairy,2026-09-15 12:30,3.1
+TL-1261,Herzliya,Dairy,2026-09-15 13:00,3.0
+TL-1261,Herzliya,Dairy,2026-09-15 13:30,3.2
+TL-1261,Herzliya,Dairy,2026-09-15 14:00,3.0
+TL-1261,Herzliya,Dairy,2026-09-15 14:30,3.6
+TL-1261,Herzliya,Dairy,2026-09-15 15:00,3.1
+TL-1261,Herzliya,Dairy,2026-09-15 15:30,3.5
+TL-1261,Herzliya,Dairy,2026-09-15 16:00,3.1
+TL-1261,Herzliya,Dairy,2026-09-15 16:30,3.6
+TL-1261,Herzliya,Dairy,2026-09-15 17:00,3.4
+TL-1261,Herzliya,Dairy,2026-09-15 17:30,3.1
+TL-1261,Herzliya,Dairy,2026-09-15 18:00,3.5
+TL-1261,Herzliya,Dairy,2026-09-15 18:30,3.6
+TL-1261,Herzliya,Dairy,2026-09-15 19:00,3.6
+TL-1261,Herzliya,Dairy,2026-09-15 19:30,3.5
+TL-1261,Herzliya,Dairy,2026-09-15 20:00,3.6
+TL-1261,Herzliya,Dairy,2026-09-15 20:30,3.0
+TL-1261,Herzliya,Dairy,2026-09-15 21:00,3.6
+TL-1261,Herzliya,Dairy,2026-09-15 21:30,3.0
+TL-1261,Herzliya,Dairy,2026-09-15 22:00,3.6
+TL-1261,Herzliya,Dairy,2026-09-15 22:30,3.3
+TL-1261,Herzliya,Dairy,2026-09-15 23:00,3.6
+TL-1261,Herzliya,Dairy,2026-09-15 23:30,3.1
+TL-1261,Herzliya,Dairy,2026-09-16 00:00,3.2
+TL-1261,Herzliya,Dairy,2026-09-16 00:30,3.2
+TL-1261,Herzliya,Dairy,2026-09-16 01:00,3.3
+TL-1261,Herzliya,Dairy,2026-09-16 01:30,3.1
+TL-1261,Herzliya,Dairy,2026-09-16 02:00,3.5
+TL-1261,Herzliya,Dairy,2026-09-16 02:30,3.1
+TL-1261,Herzliya,Dairy,2026-09-16 03:00,3.4
+TL-1261,Herzliya,Dairy,2026-09-16 03:30,3.1
+TL-1261,Herzliya,Dairy,2026-09-16 04:00,3.2
+TL-1261,Herzliya,Dairy,2026-09-16 04:30,3.2
+TL-1261,Herzliya,Dairy,2026-09-16 05:00,3.1
+TL-1261,Herzliya,Dairy,2026-09-16 05:30,3.1
+TL-1261,Herzliya,Dairy,2026-09-16 06:00,3.6
+TL-1261,Herzliya,Dairy,2026-09-16 06:30,3.6
+TL-1261,Herzliya,Dairy,2026-09-16 07:00,3.3
+TL-1261,Herzliya,Dairy,2026-09-16 07:30,3.2
+TL-1261,Herzliya,Dairy,2026-09-16 08:00,3.1
+TL-1261,Herzliya,Dairy,2026-09-16 08:30,3.5
+TL-1261,Herzliya,Dairy,2026-09-16 09:00,3.5
+TL-1261,Herzliya,Dairy,2026-09-16 09:30,3.3
+TL-1261,Herzliya,Dairy,2026-09-16 10:00,3.0
+TL-1261,Herzliya,Dairy,2026-09-16 10:30,3.5
+TL-1261,Herzliya,Dairy,2026-09-16 11:00,3.2
+TL-1261,Herzliya,Dairy,2026-09-16 11:30,3.0
+TL-1261,Herzliya,Dairy,2026-09-16 12:00,3.3
+TL-1261,Herzliya,Dairy,2026-09-16 12:30,3.2
+TL-1261,Herzliya,Dairy,2026-09-16 13:00,3.4
+TL-1261,Herzliya,Dairy,2026-09-16 13:30,3.5
+TL-1261,Herzliya,Dairy,2026-09-16 14:00,3.5
+TL-1261,Herzliya,Dairy,2026-09-16 14:30,3.1
+TL-1261,Herzliya,Dairy,2026-09-16 15:00,3.1
+TL-1261,Herzliya,Dairy,2026-09-16 15:30,3.1
+TL-1261,Herzliya,Dairy,2026-09-16 16:00,3.4
+TL-1261,Herzliya,Dairy,2026-09-16 16:30,3.0
+TL-1261,Herzliya,Dairy,2026-09-16 17:00,3.6
+TL-1261,Herzliya,Dairy,2026-09-16 17:30,3.3
+TL-1261,Herzliya,Dairy,2026-09-16 18:00,3.4
+TL-1262,Herzliya,Display 1,2026-09-14 06:00,4.8
+TL-1262,Herzliya,Display 1,2026-09-14 06:30,4.2
+TL-1262,Herzliya,Display 1,2026-09-14 07:00,4.2
+TL-1262,Herzliya,Display 1,2026-09-14 07:30,4.7
+TL-1262,Herzliya,Display 1,2026-09-14 08:00,4.6
+TL-1262,Herzliya,Display 1,2026-09-14 08:30,4.2
+TL-1262,Herzliya,Display 1,2026-09-14 09:00,4.3
+TL-1262,Herzliya,Display 1,2026-09-14 09:30,4.5
+TL-1262,Herzliya,Display 1,2026-09-14 10:00,4.7
+TL-1262,Herzliya,Display 1,2026-09-14 10:30,4.6
+TL-1262,Herzliya,Display 1,2026-09-14 11:00,4.4
+TL-1262,Herzliya,Display 1,2026-09-14 11:30,4.2
+TL-1262,Herzliya,Display 1,2026-09-14 12:00,4.8
+TL-1262,Herzliya,Display 1,2026-09-14 12:30,4.3
+TL-1262,Herzliya,Display 1,2026-09-14 13:00,4.4
+TL-1262,Herzliya,Display 1,2026-09-14 13:30,4.3
+TL-1262,Herzliya,Display 1,2026-09-14 14:00,4.5
+TL-1262,Herzliya,Display 1,2026-09-14 14:30,4.7
+TL-1262,Herzliya,Display 1,2026-09-14 15:00,4.3
+TL-1262,Herzliya,Display 1,2026-09-14 15:30,4.6
+TL-1262,Herzliya,Display 1,2026-09-14 16:00,4.3
+TL-1262,Herzliya,Display 1,2026-09-14 16:30,4.8
+TL-1262,Herzliya,Display 1,2026-09-14 17:00,4.2
+TL-1262,Herzliya,Display 1,2026-09-14 17:30,4.3
+TL-1262,Herzliya,Display 1,2026-09-14 18:00,4.6
+TL-1262,Herzliya,Display 1,2026-09-14 18:30,4.3
+TL-1262,Herzliya,Display 1,2026-09-14 19:00,4.5
+TL-1262,Herzliya,Display 1,2026-09-14 19:30,4.7
+TL-1262,Herzliya,Display 1,2026-09-14 20:00,4.4
+TL-1262,Herzliya,Display 1,2026-09-14 20:30,4.2
+TL-1262,Herzliya,Display 1,2026-09-14 21:00,4.6
+TL-1262,Herzliya,Display 1,2026-09-14 21:30,4.4
+TL-1262,Herzliya,Display 1,2026-09-14 22:00,4.8
+TL-1262,Herzliya,Display 1,2026-09-14 22:30,4.8
+TL-1262,Herzliya,Display 1,2026-09-14 23:00,4.5
+TL-1262,Herzliya,Display 1,2026-09-14 23:30,4.3
+TL-1262,Herzliya,Display 1,2026-09-15 00:00,4.8
+TL-1262,Herzliya,Display 1,2026-09-15 00:30,4.2
+TL-1262,Herzliya,Display 1,2026-09-15 01:00,4.2
+TL-1262,Herzliya,Display 1,2026-09-15 01:30,4.4
+TL-1262,Herzliya,Display 1,2026-09-15 02:00,4.6
+TL-1262,Herzliya,Display 1,2026-09-15 02:30,4.2
+TL-1262,Herzliya,Display 1,2026-09-15 03:00,4.7
+TL-1262,Herzliya,Display 1,2026-09-15 03:30,4.2
+TL-1262,Herzliya,Display 1,2026-09-15 04:00,4.2
+TL-1262,Herzliya,Display 1,2026-09-15 04:30,4.4
+TL-1262,Herzliya,Display 1,2026-09-15 05:00,4.8
+TL-1262,Herzliya,Display 1,2026-09-15 05:30,9.7
+TL-1262,Herzliya,Display 1,2026-09-15 06:00,4.8
+TL-1262,Herzliya,Display 1,2026-09-15 06:30,4.4
+TL-1262,Herzliya,Display 1,2026-09-15 07:00,4.3
+TL-1262,Herzliya,Display 1,2026-09-15 07:30,4.4
+TL-1262,Herzliya,Display 1,2026-09-15 08:00,4.7
+TL-1262,Herzliya,Display 1,2026-09-15 08:30,4.3
+TL-1262,Herzliya,Display 1,2026-09-15 09:00,4.6
+TL-1262,Herzliya,Display 1,2026-09-15 09:30,4.4
+TL-1262,Herzliya,Display 1,2026-09-15 10:00,4.8
+TL-1262,Herzliya,Display 1,2026-09-15 10:30,4.6
+TL-1262,Herzliya,Display 1,2026-09-15 11:00,4.5
+TL-1262,Herzliya,Display 1,2026-09-15 11:30,4.3
+TL-1262,Herzliya,Display 1,2026-09-15 12:00,4.8
+TL-1262,Herzliya,Display 1,2026-09-15 12:30,4.6
+TL-1262,Herzliya,Display 1,2026-09-15 13:00,4.8
+TL-1262,Herzliya,Display 1,2026-09-15 13:30,4.7
+TL-1262,Herzliya,Display 1,2026-09-15 14:00,4.8
+TL-1262,Herzliya,Display 1,2026-09-15 14:30,4.3
+TL-1262,Herzliya,Display 1,2026-09-15 15:00,4.2
+TL-1262,Herzliya,Display 1,2026-09-15 15:30,4.5
+TL-1262,Herzliya,Display 1,2026-09-15 16:00,4.4
+TL-1262,Herzliya,Display 1,2026-09-15 16:30,4.5
+TL-1262,Herzliya,Display 1,2026-09-15 17:00,4.7
+TL-1262,Herzliya,Display 1,2026-09-15 17:30,4.3
+TL-1262,Herzliya,Display 1,2026-09-15 18:00,4.8
+TL-1262,Herzliya,Display 1,2026-09-15 18:30,4.7
+TL-1262,Herzliya,Display 1,2026-09-15 19:00,4.7
+TL-1262,Herzliya,Display 1,2026-09-15 19:30,4.8
+TL-1262,Herzliya,Display 1,2026-09-15 20:00,4.3
+TL-1262,Herzliya,Display 1,2026-09-15 20:30,4.2
+TL-1262,Herzliya,Display 1,2026-09-15 21:00,4.8
+TL-1262,Herzliya,Display 1,2026-09-15 21:30,4.8
+TL-1262,Herzliya,Display 1,2026-09-15 22:00,4.6
+TL-1262,Herzliya,Display 1,2026-09-15 22:30,4.4
+TL-1262,Herzliya,Display 1,2026-09-15 23:00,4.2
+TL-1262,Herzliya,Display 1,2026-09-15 23:30,4.4
+TL-1262,Herzliya,Display 1,2026-09-16 00:00,4.6
+TL-1262,Herzliya,Display 1,2026-09-16 00:30,4.7
+TL-1262,Herzliya,Display 1,2026-09-16 01:00,4.8
+TL-1262,Herzliya,Display 1,2026-09-16 01:30,4.4
+TL-1262,Herzliya,Display 1,2026-09-16 02:00,4.5
+TL-1262,Herzliya,Display 1,2026-09-16 02:30,4.6
+TL-1262,Herzliya,Display 1,2026-09-16 03:00,4.6
+TL-1262,Herzliya,Display 1,2026-09-16 03:30,4.8
+TL-1262,Herzliya,Display 1,2026-09-16 04:00,4.6
+TL-1262,Herzliya,Display 1,2026-09-16 04:30,4.8
+TL-1262,Herzliya,Display 1,2026-09-16 05:00,10.2
+TL-1262,Herzliya,Display 1,2026-09-16 05:30,4.7
+TL-1262,Herzliya,Display 1,2026-09-16 06:00,4.2
+TL-1262,Herzliya,Display 1,2026-09-16 06:30,4.8
+TL-1262,Herzliya,Display 1,2026-09-16 07:00,4.2
+TL-1262,Herzliya,Display 1,2026-09-16 07:30,4.7
+TL-1262,Herzliya,Display 1,2026-09-16 08:00,4.6
+TL-1262,Herzliya,Display 1,2026-09-16 08:30,4.5
+TL-1262,Herzliya,Display 1,2026-09-16 09:00,4.3
+TL-1262,Herzliya,Display 1,2026-09-16 09:30,4.5
+TL-1262,Herzliya,Display 1,2026-09-16 10:00,4.8
+TL-1262,Herzliya,Display 1,2026-09-16 10:30,4.6
+TL-1262,Herzliya,Display 1,2026-09-16 11:00,4.2
+TL-1262,Herzliya,Display 1,2026-09-16 11:30,4.6
+TL-1262,Herzliya,Display 1,2026-09-16 12:00,4.4
+TL-1262,Herzliya,Display 1,2026-09-16 12:30,4.7
+TL-1262,Herzliya,Display 1,2026-09-16 13:00,4.7
+TL-1262,Herzliya,Display 1,2026-09-16 13:30,4.2
+TL-1262,Herzliya,Display 1,2026-09-16 14:00,4.5
+TL-1262,Herzliya,Display 1,2026-09-16 14:30,4.6
+TL-1262,Herzliya,Display 1,2026-09-16 15:00,4.5
+TL-1262,Herzliya,Display 1,2026-09-16 15:30,4.2
+TL-1262,Herzliya,Display 1,2026-09-16 16:00,4.8
+TL-1262,Herzliya,Display 1,2026-09-16 16:30,4.7
+TL-1262,Herzliya,Display 1,2026-09-16 17:00,4.6
+TL-1262,Herzliya,Display 1,2026-09-16 17:30,4.7
+TL-1262,Herzliya,Display 1,2026-09-16 18:00,4.3
+TL-1370,Ra'anana,Dairy,2026-09-14 06:00,3.7
+TL-1370,Ra'anana,Dairy,2026-09-14 06:30,3.5
+TL-1370,Ra'anana,Dairy,2026-09-14 07:00,3.7
+TL-1370,Ra'anana,Dairy,2026-09-14 07:30,3.5
+TL-1370,Ra'anana,Dairy,2026-09-14 08:00,4.0
+TL-1370,Ra'anana,Dairy,2026-09-14 08:30,3.9
+TL-1370,Ra'anana,Dairy,2026-09-14 09:00,3.7
+TL-1370,Ra'anana,Dairy,2026-09-14 09:30,4.1
+TL-1370,Ra'anana,Dairy,2026-09-14 10:00,3.9
+TL-1370,Ra'anana,Dairy,2026-09-14 10:30,3.6
+TL-1370,Ra'anana,Dairy,2026-09-14 11:00,3.5
+TL-1370,Ra'anana,Dairy,2026-09-14 11:30,3.9
+TL-1370,Ra'anana,Dairy,2026-09-14 12:00,3.8
+TL-1370,Ra'anana,Dairy,2026-09-14 12:30,3.9
+TL-1370,Ra'anana,Dairy,2026-09-14 13:00,3.7
+TL-1370,Ra'anana,Dairy,2026-09-14 13:30,4.0
+TL-1370,Ra'anana,Dairy,2026-09-14 14:00,3.9
+TL-1370,Ra'anana,Dairy,2026-09-14 14:30,3.8
+TL-1370,Ra'anana,Dairy,2026-09-14 15:00,3.6
+TL-1370,Ra'anana,Dairy,2026-09-14 15:30,4.1
+TL-1370,Ra'anana,Dairy,2026-09-14 16:00,3.7
+TL-1370,Ra'anana,Dairy,2026-09-14 16:30,4.0
+TL-1370,Ra'anana,Dairy,2026-09-14 17:00,3.9
+TL-1370,Ra'anana,Dairy,2026-09-14 17:30,4.1
+TL-1370,Ra'anana,Dairy,2026-09-14 18:00,3.8
+TL-1370,Ra'anana,Dairy,2026-09-14 18:30,4.1
+TL-1370,Ra'anana,Dairy,2026-09-14 19:00,4.0
+TL-1370,Ra'anana,Dairy,2026-09-14 19:30,3.8
+TL-1370,Ra'anana,Dairy,2026-09-14 20:00,3.6
+TL-1370,Ra'anana,Dairy,2026-09-14 20:30,3.7
+TL-1370,Ra'anana,Dairy,2026-09-14 21:00,3.8
+TL-1370,Ra'anana,Dairy,2026-09-14 21:30,3.8
+TL-1370,Ra'anana,Dairy,2026-09-14 22:00,4.1
+TL-1370,Ra'anana,Dairy,2026-09-14 22:30,3.8
+TL-1370,Ra'anana,Dairy,2026-09-14 23:00,3.5
+TL-1370,Ra'anana,Dairy,2026-09-14 23:30,3.8
+TL-1370,Ra'anana,Dairy,2026-09-15 00:00,3.8
+TL-1370,Ra'anana,Dairy,2026-09-15 00:30,3.7
+TL-1370,Ra'anana,Dairy,2026-09-15 01:00,3.5
+TL-1370,Ra'anana,Dairy,2026-09-15 01:30,4.1
+TL-1370,Ra'anana,Dairy,2026-09-15 02:00,3.5
+TL-1370,Ra'anana,Dairy,2026-09-15 02:30,4.1
+TL-1370,Ra'anana,Dairy,2026-09-15 03:00,3.8
+TL-1370,Ra'anana,Dairy,2026-09-15 03:30,3.7
+TL-1370,Ra'anana,Dairy,2026-09-15 04:00,3.6
+TL-1370,Ra'anana,Dairy,2026-09-15 04:30,3.9
+TL-1370,Ra'anana,Dairy,2026-09-15 05:00,3.5
+TL-1370,Ra'anana,Dairy,2026-09-15 05:30,3.8
+TL-1370,Ra'anana,Dairy,2026-09-15 06:00,4.0
+TL-1370,Ra'anana,Dairy,2026-09-15 06:30,3.7
+TL-1370,Ra'anana,Dairy,2026-09-15 07:00,3.9
+TL-1370,Ra'anana,Dairy,2026-09-15 07:30,3.6
+TL-1370,Ra'anana,Dairy,2026-09-15 08:00,3.5
+TL-1370,Ra'anana,Dairy,2026-09-15 08:30,4.1
+TL-1370,Ra'anana,Dairy,2026-09-15 09:00,3.8
+TL-1370,Ra'anana,Dairy,2026-09-15 09:30,3.5
+TL-1370,Ra'anana,Dairy,2026-09-15 10:00,3.9
+TL-1370,Ra'anana,Dairy,2026-09-15 10:30,4.1
+TL-1370,Ra'anana,Dairy,2026-09-15 11:00,4.1
+TL-1370,Ra'anana,Dairy,2026-09-15 11:30,3.6
+TL-1370,Ra'anana,Dairy,2026-09-15 12:00,3.8
+TL-1370,Ra'anana,Dairy,2026-09-15 12:30,3.5
+TL-1370,Ra'anana,Dairy,2026-09-15 13:00,3.6
+TL-1370,Ra'anana,Dairy,2026-09-15 13:30,4.1
+TL-1370,Ra'anana,Dairy,2026-09-15 14:00,3.9
+TL-1370,Ra'anana,Dairy,2026-09-15 14:30,3.7
+TL-1370,Ra'anana,Dairy,2026-09-15 15:00,3.7
+TL-1370,Ra'anana,Dairy,2026-09-15 15:30,4.1
+TL-1370,Ra'anana,Dairy,2026-09-15 16:00,3.5
+TL-1370,Ra'anana,Dairy,2026-09-15 16:30,3.5
+TL-1370,Ra'anana,Dairy,2026-09-15 17:00,3.6
+TL-1370,Ra'anana,Dairy,2026-09-15 17:30,3.8
+TL-1370,Ra'anana,Dairy,2026-09-15 18:00,4.0
+TL-1370,Ra'anana,Dairy,2026-09-15 18:30,3.5
+TL-1370,Ra'anana,Dairy,2026-09-15 19:00,3.8
+TL-1370,Ra'anana,Dairy,2026-09-15 19:30,3.7
+TL-1370,Ra'anana,Dairy,2026-09-15 20:00,3.8
+TL-1370,Ra'anana,Dairy,2026-09-15 20:30,4.0
+TL-1370,Ra'anana,Dairy,2026-09-15 21:00,3.7
+TL-1370,Ra'anana,Dairy,2026-09-15 21:30,4.0
+TL-1370,Ra'anana,Dairy,2026-09-15 22:00,4.0
+TL-1370,Ra'anana,Dairy,2026-09-15 22:30,3.7
+TL-1370,Ra'anana,Dairy,2026-09-15 23:00,4.1
+TL-1370,Ra'anana,Dairy,2026-09-15 23:30,3.5
+TL-1370,Ra'anana,Dairy,2026-09-16 00:00,3.6
+TL-1370,Ra'anana,Dairy,2026-09-16 00:30,3.7
+TL-1370,Ra'anana,Dairy,2026-09-16 01:00,3.6
+TL-1370,Ra'anana,Dairy,2026-09-16 01:30,4.0
+TL-1370,Ra'anana,Dairy,2026-09-16 02:00,4.1
+TL-1370,Ra'anana,Dairy,2026-09-16 02:30,3.5
+TL-1370,Ra'anana,Dairy,2026-09-16 03:00,3.7
+TL-1370,Ra'anana,Dairy,2026-09-16 03:30,3.6
+TL-1370,Ra'anana,Dairy,2026-09-16 04:00,3.6
+TL-1370,Ra'anana,Dairy,2026-09-16 04:30,3.5
+TL-1370,Ra'anana,Dairy,2026-09-16 05:00,3.5
+TL-1370,Ra'anana,Dairy,2026-09-16 05:30,3.7
+TL-1370,Ra'anana,Dairy,2026-09-16 06:00,3.7
+TL-1370,Ra'anana,Dairy,2026-09-16 06:30,3.6
+TL-1370,Ra'anana,Dairy,2026-09-16 07:00,3.9
+TL-1370,Ra'anana,Dairy,2026-09-16 07:30,3.7
+TL-1370,Ra'anana,Dairy,2026-09-16 08:00,4.0
+TL-1370,Ra'anana,Dairy,2026-09-16 08:30,3.6
+TL-1370,Ra'anana,Dairy,2026-09-16 09:00,4.1
+TL-1370,Ra'anana,Dairy,2026-09-16 09:30,3.7
+TL-1370,Ra'anana,Dairy,2026-09-16 10:00,3.9
+TL-1370,Ra'anana,Dairy,2026-09-16 10:30,3.5
+TL-1370,Ra'anana,Dairy,2026-09-16 11:00,3.5
+TL-1370,Ra'anana,Dairy,2026-09-16 11:30,3.9
+TL-1370,Ra'anana,Dairy,2026-09-16 12:00,3.6
+TL-1370,Ra'anana,Dairy,2026-09-16 12:30,4.1
+TL-1370,Ra'anana,Dairy,2026-09-16 13:00,3.7
+TL-1370,Ra'anana,Dairy,2026-09-16 13:30,3.5
+TL-1370,Ra'anana,Dairy,2026-09-16 14:00,3.8
+TL-1370,Ra'anana,Dairy,2026-09-16 14:30,3.7
+TL-1370,Ra'anana,Dairy,2026-09-16 15:00,3.6
+TL-1370,Ra'anana,Dairy,2026-09-16 15:30,3.6
+TL-1370,Ra'anana,Dairy,2026-09-16 16:00,4.0
+TL-1370,Ra'anana,Dairy,2026-09-16 16:30,3.8
+TL-1370,Ra'anana,Dairy,2026-09-16 17:00,3.8
+TL-1370,Ra'anana,Dairy,2026-09-16 17:30,4.1
+TL-1370,Ra'anana,Dairy,2026-09-16 18:00,3.7
+TL-1371,Ra'anana,Cream cakes,2026-09-14 06:00,4.4
+TL-1371,Ra'anana,Cream cakes,2026-09-14 06:30,4.4
+TL-1371,Ra'anana,Cream cakes,2026-09-14 07:00,3.9
+TL-1371,Ra'anana,Cream cakes,2026-09-14 07:30,4.0
+TL-1371,Ra'anana,Cream cakes,2026-09-14 08:00,4.3
+TL-1371,Ra'anana,Cream cakes,2026-09-14 08:30,4.2
+TL-1371,Ra'anana,Cream cakes,2026-09-14 09:00,4.2
+TL-1371,Ra'anana,Cream cakes,2026-09-14 09:30,4.1
+TL-1371,Ra'anana,Cream cakes,2026-09-14 10:00,4.3
+TL-1371,Ra'anana,Cream cakes,2026-09-14 10:30,4.2
+TL-1371,Ra'anana,Cream cakes,2026-09-14 11:00,4.2
+TL-1371,Ra'anana,Cream cakes,2026-09-14 11:30,4.1
+TL-1371,Ra'anana,Cream cakes,2026-09-14 12:00,4.0
+TL-1371,Ra'anana,Cream cakes,2026-09-14 12:30,4.5
+TL-1371,Ra'anana,Cream cakes,2026-09-14 13:00,4.2
+TL-1371,Ra'anana,Cream cakes,2026-09-14 13:30,4.1
+TL-1371,Ra'anana,Cream cakes,2026-09-14 14:00,4.3
+TL-1371,Ra'anana,Cream cakes,2026-09-14 14:30,4.4
+TL-1371,Ra'anana,Cream cakes,2026-09-14 15:00,4.5
+TL-1371,Ra'anana,Cream cakes,2026-09-14 15:30,4.4
+TL-1371,Ra'anana,Cream cakes,2026-09-14 16:00,4.2
+TL-1371,Ra'anana,Cream cakes,2026-09-14 16:30,4.2
+TL-1371,Ra'anana,Cream cakes,2026-09-14 17:00,4.0
+TL-1371,Ra'anana,Cream cakes,2026-09-14 17:30,4.1
+TL-1371,Ra'anana,Cream cakes,2026-09-14 18:00,4.5
+TL-1371,Ra'anana,Cream cakes,2026-09-14 18:30,4.0
+TL-1371,Ra'anana,Cream cakes,2026-09-14 19:00,4.5
+TL-1371,Ra'anana,Cream cakes,2026-09-14 19:30,4.0
+TL-1371,Ra'anana,Cream cakes,2026-09-14 20:00,4.1
+TL-1371,Ra'anana,Cream cakes,2026-09-14 20:30,4.2
+TL-1371,Ra'anana,Cream cakes,2026-09-14 21:00,4.4
+TL-1371,Ra'anana,Cream cakes,2026-09-14 21:30,4.5
+TL-1371,Ra'anana,Cream cakes,2026-09-14 22:00,4.1
+TL-1371,Ra'anana,Cream cakes,2026-09-14 22:30,4.5
+TL-1371,Ra'anana,Cream cakes,2026-09-14 23:00,3.9
+TL-1371,Ra'anana,Cream cakes,2026-09-14 23:30,4.5
+TL-1371,Ra'anana,Cream cakes,2026-09-15 00:00,4.0
+TL-1371,Ra'anana,Cream cakes,2026-09-15 00:30,3.9
+TL-1371,Ra'anana,Cream cakes,2026-09-15 01:00,4.5
+TL-1371,Ra'anana,Cream cakes,2026-09-15 01:30,4.2
+TL-1371,Ra'anana,Cream cakes,2026-09-15 02:00,4.0
+TL-1371,Ra'anana,Cream cakes,2026-09-15 02:30,4.4
+TL-1371,Ra'anana,Cream cakes,2026-09-15 03:00,3.9
+TL-1371,Ra'anana,Cream cakes,2026-09-15 03:30,4.5
+TL-1371,Ra'anana,Cream cakes,2026-09-15 04:00,3.9
+TL-1371,Ra'anana,Cream cakes,2026-09-15 04:30,4.3
+TL-1371,Ra'anana,Cream cakes,2026-09-15 05:00,3.9
+TL-1371,Ra'anana,Cream cakes,2026-09-15 05:30,4.4
+TL-1371,Ra'anana,Cream cakes,2026-09-15 06:00,4.4
+TL-1371,Ra'anana,Cream cakes,2026-09-15 06:30,4.1
+TL-1371,Ra'anana,Cream cakes,2026-09-15 07:00,4.3
+TL-1371,Ra'anana,Cream cakes,2026-09-15 07:30,4.3
+TL-1371,Ra'anana,Cream cakes,2026-09-15 08:00,4.4
+TL-1371,Ra'anana,Cream cakes,2026-09-15 08:30,4.3
+TL-1371,Ra'anana,Cream cakes,2026-09-15 09:00,4.1
+TL-1371,Ra'anana,Cream cakes,2026-09-15 09:30,4.0
+TL-1371,Ra'anana,Cream cakes,2026-09-15 10:00,4.5
+TL-1371,Ra'anana,Cream cakes,2026-09-15 10:30,4.5
+TL-1371,Ra'anana,Cream cakes,2026-09-15 11:00,4.0
+TL-1371,Ra'anana,Cream cakes,2026-09-15 11:30,4.0
+TL-1371,Ra'anana,Cream cakes,2026-09-15 12:00,3.9
+TL-1371,Ra'anana,Cream cakes,2026-09-15 12:30,4.2
+TL-1371,Ra'anana,Cream cakes,2026-09-15 13:00,4.4
+TL-1371,Ra'anana,Cream cakes,2026-09-15 13:30,4.0
+TL-1371,Ra'anana,Cream cakes,2026-09-15 14:00,3.9
+TL-1371,Ra'anana,Cream cakes,2026-09-15 14:30,3.9
+TL-1371,Ra'anana,Cream cakes,2026-09-15 15:00,4.4
+TL-1371,Ra'anana,Cream cakes,2026-09-15 15:30,3.9
+TL-1371,Ra'anana,Cream cakes,2026-09-15 16:00,4.5
+TL-1371,Ra'anana,Cream cakes,2026-09-15 16:30,4.3
+TL-1371,Ra'anana,Cream cakes,2026-09-15 17:00,4.5
+TL-1371,Ra'anana,Cream cakes,2026-09-15 17:30,4.3
+TL-1371,Ra'anana,Cream cakes,2026-09-15 18:00,4.3
+TL-1371,Ra'anana,Cream cakes,2026-09-15 18:30,4.5
+TL-1371,Ra'anana,Cream cakes,2026-09-15 19:00,4.5
+TL-1371,Ra'anana,Cream cakes,2026-09-15 19:30,4.2
+TL-1371,Ra'anana,Cream cakes,2026-09-15 20:00,4.4
+TL-1371,Ra'anana,Cream cakes,2026-09-15 20:30,4.3
+TL-1371,Ra'anana,Cream cakes,2026-09-15 21:00,4.3
+TL-1371,Ra'anana,Cream cakes,2026-09-15 21:30,4.1
+TL-1371,Ra'anana,Cream cakes,2026-09-15 22:00,4.1
+TL-1371,Ra'anana,Cream cakes,2026-09-15 22:30,4.2
+TL-1371,Ra'anana,Cream cakes,2026-09-15 23:00,4.4
+TL-1371,Ra'anana,Cream cakes,2026-09-15 23:30,4.2
+TL-1371,Ra'anana,Cream cakes,2026-09-16 00:00,4.1
+TL-1371,Ra'anana,Cream cakes,2026-09-16 00:30,4.0
+TL-1371,Ra'anana,Cream cakes,2026-09-16 01:00,4.2
+TL-1371,Ra'anana,Cream cakes,2026-09-16 01:30,4.1
+TL-1371,Ra'anana,Cream cakes,2026-09-16 02:00,4.2
+TL-1371,Ra'anana,Cream cakes,2026-09-16 02:30,4.2
+TL-1371,Ra'anana,Cream cakes,2026-09-16 03:00,4.4
+TL-1371,Ra'anana,Cream cakes,2026-09-16 03:30,4.1
+TL-1371,Ra'anana,Cream cakes,2026-09-16 04:00,4.3
+TL-1371,Ra'anana,Cream cakes,2026-09-16 04:30,4.5
+TL-1371,Ra'anana,Cream cakes,2026-09-16 05:00,4.5
+TL-1371,Ra'anana,Cream cakes,2026-09-16 05:30,4.5
+TL-1371,Ra'anana,Cream cakes,2026-09-16 06:00,4.1
+TL-1371,Ra'anana,Cream cakes,2026-09-16 06:30,4.0
+TL-1371,Ra'anana,Cream cakes,2026-09-16 07:00,4.2
+TL-1371,Ra'anana,Cream cakes,2026-09-16 07:30,4.0
+TL-1371,Ra'anana,Cream cakes,2026-09-16 08:00,4.0
+TL-1371,Ra'anana,Cream cakes,2026-09-16 08:30,4.3
+TL-1371,Ra'anana,Cream cakes,2026-09-16 09:00,4.5
+TL-1371,Ra'anana,Cream cakes,2026-09-16 09:30,4.4
+TL-1371,Ra'anana,Cream cakes,2026-09-16 10:00,3.9
+TL-1371,Ra'anana,Cream cakes,2026-09-16 10:30,4.3
+TL-1371,Ra'anana,Cream cakes,2026-09-16 11:00,4.5
+TL-1371,Ra'anana,Cream cakes,2026-09-16 11:30,3.9
+TL-1371,Ra'anana,Cream cakes,2026-09-16 12:00,4.0
+TL-1371,Ra'anana,Cream cakes,2026-09-16 12:30,4.1
+TL-1371,Ra'anana,Cream cakes,2026-09-16 13:00,4.0
+TL-1371,Ra'anana,Cream cakes,2026-09-16 13:30,4.4
+TL-1371,Ra'anana,Cream cakes,2026-09-16 14:00,4.2
+TL-1371,Ra'anana,Cream cakes,2026-09-16 14:30,4.4
+TL-1371,Ra'anana,Cream cakes,2026-09-16 15:00,4.4
+TL-1371,Ra'anana,Cream cakes,2026-09-16 15:30,3.9
+TL-1371,Ra'anana,Cream cakes,2026-09-16 16:00,4.4
+TL-1371,Ra'anana,Cream cakes,2026-09-16 16:30,4.3
+TL-1371,Ra'anana,Cream cakes,2026-09-16 17:00,4.3
+TL-1371,Ra'anana,Cream cakes,2026-09-16 17:30,4.3
+TL-1371,Ra'anana,Cream cakes,2026-09-16 18:00,4.1
