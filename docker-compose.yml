@@ -1,0 +1,23 @@
+services:
+  postgres:
+    image: postgres:16-alpine
+    container_name: squanchy-postgres
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: squanchy
+    # 5433 on the host, not 5432, so this does not collide with a Postgres
+    # someone already has running locally.
+    ports:
+      - "5433:5432"
+    volumes:
+      - squanchy_pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres -d squanchy"]
+      interval: 2s
+      timeout: 3s
+      retries: 15
+
+volumes:
+  squanchy_pgdata:
