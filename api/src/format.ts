@@ -27,15 +27,6 @@ export function formatDate(value: string | Date, timeZone: string): string {
   }).format(new Date(value));
 }
 
-export function formatTime(value: string | Date, timeZone: string): string {
-  return new Intl.DateTimeFormat('en-GB', {
-    timeZone,
-    hour: '2-digit',
-    minute: '2-digit',
-    hour12: false,
-  }).format(new Date(value));
-}
-
 /** "3 hours 15 minutes", "45 minutes", "2 days 4 hours" */
 export function describeDuration(minutes: number): string {
   const rounded = Math.max(0, Math.round(minutes));

@@ -1,23 +1,25 @@
 import type { BottomTabNavigationProp } from '@react-navigation/bottom-tabs';
 import type { NativeStackScreenProps } from '@react-navigation/native-stack';
+import type { ReactNode } from 'react';
 import { useState } from 'react';
 import { Pressable, RefreshControl, ScrollView, StyleSheet, Text, View } from 'react-native';
 
 import type { FridgeDetail } from '../api/types';
 import { Empty, ErrorMessage, Loading } from '../components/Message';
+import { RangeChips } from '../components/RangeChips';
 import { StatusPill } from '../components/StatusPill';
 import { TemperatureChart } from '../components/TemperatureChart';
 import { describeDuration, formatDateTime, formatTemperature } from '../format';
 import { useApi } from '../hooks/useApi';
-import type { FridgesStackParamList, RootTabParamList } from '../navigation/types';
+import type { FridgeDetailParams, RootTabParamList } from '../navigation/types';
 import { colors, spacing } from '../theme';
 
-type Props = NativeStackScreenProps<FridgesStackParamList, 'FridgeDetail'>;
+type Props = NativeStackScreenProps<{ FridgeDetail: FridgeDetailParams }, 'FridgeDetail'>;
 
 const RANGES = [
-  { label: '24 hours', days: 1 },
-  { label: '3 days', days: 3 },
-  { label: '7 days', days: 7 },
+  { label: '24 hours', value: 1 },
+  { label: '3 days', value: 3 },
+  { label: '7 days', value: 7 },
 ] as const;
 
 export function FridgeDetailScreen({ route, navigation }: Props) {
@@ -58,19 +60,7 @@ export function FridgeDetailScreen({ route, navigation }: Props) {
         </Text>
       </View>
 
-      <View style={styles.rangeRow}>
-        {RANGES.map((range) => (
-          <Pressable
-            key={range.days}
-            onPress={() => setDays(range.days)}
-            style={[styles.rangeChip, days === range.days && styles.rangeChipActive]}
-          >
-            <Text style={[styles.rangeText, days === range.days && styles.rangeTextActive]}>
-              {range.label}
-            </Text>
-          </Pressable>
-        ))}
-      </View>
+      <RangeChips options={RANGES} value={days} onChange={setDays} />
 
       <View style={styles.card}>
         {readings.length === 0 ? (
@@ -105,9 +95,9 @@ export function FridgeDetailScreen({ route, navigation }: Props) {
               <View style={styles.rowMain}>
                 <Text style={styles.rowTitle}>
                   {formatDateTime(excursion.startedAt)}
-                  {excursion.ongoing
-                    ? ' - still too warm'
-                    : ` to ${formatDateTime(excursion.endedAt!)}`}
+                  {excursion.endedAt
+                    ? ` to ${formatDateTime(excursion.endedAt)}`
+                    : ' - still too warm'}
                 </Text>
                 <Text style={styles.rowDetail}>
                   {describeDuration(excursion.durationMinutes)} · peak{' '}
@@ -172,7 +162,7 @@ export function FridgeDetailScreen({ route, navigation }: Props) {
   );
 }
 
-function Section({ title, children }: { title: string; children: React.ReactNode }) {
+function Section({ title, children }: { title: string; children: ReactNode }) {
   return (
     <View style={styles.card}>
       <Text style={styles.sectionTitle}>{title}</Text>
@@ -192,22 +182,17 @@ function Legend({ color, label }: { color: string; label: string }) {
 
 const styles = StyleSheet.create({
   screen: { flex: 1, backgroundColor: colors.background },
-  content: { padding: spacing.lg, gap: spacing.md, paddingBottom: spacing.xl },
+  content: {
+    padding: spacing.lg,
+    gap: spacing.md,
+    paddingBottom: spacing.xl,
+    maxWidth: 560,
+    width: '100%',
+    alignSelf: 'center',
+  },
   section: { gap: spacing.sm },
   reason: { fontSize: 14, lineHeight: 20, color: colors.text },
   meta: { fontSize: 12, color: colors.textMuted },
-  rangeRow: { flexDirection: 'row', gap: spacing.sm },
-  rangeChip: {
-    paddingHorizontal: spacing.md,
-    paddingVertical: spacing.xs + 2,
-    borderRadius: 999,
-    borderWidth: 1,
-    borderColor: colors.border,
-    backgroundColor: colors.surface,
-  },
-  rangeChipActive: { backgroundColor: colors.accent, borderColor: colors.accent },
-  rangeText: { fontSize: 12, fontWeight: '600', color: colors.textMuted },
-  rangeTextActive: { color: '#fff' },
   card: {
     backgroundColor: colors.surface,
     borderRadius: 12,

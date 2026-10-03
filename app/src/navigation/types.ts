@@ -1,8 +1,16 @@
 import type { NavigatorScreenParams } from '@react-navigation/native';
 
+export type FridgeDetailParams = { fridgeId: number; fridgeName: string };
+
 export type FridgesStackParamList = {
   Dashboard: undefined;
-  FridgeDetail: { fridgeId: number; fridgeName: string };
+  Branch: { branchName: string };
+  FridgeDetail: FridgeDetailParams;
+};
+
+export type SearchStackParamList = {
+  Search: undefined;
+  FridgeDetail: FridgeDetailParams;
 };
 
 export type InspectorStackParamList = {
@@ -11,6 +19,8 @@ export type InspectorStackParamList = {
 
 export type RootTabParamList = {
   FridgesTab: NavigatorScreenParams<FridgesStackParamList>;
+  SearchTab: NavigatorScreenParams<SearchStackParamList>;
   UploadTab: undefined;
+  RulesTab: undefined;
   InspectorTab: NavigatorScreenParams<InspectorStackParamList>;
 };

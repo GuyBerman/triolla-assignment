@@ -2,7 +2,7 @@ import { describeDuration, formatDateTime, formatTemperature } from '../format';
 import type { Drift, Excursion, FridgeStatus, Gap, Sample } from '../types';
 import { ANALYSIS } from './config';
 
-export interface StatusInput {
+interface StatusInput {
   /** Readings with a usable temperature, in time order. */
   samples: Sample[];
   /** The newest reading in the whole dataset - see index.ts for why. */
@@ -16,7 +16,7 @@ export interface StatusInput {
   noDataHint?: string | null;
 }
 
-export interface StatusResult {
+interface StatusResult {
   status: FridgeStatus;
   /** Written to be read by someone who is not technical and is in a hurry. */
   reason: string;

@@ -101,6 +101,12 @@ fridge can sit at 22°C and refusing that data would hide a real emergency.
 **No login.** Scoped out deliberately, per your instruction. Honest to say it
 is a gap rather than a decision — see below.
 
+**Routes do not decide what a fridge is doing.** HTTP lives in `src/routes/`,
+orchestration in `src/services/`, SQL in `repository.ts` / `ruleStore.ts`.
+The actual rules are still in `ingest/` and `analysis/` — a `FridgeService`
+class that only forwarded to those would have been a third name for the same
+work. Rules stay route → `ruleStore` because there is nothing to orchestrate.
+
 ---
 
 ## What I would ask Summer before this goes live
@@ -129,9 +135,9 @@ In rough order of how much the answers would change:
 6. **How do loggers really get moved and replaced?** I inferred moves from the
    data because the files are all we have, but if there is a real asset list,
    reading it would be more reliable than guessing from readings.
-7. **Are the files always CSV?** Only CSV and tab-separated text are handled.
-   If managers send `.xlsx`, she will have to re-save them, which is exactly
-   the manual step this is supposed to remove.
+7. **Are the files always CSV?** CSV, TSV and `.xlsx` are handled. Old
+   binary `.xls` is not — she is asked to save it as `.xlsx` or CSV. Macros
+   and charts are ignored; only sheets that look like a logger table are read.
 
 ---
 
@@ -140,7 +146,8 @@ In rough order of how much the answers would change:
 - **No login or users.** Anyone who can reach the API can read and upload.
   Fine on a laptop, not fine on the internet.
 - **No alerting.** No email, no push. The tool is silent until she opens it.
-- **No Excel files.** CSV and TSV only.
+- **Old `.xls` files are refused.** `.xlsx` and `.xlsm` are read; the
+  pre-2007 binary format is not.
 - **No way to edit anything in the UI** — thresholds, branch names, fridge
   names, logger assignments are all inferred from files or set to defaults.
 - **No pagination.** Twenty fridges and ~3,300 readings are fine; twenty

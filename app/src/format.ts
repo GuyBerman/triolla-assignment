@@ -3,7 +3,7 @@
  * so that a screenshot of the app and the report the API generates always say
  * the same thing - even if Summer happens to be abroad.
  */
-export const APP_TIMEZONE = 'Asia/Jerusalem';
+const APP_TIMEZONE = 'Asia/Jerusalem';
 
 export function formatDateTime(iso: string): string {
   return new Intl.DateTimeFormat('en-GB', {
@@ -70,14 +70,4 @@ export function describeDuration(minutes: number): string {
 export function formatTemperature(celsius: number | null): string {
   if (celsius === null) return '--';
   return `${celsius.toFixed(1)}°`;
-}
-
-/** For the date inputs on the report screen. */
-export function toDateInput(iso: string): string {
-  return new Intl.DateTimeFormat('en-CA', {
-    timeZone: APP_TIMEZONE,
-    year: 'numeric',
-    month: '2-digit',
-    day: '2-digit',
-  }).format(new Date(iso));
 }

@@ -30,9 +30,9 @@ function resolveBaseUrl(): string {
   return 'http://localhost:4000';
 }
 
-export const API_BASE_URL = resolveBaseUrl();
+const API_BASE_URL = resolveBaseUrl();
 
-export class ApiError extends Error {
+class ApiError extends Error {
   constructor(
     message: string,
     readonly status: number,
@@ -79,10 +79,26 @@ export const api = {
       // Deliberately no Content-Type: the runtime has to set the multipart
       // boundary itself, and setting it by hand breaks the upload.
     }),
+
+  post: <T>(path: string, body: unknown) =>
+    request<T>(path, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(body),
+    }),
+
+  delete: <T>(path: string) => request<T>(path, { method: 'DELETE' }),
 };
 
+/** What Summer typed when a file did not say which fridge it came from. */
+export interface FileLabels {
+  logger: string;
+  branch: string;
+  fridge: string;
+}
+
 /** The subset of a document-picker asset we need; avoids importing the picker here. */
-export interface PickedFile {
+interface PickedFile {
   uri: string;
   name: string;
   mimeType?: string | null;
@@ -97,7 +113,7 @@ export interface PickedFile {
  * React Native's own fetch recognises, which is not valid DOM FormData and so
  * needs the cast.
  */
-export async function uploadFile(asset: PickedFile): Promise<UploadReport> {
+export async function uploadFile(asset: PickedFile, labels?: FileLabels): Promise<UploadReport> {
   const form = new FormData();
   const name = asset.name || 'upload.csv';
   const type = asset.mimeType ?? 'text/csv';
@@ -107,6 +123,15 @@ export async function uploadFile(asset: PickedFile): Promise<UploadReport> {
     form.append('file', blob, name);
   } else {
     form.append('file', { uri: asset.uri, name, type } as unknown as Blob);
+  }
+
+  // Only sent for a raw logger file, where the file itself does not say which
+  // fridge it is from. Blank fields are left off entirely rather than sent as
+  // empty strings, so the API can tell "not supplied" from "supplied blank".
+  if (labels) {
+    if (labels.logger) form.append('logger', labels.logger);
+    if (labels.branch) form.append('branch', labels.branch);
+    if (labels.fridge) form.append('fridge', labels.fridge);
   }
 
   return api.postFile<UploadReport>('/api/uploads', form);

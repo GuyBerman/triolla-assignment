@@ -2,9 +2,10 @@ import { readFileSync } from 'node:fs';
 import { dirname, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
+import ExcelJS from 'exceljs';
 import { describe, expect, it } from 'vitest';
 
-import { detectDelimiter, parseLoggerFile } from '../src/ingest/parseFile';
+import { detectDelimiter, parseLoggerFile, parseUploadedFile } from '../src/ingest/parseFile';
 
 const TZ = 'Asia/Jerusalem';
 const here = dirname(fileURLToPath(import.meta.url));
@@ -203,5 +204,136 @@ describe('unit hints', () => {
     ].join('\n');
 
     expect(parseLoggerFile(content, TZ).rows[0]!.unitOverride).toBeNull();
+  });
+});
+
+describe('a logger file with nothing but times and temperatures', () => {
+  const RAW = ['Time,Temp', '2026-09-14 06:00,3.8', '2026-09-14 06:15,4.1'].join('\n');
+
+  it('is imported once Summer says which fridge it came from', () => {
+    const result = parseLoggerFile(RAW, TZ, {
+      loggerCode: 'TL-0512',
+      branchName: 'Jerusalem',
+      fridgeName: 'Dairy',
+    });
+
+    expect(result.validation.ok).toBe(true);
+    expect(result.rows).toHaveLength(2);
+    expect(result.rows[0]!.loggerCode).toBe('TL-0512');
+    expect(result.rows[0]!.branchName).toBe('Jerusalem');
+    expect(result.rows[0]!.fridgeName).toBe('Dairy');
+    expect(result.rows[0]!.rawNumber).toBe(3.8);
+  });
+
+  it('yields nothing, and no rejected rows, while it is still unlabelled', () => {
+    const result = parseLoggerFile(RAW, TZ);
+    expect(result.validation.needsLabels).toBe(true);
+    expect(result.rows).toEqual([]);
+    // Not row-by-row rejections: the rows are fine, the file just needs a name.
+    expect(result.rejections).toEqual([]);
+  });
+
+  it('lets the file win where it disagrees with what she typed', () => {
+    // She picks one logger for a batch, but a file that names its own fridge
+    // per row knows better - otherwise a mislabelled upload would silently
+    // move every reading into the wrong fridge.
+    const content = [
+      'Logger,Branch,Fridge,Time,Temp',
+      'TL-0417,Tel Aviv,Walk-in,2026-09-14 06:00,4.1',
+    ].join('\n');
+
+    const result = parseLoggerFile(content, TZ, {
+      loggerCode: 'TL-0512',
+      branchName: 'Jerusalem',
+      fridgeName: 'Dairy',
+    });
+
+    expect(result.rows[0]!.loggerCode).toBe('TL-0417');
+    expect(result.rows[0]!.fridgeName).toBe('Walk-in');
+  });
+
+  it('fills in only the blanks when a column exists but a cell is empty', () => {
+    const content = ['Logger,Time,Temp', ',2026-09-14 06:00,3.8'].join('\n');
+
+    const result = parseLoggerFile(content, TZ, {
+      loggerCode: 'TL-0512',
+      branchName: 'Jerusalem',
+      fridgeName: 'Dairy',
+    });
+
+    expect(result.rows).toHaveLength(1);
+    expect(result.rows[0]!.loggerCode).toBe('TL-0512');
+  });
+});
+
+async function workbookBuffer(sheets: { name: string; rows: (string | number | Date)[][] }[]): Promise<Buffer> {
+  const workbook = new ExcelJS.Workbook();
+  for (const sheet of sheets) {
+    const worksheet = workbook.addWorksheet(sheet.name);
+    for (const row of sheet.rows) worksheet.addRow(row);
+  }
+  return Buffer.from(await workbook.xlsx.writeBuffer());
+}
+
+describe('an Excel workbook', () => {
+  it('reads the brief sample the same way as the TSV', async () => {
+    const rows = briefSample
+      .split(/\r?\n/)
+      .filter((line) => line.trim() !== '')
+      .map((line) => line.split('\t'));
+    const buffer = await workbookBuffer([{ name: 'This week', rows }]);
+
+    const fromExcel = await parseUploadedFile(buffer, TZ, {}, 'summer.xlsx');
+    const fromTsv = parseLoggerFile(briefSample, TZ);
+
+    expect(fromExcel.rows).toHaveLength(fromTsv.rows.length);
+    expect(fromExcel.duplicateCount).toBe(1);
+    expect(fromExcel.rows.find((row) => row.rawValue === 'ERR')?.status).toBe('error');
+    expect(fromExcel.warnings.some((warning) => warning.includes('Excel workbook'))).toBe(true);
+  });
+
+  it('treats an Excel date cell as a wall-clock time, not UTC', async () => {
+    const buffer = await workbookBuffer([
+      {
+        name: 'Dairy',
+        rows: [
+          ['Logger', 'Branch', 'Fridge', 'Time', 'Temp'],
+          ['TL-0512', 'Jerusalem', 'Dairy', new Date(Date.UTC(2026, 8, 14, 6, 0)), 3.8],
+        ],
+      },
+    ]);
+
+    const result = await parseUploadedFile(buffer, TZ, {}, 'haifa.xlsx');
+    expect(result.rows).toHaveLength(1);
+    // 06:00 in the cell is 06:00 in Israel, same as a CSV that says "06:00".
+    expect(result.rows[0]!.recordedAt.toISOString()).toBe('2026-09-14T03:00:00.000Z');
+    expect(result.rows[0]!.rawNumber).toBe(3.8);
+  });
+
+  it('reads every sheet that looks like a logger table', async () => {
+    const header = ['Logger', 'Branch', 'Fridge', 'Time', 'Temp'];
+    const buffer = await workbookBuffer([
+      { name: 'Notes', rows: [['Ignore this'], ['just a cover page']] },
+      {
+        name: 'Jerusalem',
+        rows: [header, ['TL-0512', 'Jerusalem', 'Dairy', '2026-09-14 06:00', 3.8]],
+      },
+      {
+        name: 'Tel Aviv',
+        rows: [header, ['TL-0417', 'Tel Aviv', 'Walk-in', '2026-09-14 06:00', 4.1]],
+      },
+    ]);
+
+    const result = await parseUploadedFile(buffer, TZ, {}, 'branches.xlsx');
+    expect(result.rows).toHaveLength(2);
+    expect(result.rows.map((row) => row.loggerCode).sort()).toEqual(['TL-0417', 'TL-0512']);
+    expect(result.warnings.some((warning) => warning.includes('Notes'))).toBe(true);
+    expect(result.warnings.some((warning) => warning.includes('2 sheets'))).toBe(true);
+  });
+
+  it('tells her to re-save an old .xls instead of importing garbage', async () => {
+    const result = await parseUploadedFile(Buffer.from('not-excel'), TZ, {}, 'haifa.xls');
+    expect(result.rows).toEqual([]);
+    expect(result.warnings.join(' ')).toMatch(/old Excel file/);
   });
 });

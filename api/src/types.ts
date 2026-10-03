@@ -65,6 +65,8 @@ export interface FridgeSummary {
   status: FridgeStatus;
   statusReason: string;
   lastReading: Reading | null;
+  /** Hottest reading in the window being shown. */
+  peakC: number | null;
   openExcursion: Excursion | null;
   excursionCount: number;
   doorEventCount: number;
@@ -108,6 +110,27 @@ export interface LoggerMove {
   at: string;
 }
 
+/**
+ * A logger we already know about, offered on the upload screen so Summer can
+ * tap "TL-0417 - Tel Aviv Display 2" instead of retyping all three fields.
+ */
+export interface KnownLogger {
+  code: string;
+  branchName: string | null;
+  fridgeName: string | null;
+}
+
+/**
+ * Set when a file holds times and temperatures but nothing saying which fridge
+ * they came from - a logger file straight off the device. Nothing was imported
+ * yet; the app asks who it belongs to and uploads it again with the answer.
+ */
+export interface NeedsLabels {
+  /** Which of logger, branch, fridge the file does not say. */
+  missing: string[];
+  knownLoggers: KnownLogger[];
+}
+
 export interface UploadReport {
   uploadId: number;
   filename: string;
@@ -121,6 +144,26 @@ export interface UploadReport {
   rejections: UploadRejection[];
   loggerMoves: LoggerMove[];
   convertedFromFahrenheit: string[];
+  appliedRules: AppliedRule[];
+  needsLabels: NeedsLabels | null;
+}
+
+/** One row of upload history. */
+export interface UploadHistoryEntry {
+  id: number;
+  filename: string;
+  uploadedAt: string;
+  rowsTotal: number;
+  rowsAccepted: number;
+  rowsRejected: number;
+  rowsDuplicate: number;
+  warnings: string[];
+}
+
+export interface AppliedRule {
+  ruleId: number;
+  summary: string;
+  rows: number;
 }
 
 export interface ExcursionReportRow {

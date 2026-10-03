@@ -1,19 +1,18 @@
 import type { NativeStackScreenProps } from '@react-navigation/native-stack';
 import { FlatList, RefreshControl, StyleSheet, Text, View } from 'react-native';
 
-import type { FridgeListResponse, FridgeStatus } from '../api/types';
-import { FridgeCard } from '../components/FridgeCard';
+import type { FridgeListResponse } from '../api/types';
+import { BranchCard } from '../components/BranchCard';
 import { Empty, ErrorMessage, Loading } from '../components/Message';
+import { StatusLegend } from '../components/StatusLegend';
 import { StatusPill } from '../components/StatusPill';
 import { formatDateTime } from '../format';
+import { countProblemStatuses, groupByBranch } from '../groupBranches';
 import { useApi } from '../hooks/useApi';
 import type { FridgesStackParamList } from '../navigation/types';
 import { colors, spacing } from '../theme';
 
 type Props = NativeStackScreenProps<FridgesStackParamList, 'Dashboard'>;
-
-/** Only the states worth counting; "ok" is the absence of news. */
-const SUMMARY_STATUSES: FridgeStatus[] = ['alarm', 'no_data', 'warning'];
 
 export function DashboardScreen({ navigation }: Props) {
   const { data, error, loading, refreshing, refetch } =
@@ -33,19 +32,16 @@ export function DashboardScreen({ navigation }: Props) {
     );
   }
 
-  const counts = SUMMARY_STATUSES.map((status) => ({
-    status,
-    count: fridges.filter((fridge) => fridge.status === status).length,
-  })).filter((entry) => entry.count > 0);
-
+  const branches = groupByBranch(fridges);
+  const counts = countProblemStatuses(fridges);
   const allWell = counts.length === 0;
 
   return (
     <FlatList
       style={styles.list}
       contentContainerStyle={styles.content}
-      data={fridges}
-      keyExtractor={(fridge) => String(fridge.id)}
+      data={branches}
+      keyExtractor={(branch) => branch.name}
       refreshControl={
         <RefreshControl refreshing={refreshing} onRefresh={refetch} tintColor={colors.accent} />
       }
@@ -62,7 +58,7 @@ export function DashboardScreen({ navigation }: Props) {
 
           {allWell ? (
             <Text style={styles.allWell}>
-              All {fridges.length} fridges are behaving.
+              All {fridges.length} fridges across {branches.length} branches are behaving.
             </Text>
           ) : (
             <View style={styles.pills}>
@@ -71,17 +67,14 @@ export function DashboardScreen({ navigation }: Props) {
               ))}
             </View>
           )}
+
+          <StatusLegend />
         </View>
       }
       renderItem={({ item }) => (
-        <FridgeCard
-          fridge={item}
-          onPress={() =>
-            navigation.navigate('FridgeDetail', {
-              fridgeId: item.id,
-              fridgeName: `${item.branchName} ${item.name}`,
-            })
-          }
+        <BranchCard
+          branch={item}
+          onPress={() => navigation.navigate('Branch', { branchName: item.name })}
         />
       )}
       ItemSeparatorComponent={() => <View style={styles.separator} />}
@@ -97,6 +90,9 @@ const styles = StyleSheet.create({
   content: {
     padding: spacing.lg,
     paddingBottom: spacing.xl,
+    maxWidth: 560,
+    width: '100%',
+    alignSelf: 'center',
   },
   header: {
     marginBottom: spacing.lg,

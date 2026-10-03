@@ -63,6 +63,8 @@ export interface FridgeSummary {
   /** Plain-language explanation, written for someone non-technical. */
   statusReason: string;
   lastReading: Reading | null;
+  /** Hottest reading in the window being shown. */
+  peakC: number | null;
   openExcursion: Excursion | null;
   excursionCount: number;
   doorEventCount: number;
@@ -106,6 +108,23 @@ export interface LoggerMove {
   at: string;
 }
 
+/** A logger we already know about, offered when a file needs labelling. */
+export interface KnownLogger {
+  code: string;
+  branchName: string | null;
+  fridgeName: string | null;
+}
+
+/**
+ * A logger file straight off the device: readings, but nothing saying which
+ * fridge they came from. Nothing was imported - the app asks who it belongs to
+ * and uploads the same file again with the answer.
+ */
+export interface NeedsLabels {
+  missing: string[];
+  knownLoggers: KnownLogger[];
+}
+
 export interface UploadReport {
   uploadId: number;
   filename: string;
@@ -120,6 +139,27 @@ export interface UploadReport {
   rejections: UploadRejection[];
   loggerMoves: LoggerMove[];
   convertedFromFahrenheit: string[];
+  appliedRules: AppliedRule[];
+  /** Non-null when the file is readable but nobody has said which fridge it is. */
+  needsLabels: NeedsLabels | null;
+}
+
+/** One row of upload history. */
+export interface UploadHistoryEntry {
+  id: number;
+  filename: string;
+  uploadedAt: string;
+  rowsTotal: number;
+  rowsAccepted: number;
+  rowsRejected: number;
+  rowsDuplicate: number;
+  warnings: string[];
+}
+
+export interface AppliedRule {
+  ruleId: number;
+  summary: string;
+  rows: number;
 }
 
 export interface ExcursionReportRow {
@@ -138,8 +178,20 @@ export interface ExcursionReport {
   totalExcursions: number;
 }
 
-export interface HealthResponse {
-  status: string;
-  database: string;
-  time: string;
+type RuleUnit = 'as_written' | 'C' | 'F';
+
+export interface ConversionRule {
+  id: number;
+  matchBranch: string | null;
+  matchLogger: string | null;
+  matchFridge: string | null;
+  unit: RuleUnit;
+  multiplyBy: number;
+  add: number;
+  createdAt: string;
+  summary: string;
+}
+
+export interface RulesListResponse {
+  rules: ConversionRule[];
 }

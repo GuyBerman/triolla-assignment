@@ -2,7 +2,7 @@ import { useCallback, useEffect, useRef, useState } from 'react';
 
 import { api } from '../api/client';
 
-export interface ApiState<T> {
+interface ApiState<T> {
   data: T | null;
   error: string | null;
   /** First load only, so a pull-to-refresh does not blank the screen. */

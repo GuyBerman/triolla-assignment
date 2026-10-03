@@ -1,15 +1,15 @@
 import { pool } from './db/pool';
 import { formatDate } from './format';
-import type { Reading } from './types';
+import type { KnownLogger, Reading, UploadHistoryEntry, UploadReport } from './types';
 
-export interface FridgeRow {
+interface FridgeRow {
   id: number;
   name: string;
   branchName: string;
   thresholdC: number;
 }
 
-export interface AssignmentRow {
+interface AssignmentRow {
   loggerId: number;
   loggerCode: string;
   fridgeId: number;
@@ -75,6 +75,34 @@ export async function getFridge(id: number): Promise<FridgeRow | null> {
     branchName: row.branch_name,
     thresholdC: Number(row.threshold_c),
   };
+}
+
+/**
+ * Every logger we have seen, with the fridge it is in now. Offered on the
+ * upload screen when a file does not say which fridge it is from, so Summer
+ * taps a logger she recognises rather than retyping a branch name slightly
+ * differently and inventing a second "Tel Aviv".
+ */
+export async function listKnownLoggers(): Promise<KnownLogger[]> {
+  const result = await pool.query<{
+    code: string;
+    branch_name: string | null;
+    fridge_name: string | null;
+  }>(
+    `select l.code, b.name as branch_name, f.name as fridge_name
+       from loggers l
+       left join logger_assignments la
+              on la.logger_id = l.id and la.valid_to is null
+       left join fridges f on f.id = la.fridge_id
+       left join branches b on b.id = f.branch_id
+      order by l.code`,
+  );
+
+  return result.rows.map((row) => ({
+    code: row.code,
+    branchName: row.branch_name,
+    fridgeName: row.fridge_name,
+  }));
 }
 
 export async function listAssignments(): Promise<AssignmentRow[]> {
@@ -164,7 +192,7 @@ export async function readingsForFridge(
   return result.rows.map(toReading);
 }
 
-export interface AssignmentContext {
+interface AssignmentContext {
   loggerCodeByFridge: Map<number, string>;
   /** Why a fridge has no logger, when we can explain it. */
   noDataHintByFridge: Map<number, string>;
@@ -210,4 +238,36 @@ export function buildAssignmentContext(
   }
 
   return { loggerCodeByFridge, noDataHintByFridge };
+}
+
+/** Newest uploads only — enough for Summer to see what she already sent. */
+export async function listRecentUploads(limit = 20): Promise<UploadHistoryEntry[]> {
+  const result = await pool.query<{
+    id: number;
+    filename: string;
+    uploaded_at: Date;
+    rows_total: number;
+    rows_accepted: number;
+    rows_rejected: number;
+    rows_duplicate: number;
+    report: UploadReport | null;
+  }>(
+    `select id, filename, uploaded_at, rows_total, rows_accepted,
+            rows_rejected, rows_duplicate, report
+       from uploads
+      order by uploaded_at desc
+      limit $1`,
+    [limit],
+  );
+
+  return result.rows.map((row) => ({
+    id: row.id,
+    filename: row.filename,
+    uploadedAt: row.uploaded_at.toISOString(),
+    rowsTotal: row.rows_total,
+    rowsAccepted: row.rows_accepted,
+    rowsRejected: row.rows_rejected,
+    rowsDuplicate: row.rows_duplicate,
+    warnings: row.report?.warnings ?? [],
+  }));
 }

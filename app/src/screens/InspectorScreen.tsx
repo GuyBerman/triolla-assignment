@@ -3,8 +3,9 @@ import * as Clipboard from 'expo-clipboard';
 import { useMemo, useState } from 'react';
 import { Pressable, ScrollView, StyleSheet, Text, View } from 'react-native';
 
-import type { ExcursionReport } from '../api/types';
+import type { Excursion, ExcursionReport, ExcursionReportRow } from '../api/types';
 import { Empty, ErrorMessage, Loading } from '../components/Message';
+import { RangeChips } from '../components/RangeChips';
 import { describeDuration, formatDate, formatDateTime, formatTemperature } from '../format';
 import { useApi } from '../hooks/useApi';
 import type { InspectorStackParamList } from '../navigation/types';
@@ -13,9 +14,9 @@ import { colors, spacing } from '../theme';
 type Props = NativeStackScreenProps<InspectorStackParamList, 'InspectorReport'>;
 
 const RANGES = [
-  { label: '7 days', days: 7 },
-  { label: '30 days', days: 30 },
-  { label: '90 days', days: 90 },
+  { label: '7 days', value: 7 },
+  { label: '30 days', value: 30 },
+  { label: '90 days', value: 90 },
 ] as const;
 
 export function InspectorScreen({ route }: Props) {
@@ -45,19 +46,7 @@ export function InspectorScreen({ route }: Props) {
 
   return (
     <ScrollView style={styles.screen} contentContainerStyle={styles.content}>
-      <View style={styles.rangeRow}>
-        {RANGES.map((range) => (
-          <Pressable
-            key={range.days}
-            onPress={() => setDays(range.days)}
-            style={[styles.rangeChip, days === range.days && styles.rangeChipActive]}
-          >
-            <Text style={[styles.rangeText, days === range.days && styles.rangeTextActive]}>
-              {range.label}
-            </Text>
-          </Pressable>
-        ))}
-      </View>
+      <RangeChips options={RANGES} value={days} onChange={setDays} />
 
       <View style={styles.card}>
         <Text style={styles.period}>
@@ -65,12 +54,15 @@ export function InspectorScreen({ route }: Props) {
         </Text>
         <Text style={styles.headline}>
           {data.totalExcursions === 0
-            ? `No fridge went above its limit for long enough to record. All ${data.rows.length} checked.`
+            ? `No fridge stayed above its limit for 30 minutes or more. All ${data.rows.length} checked.`
             : `${data.totalExcursions} ${
                 data.totalExcursions === 1 ? 'period' : 'periods'
-              } above the limit, across ${withExcursions.length} of ${data.rows.length} ${
+              } above the limit, on ${withExcursions.length} of ${data.rows.length} ${
                 data.rows.length === 1 ? 'fridge' : 'fridges'
               }.`}
+        </Text>
+        <Text style={styles.muted}>
+          A jump that lasted under 30 minutes is a door opening. It is not listed here.
         </Text>
       </View>
 
@@ -86,18 +78,15 @@ export function InspectorScreen({ route }: Props) {
             {row.branchName} {row.fridgeName}
           </Text>
           <Text style={styles.muted}>Limit {formatTemperature(row.thresholdC)}</Text>
-          {row.excursions.map((excursion) => (
-            <View key={excursion.startedAt} style={styles.row}>
-              <Text style={styles.rowTitle}>
-                {formatDateTime(excursion.startedAt)}
-                {excursion.ongoing ? ' - still too warm' : ` to ${formatDateTime(excursion.endedAt!)}`}
-              </Text>
-              <Text style={styles.rowDetail}>
-                {describeDuration(excursion.durationMinutes)} · peak{' '}
-                {formatTemperature(excursion.peakC)}
-              </Text>
-            </View>
-          ))}
+          {row.excursions.map((excursion) => {
+            const described = describeExcursion(excursion);
+            return (
+              <View key={excursion.startedAt} style={styles.row}>
+                <Text style={styles.rowTitle}>{described.when}</Text>
+                <Text style={styles.rowDetail}>{described.detail}</Text>
+              </View>
+            );
+          })}
         </View>
       ))}
 
@@ -107,17 +96,21 @@ export function InspectorScreen({ route }: Props) {
               limit" is usually the answer an inspector is after, and a report
               showing only problems looks like it found only problems. */}
           <Text style={styles.fridgeTitle}>
-            Never above the limit ({clean.length})
+            Did not stay above the limit ({clean.length})
           </Text>
-          <Text style={styles.muted}>
-            {clean.map((row) => `${row.branchName} ${row.fridgeName}`).join(', ')}
-          </Text>
+          <Text style={styles.muted}>Nothing lasting 30 minutes or more in this period.</Text>
+          {clean.map((row) => (
+            <Text key={row.fridgeId} style={styles.cleanName}>
+              {row.branchName} {row.fridgeName}
+            </Text>
+          ))}
         </View>
       ) : null}
 
       <Text style={styles.footnote}>
-        Based only on readings that have been uploaded. A fridge with no readings for part of this
-        period cannot be reported on for that time, and will say so on its own page.
+        Times are the first and last readings that were actually above the limit. A gap in the
+        file is not filled in. If the logger went quiet, that stretch is not counted as warm and
+        not counted as fine.
       </Text>
     </ScrollView>
   );
@@ -129,30 +122,42 @@ export function InspectorScreen({ route }: Props) {
  * has to stand on its own away from the app - including the caveat about the
  * data it is based on.
  */
+/** The same sentences the screen shows, so the pasted report matches what she read. */
+function describeExcursion(excursion: Excursion): { when: string; detail: string } {
+  const length = describeDuration(excursion.durationMinutes);
+  const when = excursion.ongoing
+    ? `Above the limit since ${formatDateTime(excursion.startedAt)} — ${length} so far, and the latest reading is still above it.`
+    : `Above the limit from ${formatDateTime(excursion.startedAt)} to ${formatDateTime(excursion.endedAt ?? excursion.startedAt)} — ${length}.`;
+  const readings = excursion.readingCount === 1 ? '1 reading' : `${excursion.readingCount} readings`;
+  return {
+    when,
+    detail: `Peak ${formatTemperature(excursion.peakC)}, average ${formatTemperature(excursion.meanC)}, from ${readings}.`,
+  };
+}
+
 function toPlainText(report: ExcursionReport): string {
   const lines: string[] = [
     'Squanchy Bakery - fridge temperature record',
     `Period: ${formatDate(report.from)} to ${formatDate(report.to)}`,
     `Produced: ${formatDateTime(report.generatedAt)}`,
+    'Only stretches of 30 minutes or more above the limit are listed. A shorter jump is a door opening.',
     '',
   ];
 
   const withExcursions = report.rows.filter((row) => row.excursions.length > 0);
 
   if (withExcursions.length === 0) {
-    lines.push(`No fridge recorded a sustained period above its limit. ${report.rows.length} fridges checked.`);
+    lines.push(
+      `No fridge stayed above its limit for 30 minutes or more. ${report.rows.length} fridges checked.`,
+    );
+    lines.push('');
   } else {
     for (const row of withExcursions) {
-      lines.push(`${row.branchName} ${row.fridgeName} (limit ${row.thresholdC.toFixed(1)} C)`);
+      lines.push(fridgeHeading(row));
       for (const excursion of row.excursions) {
-        const ended = excursion.ongoing
-          ? 'still above the limit at the end of the period'
-          : formatDateTime(excursion.endedAt!);
-        lines.push(
-          `  ${formatDateTime(excursion.startedAt)} to ${ended} - ${describeDuration(
-            excursion.durationMinutes,
-          )}, peak ${excursion.peakC.toFixed(1)} C`,
-        );
+        const described = describeExcursion(excursion);
+        lines.push(`  ${described.when}`);
+        lines.push(`  ${described.detail}`);
       }
       lines.push('');
     }
@@ -160,7 +165,7 @@ function toPlainText(report: ExcursionReport): string {
 
   const clean = report.rows.filter((row) => row.excursions.length === 0);
   if (clean.length > 0) {
-    lines.push(`Never above the limit in this period (${clean.length}):`);
+    lines.push(`Did not stay above the limit in this period (${clean.length}):`);
     for (const row of clean) {
       lines.push(`  ${row.branchName} ${row.fridgeName}`);
     }
@@ -168,27 +173,26 @@ function toPlainText(report: ExcursionReport): string {
   }
 
   lines.push(
-    'Based on readings uploaded from the branch loggers. Periods with no readings are listed on each fridge individually and are not counted as either compliant or non-compliant.',
+    'Times are the first and last readings actually above the limit. A gap in the file is not filled in. If the logger went quiet, that stretch is not counted as warm and not counted as fine.',
   );
 
   return lines.join('\n');
 }
 
+function fridgeHeading(row: ExcursionReportRow): string {
+  return `${row.branchName} ${row.fridgeName} (limit ${formatTemperature(row.thresholdC)})`;
+}
+
 const styles = StyleSheet.create({
   screen: { flex: 1, backgroundColor: colors.background },
-  content: { padding: spacing.lg, gap: spacing.md, paddingBottom: spacing.xl },
-  rangeRow: { flexDirection: 'row', gap: spacing.sm },
-  rangeChip: {
-    paddingHorizontal: spacing.md,
-    paddingVertical: spacing.xs + 2,
-    borderRadius: 999,
-    borderWidth: 1,
-    borderColor: colors.border,
-    backgroundColor: colors.surface,
+  content: {
+    padding: spacing.lg,
+    gap: spacing.md,
+    paddingBottom: spacing.xl,
+    maxWidth: 560,
+    width: '100%',
+    alignSelf: 'center',
   },
-  rangeChipActive: { backgroundColor: colors.accent, borderColor: colors.accent },
-  rangeText: { fontSize: 12, fontWeight: '600', color: colors.textMuted },
-  rangeTextActive: { color: '#fff' },
   card: {
     backgroundColor: colors.surface,
     borderRadius: 12,
@@ -211,5 +215,6 @@ const styles = StyleSheet.create({
   rowTitle: { fontSize: 13, fontWeight: '600', color: colors.text },
   rowDetail: { fontSize: 12, color: colors.textMuted },
   muted: { fontSize: 12, lineHeight: 18, color: colors.textMuted },
+  cleanName: { fontSize: 13, color: colors.text },
   footnote: { fontSize: 11, lineHeight: 16, color: colors.textMuted },
 });

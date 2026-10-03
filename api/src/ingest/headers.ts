@@ -4,7 +4,7 @@ import type { ColumnMapping, TemperatureUnit } from '../types';
  * The fields we need out of a logger file. `timestamp` is the normal case;
  * `date` + `time` cover the files that split them into two columns.
  */
-export type IngestField =
+type IngestField =
   | 'logger'
   | 'branch'
   | 'fridge'
@@ -160,21 +160,51 @@ export interface HeaderValidation {
   missing: string[];
   /** True when the file has separate date and time columns to be joined. */
   splitDateTime: boolean;
+  /**
+   * True when the only thing wrong is that nobody said which fridge this is.
+   * The file is readable; it just needs labelling, which Summer can do in the
+   * app instead of in Excel first.
+   */
+  needsLabels: boolean;
+}
+
+/**
+ * Which of logger, branch and fridge Summer can supply by hand at upload time.
+ * She already does exactly this in Excel: "I type in the logger number, the
+ * branch and the fridge myself when I paste".
+ */
+export interface SuppliedLabels {
+  loggerCode?: string | null;
+  branchName?: string | null;
+  fridgeName?: string | null;
+}
+
+function supplied(value: string | null | undefined): boolean {
+  return typeof value === 'string' && value.trim() !== '';
 }
 
 /**
  * The logger files themselves "only have the time and the temperature" - Summer
- * adds logger, branch and fridge when she pastes. So those three are required
- * here, and a raw logger export has to be labelled before upload. The upload
- * report says so explicitly when they are missing.
+ * adds logger, branch and fridge when she pastes. So those three are required,
+ * but they can come either from a column or from what she typed on the upload
+ * screen; a raw logger export is not a file we have to turn away.
+ *
+ * A time and a temperature, though, have to be in the file. Nothing outside it
+ * can supply those.
  */
-export function validateHeaders(mapping: HeaderMapping): HeaderValidation {
+export function validateHeaders(
+  mapping: HeaderMapping,
+  labels: SuppliedLabels = {},
+): HeaderValidation {
   const { columns } = mapping;
   const missing: string[] = [];
+  const unlabelled: string[] = [];
 
-  if (columns.logger === undefined) missing.push('logger');
-  if (columns.branch === undefined) missing.push('branch');
-  if (columns.fridge === undefined) missing.push('fridge');
+  if (columns.logger === undefined && !supplied(labels.loggerCode)) unlabelled.push('logger');
+  if (columns.branch === undefined && !supplied(labels.branchName)) unlabelled.push('branch');
+  if (columns.fridge === undefined && !supplied(labels.fridgeName)) unlabelled.push('fridge');
+  missing.push(...unlabelled);
+
   if (columns.temperature === undefined) missing.push('temperature');
 
   const hasCombined = columns.timestamp !== undefined;
@@ -191,5 +221,8 @@ export function validateHeaders(mapping: HeaderMapping): HeaderValidation {
     ok: missing.length === 0,
     missing,
     splitDateTime: !hasCombined && hasSplit,
+    // Only offer the labelling form when labelling is the whole problem. A
+    // file with no readable temperature column is a different conversation.
+    needsLabels: unlabelled.length > 0 && missing.length === unlabelled.length,
   };
 }

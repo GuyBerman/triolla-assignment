@@ -3,7 +3,7 @@ import { ANALYSIS } from './config';
 
 const MINUTE = 60_000;
 
-export interface ExcursionOptions {
+interface ExcursionOptions {
   thresholdC: number;
   /** Runs shorter than this are door openings, not violations. */
   minDurationMinutes?: number;
@@ -15,7 +15,7 @@ export interface ExcursionOptions {
   maxGapMs: number;
 }
 
-export interface ExcursionResult {
+interface ExcursionResult {
   excursions: Excursion[];
   doorEvents: DoorEvent[];
 }

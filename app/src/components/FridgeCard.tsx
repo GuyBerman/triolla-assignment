@@ -8,9 +8,12 @@ import { StatusPill } from './StatusPill';
 export function FridgeCard({
   fridge,
   onPress,
+  showBranch = true,
 }: {
   fridge: FridgeSummary;
   onPress: () => void;
+  /** False on a branch page, where the branch name is already the title. */
+  showBranch?: boolean;
 }) {
   const last = fridge.lastReading;
   // An ERR row has no temperature. Showing the raw value is more honest than
@@ -22,15 +25,15 @@ export function FridgeCard({
       style={({ pressed }) => [styles.card, pressed && styles.cardPressed]}
       onPress={onPress}
       accessibilityRole="button"
-      accessibilityLabel={`${fridge.branchName} ${fridge.name}. ${fridge.statusReason}`}
+      accessibilityLabel={`${showBranch ? `${fridge.branchName} ${fridge.name}` : fridge.name}. ${fridge.statusReason}`}
     >
       <View style={[styles.statusEdge, { backgroundColor: statusColor[fridge.status] }]} />
 
       <View style={styles.body}>
         <View style={styles.topRow}>
           <View style={styles.titleBlock}>
-            <Text style={styles.branch}>{fridge.branchName}</Text>
-            <Text style={styles.fridge}>{fridge.name}</Text>
+            <Text style={styles.branch}>{showBranch ? fridge.branchName : fridge.name}</Text>
+            {showBranch ? <Text style={styles.fridge}>{fridge.name}</Text> : null}
           </View>
 
           <View style={styles.readingBlock}>
@@ -54,6 +57,9 @@ export function FridgeCard({
             <Text style={styles.meta}>
               {fridge.doorEventCount} door {fridge.doorEventCount === 1 ? 'opening' : 'openings'}
             </Text>
+          ) : null}
+          {fridge.peakC !== null && fridge.peakC !== last?.tempC ? (
+            <Text style={styles.meta}>peak {formatTemperature(fridge.peakC)}</Text>
           ) : null}
         </View>
       </View>

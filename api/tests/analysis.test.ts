@@ -344,6 +344,10 @@ describe('which state wins', () => {
 
     expect(result.excursions).toHaveLength(1);
     expect(result.status).toBe('no_data');
+    // The series ended warm, but that was a day before "now". The report must
+    // not say the fridge is still too warm across a day we never saw.
+    expect(result.excursions[0]!.ongoing).toBe(false);
+    expect(result.excursions[0]!.endedAt).toBe(new Date(lastAt(warmThenSilent)).toISOString());
   });
 });
 

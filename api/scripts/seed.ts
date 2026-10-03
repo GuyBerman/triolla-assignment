@@ -39,7 +39,7 @@ async function main() {
 
   if (process.argv.includes('--reset')) {
     await pool.query(
-      'truncate readings, logger_assignments, uploads, loggers, fridges, branches restart identity cascade',
+      'truncate readings, logger_assignments, uploads, loggers, fridges, branches, ingest_rules restart identity cascade',
     );
     console.log('[seed] cleared existing data');
   }

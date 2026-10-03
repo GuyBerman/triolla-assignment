@@ -87,7 +87,7 @@ describe('columns we do not understand', () => {
 describe('files that cannot be used', () => {
   it('names exactly what is missing', () => {
     // A raw logger export: "the logger files themselves only have the time and
-    // the temperature". Summer has to label it before it is any use.
+    // the temperature". Readable, but nothing says which fridge it is.
     const validation = validateHeaders(mapHeaders(['Time', 'Temp']));
     expect(validation.ok).toBe(false);
     expect(validation.missing).toEqual(['logger', 'branch', 'fridge']);
@@ -96,5 +96,51 @@ describe('files that cannot be used', () => {
   it('notices when there is no time column at all', () => {
     const validation = validateHeaders(mapHeaders(['Logger', 'Branch', 'Fridge', 'Temp']));
     expect(validation.missing).toContain('time');
+  });
+});
+
+describe('asks who a file belongs to instead of turning it away', () => {
+  it('offers to label a raw logger file rather than refusing it', () => {
+    // Summer already does this by hand: "I type in the logger number, the
+    // branch and the fridge myself when I paste". Refusing the file sends her
+    // back to Excel, which is the work this is meant to remove.
+    const validation = validateHeaders(mapHeaders(['Time', 'Temp']));
+    expect(validation.needsLabels).toBe(true);
+  });
+
+  it('accepts the same file once she says which fridge it is', () => {
+    const validation = validateHeaders(mapHeaders(['Time', 'Temp']), {
+      loggerCode: 'TL-0512',
+      branchName: 'Jerusalem',
+      fridgeName: 'Dairy',
+    });
+    expect(validation.ok).toBe(true);
+    expect(validation.missing).toEqual([]);
+  });
+
+  it('takes a partly labelled file: the file supplies what it can', () => {
+    const validation = validateHeaders(mapHeaders(['Logger', 'Time', 'Temp']), {
+      branchName: 'Jerusalem',
+      fridgeName: 'Dairy',
+    });
+    expect(validation.ok).toBe(true);
+  });
+
+  it('does not offer labelling when the temperature is what is missing', () => {
+    // Nothing she can type fixes a file with no readings in it, so promising a
+    // labelling form would be a dead end.
+    const validation = validateHeaders(mapHeaders(['Time', 'Notes']));
+    expect(validation.needsLabels).toBe(false);
+    expect(validation.missing).toContain('temperature');
+  });
+
+  it('ignores blank labels, which are not answers', () => {
+    const validation = validateHeaders(mapHeaders(['Time', 'Temp']), {
+      loggerCode: '  ',
+      branchName: '',
+      fridgeName: null,
+    });
+    expect(validation.ok).toBe(false);
+    expect(validation.needsLabels).toBe(true);
   });
 });

@@ -1,4 +1,4 @@
-export type TimestampResult =
+type TimestampResult =
   | {
       ok: true;
       at: Date;
@@ -54,7 +54,7 @@ function zoneOffsetMs(utcMs: number, timeZone: string): number {
  * depends on the instant, but we only know the instant after applying the
  * offset, so the first guess can land on the wrong side of a transition.
  */
-export function wallClockToUtc(
+function wallClockToUtc(
   year: number,
   month: number,
   day: number,

@@ -2,6 +2,9 @@ node_modules/
 .env
 *.log
 .DS_Store
+NOTES.md
+PLAN.md
+CLAUSES.md
 
 # Expo
 .expo/

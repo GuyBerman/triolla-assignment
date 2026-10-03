@@ -1,8 +1,19 @@
 import { parse } from 'csv-parse/sync';
 
 import type { TemperatureUnit, UploadRejection } from '../types';
-import { mapHeaders, validateHeaders, type HeaderMapping, type HeaderValidation } from './headers';
+import {
+  mapHeaders,
+  validateHeaders,
+  type HeaderMapping,
+  type HeaderValidation,
+  type SuppliedLabels,
+} from './headers';
 import { canonicalize, canonicalizeLoggerCode } from './names';
+import {
+  isLegacyExcelFilename,
+  isSpreadsheetFilename,
+  readSpreadsheet,
+} from './spreadsheet';
 import { parseTemperature } from './temperature';
 import { parseSplitDateTime, parseTimestamp } from './timestamp';
 
@@ -24,7 +35,7 @@ export interface ParsedRow {
   status: 'ok' | 'error';
 }
 
-export interface ParseFileResult {
+interface ParseFileResult {
   rows: ParsedRow[];
   rejections: UploadRejection[];
   mapping: HeaderMapping;
@@ -62,10 +73,145 @@ function cell(row: string[], index: number | undefined): string {
   return (row[index] ?? '').trim();
 }
 
-export function parseLoggerFile(content: string, timeZone: string): ParseFileResult {
+export function parseLoggerFile(
+  content: string,
+  timeZone: string,
+  labels: SuppliedLabels = {},
+): ParseFileResult {
+  return parseTextFile(content, timeZone, labels);
+}
+
+/**
+ * Upload entry point. Spreadsheets are binary, so this takes a Buffer and the
+ * filename; CSV/TSV still go through the same table parser as `parseLoggerFile`.
+ */
+export async function parseUploadedFile(
+  content: string | Buffer,
+  timeZone: string,
+  labels: SuppliedLabels = {},
+  filename = '',
+): Promise<ParseFileResult> {
+  if (isLegacyExcelFilename(filename)) {
+    return {
+      ...emptyTable('file could not be read'),
+      warnings: [
+        'That is an old Excel file (.xls). Save it as .xlsx or CSV and upload again.',
+      ],
+    };
+  }
+  if (isSpreadsheetFilename(filename)) {
+    return parseSpreadsheetFile(asBuffer(content), timeZone, labels);
+  }
+  const text = Buffer.isBuffer(content) ? content.toString('utf8') : content;
+  return parseTextFile(text, timeZone, labels);
+}
+
+function asBuffer(content: string | Buffer): Buffer {
+  return Buffer.isBuffer(content) ? content : Buffer.from(content);
+}
+
+function emptyTable(message: string): ParseFileResult {
+  return {
+    rows: [],
+    rejections: [],
+    mapping: { columns: {}, mapped: [], unmapped: [], unitHint: null },
+    validation: {
+      ok: false,
+      missing: [message],
+      splitDateTime: false,
+      needsLabels: false,
+    },
+    warnings: message === 'the file is empty' ? ['This file has no rows in it.'] : [],
+    duplicateCount: 0,
+    dayFirstAssumedCount: 0,
+  };
+}
+
+async function parseSpreadsheetFile(
+  buffer: Buffer,
+  timeZone: string,
+  labels: SuppliedLabels,
+): Promise<ParseFileResult> {
+  let sheets;
+  try {
+    sheets = await readSpreadsheet(buffer);
+  } catch (err) {
+    return {
+      ...emptyTable('file could not be read'),
+      warnings: [`This Excel file could not be read: ${(err as Error).message}`],
+    };
+  }
+
+  if (sheets.length === 0) {
+    return emptyTable('the file is empty');
+  }
+
+  const warnings = ['Read this as an Excel workbook.'];
+  const used: string[] = [];
+  const skipped: string[] = [];
+  let combined: ParseFileResult | null = null;
+
+  for (const sheet of sheets) {
+    const part = parseRecords(sheet.records, timeZone, labels, '|');
+    if (!part.validation.ok) {
+      skipped.push(sheet.name);
+      if (combined === null) combined = part;
+      continue;
+    }
+    used.push(sheet.name);
+    combined = combined?.validation.ok ? mergeParsedSheets(combined, part) : part;
+  }
+
+  if (combined === null || !combined.validation.ok) {
+    return {
+      ...(combined ?? emptyTable('the columns this file needs')),
+      warnings,
+    };
+  }
+
+  if (used.length > 1) {
+    warnings.push(`Used ${used.length} sheets: ${used.join(', ')}.`);
+  }
+  if (skipped.length > 0) {
+    warnings.push(
+      `Skipped ${skipped.length} sheet(s) that were not a logger table: ${skipped.join(', ')}.`,
+    );
+  }
+
+  return { ...combined, warnings: [...warnings, ...combined.warnings] };
+}
+
+function mergeParsedSheets(left: ParseFileResult, right: ParseFileResult): ParseFileResult {
+  const seen = new Set(left.rows.map((row) => `${row.loggerCode}|${row.recordedAt.getTime()}`));
+  const extra: ParsedRow[] = [];
+  let extraDuplicates = 0;
+  for (const row of right.rows) {
+    const key = `${row.loggerCode}|${row.recordedAt.getTime()}`;
+    if (seen.has(key)) {
+      extraDuplicates += 1;
+      continue;
+    }
+    seen.add(key);
+    extra.push(row);
+  }
+
+  const rows = [...left.rows, ...extra].sort(
+    (a, b) => a.recordedAt.getTime() - b.recordedAt.getTime(),
+  );
+
+  return {
+    rows,
+    rejections: [...left.rejections, ...right.rejections],
+    mapping: left.mapping,
+    validation: left.validation,
+    warnings: [...left.warnings, ...right.warnings],
+    duplicateCount: left.duplicateCount + right.duplicateCount + extraDuplicates,
+    dayFirstAssumedCount: left.dayFirstAssumedCount + right.dayFirstAssumedCount,
+  };
+}
+
+function parseTextFile(content: string, timeZone: string, labels: SuppliedLabels): ParseFileResult {
   const warnings: string[] = [];
-  const rejections: UploadRejection[] = [];
-  const rows: ParsedRow[] = [];
 
   const delimiter = detectDelimiter(content);
   if (delimiter !== ',') {
@@ -87,31 +233,32 @@ export function parseLoggerFile(content: string, timeZone: string): ParseFileRes
     }) as string[][];
   } catch (err) {
     return {
-      rows: [],
-      rejections: [],
-      mapping: { columns: {}, mapped: [], unmapped: [], unitHint: null },
-      validation: { ok: false, missing: ['file could not be read'], splitDateTime: false },
+      ...emptyTable('file could not be read'),
       warnings: [`This file could not be read as a table: ${(err as Error).message}`],
-      duplicateCount: 0,
-      dayFirstAssumedCount: 0,
     };
   }
+
+  const parsed = parseRecords(records, timeZone, labels, delimiter === '\t' ? ' | ' : delimiter);
+  return { ...parsed, warnings: [...warnings, ...parsed.warnings] };
+}
+
+function parseRecords(
+  records: string[][],
+  timeZone: string,
+  labels: SuppliedLabels,
+  rawJoin: string,
+): ParseFileResult {
+  const warnings: string[] = [];
+  const rejections: UploadRejection[] = [];
+  const rows: ParsedRow[] = [];
 
   const headerRow = records[0];
   if (headerRow === undefined) {
-    return {
-      rows: [],
-      rejections: [],
-      mapping: { columns: {}, mapped: [], unmapped: [], unitHint: null },
-      validation: { ok: false, missing: ['the file is empty'], splitDateTime: false },
-      warnings: ['This file has no rows in it.'],
-      duplicateCount: 0,
-      dayFirstAssumedCount: 0,
-    };
+    return emptyTable('the file is empty');
   }
 
   const mapping = mapHeaders(headerRow);
-  const validation = validateHeaders(mapping);
+  const validation = validateHeaders(mapping, labels);
   if (!validation.ok) {
     return {
       rows: [],
@@ -125,6 +272,11 @@ export function parseLoggerFile(content: string, timeZone: string): ParseFileRes
   }
 
   const { columns } = mapping;
+  const labelled = {
+    loggerCode: (labels.loggerCode ?? '').trim(),
+    branchName: (labels.branchName ?? '').trim(),
+    fridgeName: (labels.fridgeName ?? '').trim(),
+  };
   // Prefer a unit declared by a column over one implied by the header text.
   const unitColumnIndex = columns.unit;
 
@@ -139,13 +291,16 @@ export function parseLoggerFile(content: string, timeZone: string): ParseFileRes
     const record = records[index]!;
     // +1 again because a spreadsheet's row 1 is the header.
     const rowNumber = index + 1;
-    const rawLine = record.join(delimiter === '\t' ? ' | ' : delimiter);
+    const rawLine = record.join(rawJoin);
 
     if (record.every((value) => value.trim() === '')) continue;
 
-    const loggerRaw = cell(record, columns.logger);
-    const branchRaw = cell(record, columns.branch);
-    const fridgeRaw = cell(record, columns.fridge);
+    // A raw logger export has no logger, branch or fridge column, so fall back
+    // to what Summer typed on the upload screen. A column always wins: if the
+    // file says which fridge a row belongs to, it knows better than the form.
+    const loggerRaw = cell(record, columns.logger) || labelled.loggerCode;
+    const branchRaw = cell(record, columns.branch) || labelled.branchName;
+    const fridgeRaw = cell(record, columns.fridge) || labelled.fridgeName;
 
     if (loggerRaw === '' || branchRaw === '' || fridgeRaw === '') {
       const missing = [

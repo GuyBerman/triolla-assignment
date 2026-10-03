@@ -18,9 +18,14 @@ export function createApp() {
     res.status(404).json({ error: `No route for ${req.method} ${req.path}` });
   });
 
+  // The detail goes to the terminal, not to Summer. A raw Postgres message
+  // ("relation \"readings\" does not exist") tells her nothing she can act on,
+  // and the app shows whatever is in `error` verbatim.
   app.use((err: Error, _req: Request, res: Response, _next: NextFunction) => {
     console.error('[api] unhandled error:', err);
-    res.status(500).json({ error: err.message ?? 'Internal server error' });
+    res.status(500).json({
+      error: 'Something went wrong at our end. The details are in the API terminal window.',
+    });
   });
 
   return app;

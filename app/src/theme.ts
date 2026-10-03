@@ -41,6 +41,24 @@ export const statusLabel: Record<FridgeStatus, string> = {
   no_data: 'No data',
 };
 
+/** Short gloss for the dashboard key. Worst first, same as the cards. */
+export const statusMeaning: Record<FridgeStatus, string> = {
+  alarm: 'above the limit long enough to matter',
+  no_data: 'silent logger, not a cold fridge',
+  warning: 'warming, recovered, or a gap',
+  ok: 'nothing stayed above the limit',
+};
+
+export const statusesWorstFirst: FridgeStatus[] = ['alarm', 'no_data', 'warning', 'ok'];
+
+/** Worst first — same order the API uses, so a branch card matches its worst fridge. */
+export const statusOrder: Record<FridgeStatus, number> = {
+  alarm: 0,
+  no_data: 1,
+  warning: 2,
+  ok: 3,
+};
+
 export const spacing = {
   xs: 4,
   sm: 8,

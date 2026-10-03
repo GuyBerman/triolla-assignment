@@ -6,17 +6,22 @@ import { StatusBar } from 'expo-status-bar';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 
 import { DashboardScreen } from './src/screens/DashboardScreen';
+import { BranchScreen } from './src/screens/BranchScreen';
 import { FridgeDetailScreen } from './src/screens/FridgeDetailScreen';
 import { InspectorScreen } from './src/screens/InspectorScreen';
+import { RulesScreen } from './src/screens/RulesScreen';
+import { SearchScreen } from './src/screens/SearchScreen';
 import { UploadScreen } from './src/screens/UploadScreen';
 import type {
   FridgesStackParamList,
   InspectorStackParamList,
   RootTabParamList,
+  SearchStackParamList,
 } from './src/navigation/types';
 import { colors } from './src/theme';
 
 const FridgesStack = createNativeStackNavigator<FridgesStackParamList>();
+const SearchStack = createNativeStackNavigator<SearchStackParamList>();
 const InspectorStack = createNativeStackNavigator<InspectorStackParamList>();
 const Tabs = createBottomTabNavigator<RootTabParamList>();
 
@@ -32,7 +37,12 @@ function FridgesNavigator() {
       <FridgesStack.Screen
         name="Dashboard"
         component={DashboardScreen}
-        options={{ title: 'Fridges' }}
+        options={{ title: 'Branches' }}
+      />
+      <FridgesStack.Screen
+        name="Branch"
+        component={BranchScreen}
+        options={({ route }) => ({ title: route.params.branchName })}
       />
       <FridgesStack.Screen
         name="FridgeDetail"
@@ -40,6 +50,19 @@ function FridgesNavigator() {
         options={({ route }) => ({ title: route.params.fridgeName })}
       />
     </FridgesStack.Navigator>
+  );
+}
+
+function SearchNavigator() {
+  return (
+    <SearchStack.Navigator screenOptions={headerStyle}>
+      <SearchStack.Screen name="Search" component={SearchScreen} options={{ title: 'Search' }} />
+      <SearchStack.Screen
+        name="FridgeDetail"
+        component={FridgeDetailScreen}
+        options={({ route }) => ({ title: route.params.fridgeName })}
+      />
+    </SearchStack.Navigator>
   );
 }
 
@@ -79,6 +102,16 @@ export default function App() {
             }}
           />
           <Tabs.Screen
+            name="SearchTab"
+            component={SearchNavigator}
+            options={{
+              title: 'Search',
+              tabBarIcon: ({ color, size }) => (
+                <Ionicons name="search-outline" color={color} size={size} />
+              ),
+            }}
+          />
+          <Tabs.Screen
             name="UploadTab"
             component={UploadScreen}
             options={{
@@ -87,6 +120,18 @@ export default function App() {
               ...headerStyle,
               tabBarIcon: ({ color, size }) => (
                 <Ionicons name="cloud-upload-outline" color={color} size={size} />
+              ),
+            }}
+          />
+          <Tabs.Screen
+            name="RulesTab"
+            component={RulesScreen}
+            options={{
+              title: 'Rules',
+              headerShown: true,
+              ...headerStyle,
+              tabBarIcon: ({ color, size }) => (
+                <Ionicons name="options-outline" color={color} size={size} />
               ),
             }}
           />

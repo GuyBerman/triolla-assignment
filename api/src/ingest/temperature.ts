@@ -1,7 +1,7 @@
 import type { TemperatureUnit } from '../types';
 import { INGEST_RULES } from './rules';
 
-export type TemperatureResult =
+type TemperatureResult =
   | {
       ok: true;
       value: number;
@@ -108,7 +108,7 @@ function median(values: number[]): number {
   return (sorted[middle - 1]! + sorted[middle]!) / 2;
 }
 
-export type UnitSuspicion =
+type UnitSuspicion =
   | { level: 'none' }
   | { level: 'warn'; medianC: number; message: string }
   | { level: 'reject'; medianC: number; message: string };

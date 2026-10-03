@@ -70,7 +70,7 @@ export function findGaps(samples: Sample[], thresholdMs: number): Gap[] {
   return gaps;
 }
 
-export function median(values: number[]): number | null {
+function median(values: number[]): number | null {
   if (values.length === 0) return null;
   const sorted = [...values].sort((a, b) => a - b);
   const middle = Math.floor(sorted.length / 2);
@@ -79,7 +79,7 @@ export function median(values: number[]): number | null {
     : (sorted[middle - 1]! + sorted[middle]!) / 2;
 }
 
-export interface Trend {
+interface Trend {
   /** Degrees per hour. Positive means warming. */
   slopeCPerHour: number;
   /** Typical temperature in the earlier half of the window. */

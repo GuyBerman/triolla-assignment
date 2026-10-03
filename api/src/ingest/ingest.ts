@@ -2,14 +2,18 @@ import type { PoolClient } from 'pg';
 
 import { config } from '../config';
 import { pool } from '../db/pool';
+import { listKnownLoggers } from '../repository';
+import { listConversionRules } from '../ruleStore';
 import type { LoggerMove, TemperatureUnit, UploadReport, UploadRejection } from '../types';
+import { applyConversion, describeRule, pickRule } from './conversion';
+import type { SuppliedLabels } from './headers';
 import { preferredDisplayName } from './names';
-import { parseLoggerFile, type ParsedRow } from './parseFile';
-import { assessDeclaredUnit, fahrenheitToCelsius } from './temperature';
+import { parseUploadedFile, type ParsedRow } from './parseFile';
+import { assessDeclaredUnit } from './temperature';
 
 const READING_INSERT_CHUNK = 500;
 
-interface BranchRecord {
+interface NamedRecord {
   id: number;
   name: string;
 }
@@ -19,7 +23,7 @@ async function resolveBranch(
   canonical: string,
   displayName: string,
 ): Promise<number> {
-  const inserted = await client.query<BranchRecord>(
+  const inserted = await client.query<NamedRecord>(
     `insert into branches (name, canonical_name) values ($1, $2)
      on conflict (canonical_name) do nothing
      returning id, name`,
@@ -27,7 +31,7 @@ async function resolveBranch(
   );
   if (inserted.rows[0]) return inserted.rows[0].id;
 
-  const existing = await client.query<BranchRecord>(
+  const existing = await client.query<NamedRecord>(
     `select id, name from branches where canonical_name = $1`,
     [canonical],
   );
@@ -47,7 +51,7 @@ async function resolveFridge(
   canonical: string,
   displayName: string,
 ): Promise<number> {
-  const inserted = await client.query<BranchRecord>(
+  const inserted = await client.query<NamedRecord>(
     `insert into fridges (branch_id, name, canonical_name) values ($1, $2, $3)
      on conflict (branch_id, canonical_name) do nothing
      returning id, name`,
@@ -55,7 +59,7 @@ async function resolveFridge(
   );
   if (inserted.rows[0]) return inserted.rows[0].id;
 
-  const existing = await client.query<BranchRecord>(
+  const existing = await client.query<NamedRecord>(
     `select id, name from fridges where branch_id = $1 and canonical_name = $2`,
     [branchId, canonical],
   );
@@ -247,12 +251,29 @@ async function insertReadings(
   return insertedCount;
 }
 
-export async function ingestFile(filename: string, content: string): Promise<UploadReport> {
-  const parsed = parseLoggerFile(content, config.timezone);
+/**
+ * "a temperature column" reads better than "these column(s): temperature", and
+ * a file that failed for some other reason still has to say what it was.
+ */
+function describeMissing(blockers: string[], all: string[]): string {
+  const named = blockers.length > 0 ? blockers : all;
+  if (named.length === 0) return 'the columns this file needs';
+  const columns = named.map((field) => `a ${field} column`);
+  if (columns.length === 1) return columns[0]!;
+  return `${columns.slice(0, -1).join(', ')} or ${columns[columns.length - 1]!}`;
+}
+
+export async function ingestFile(
+  filename: string,
+  content: string | Buffer,
+  labels: SuppliedLabels = {},
+): Promise<UploadReport> {
+  const parsed = await parseUploadedFile(content, config.timezone, labels, filename);
   const warnings = [...parsed.warnings];
   const rejections: UploadRejection[] = [...parsed.rejections];
   const moves: LoggerMove[] = [];
   const convertedFromFahrenheit: string[] = [];
+  const appliedRuleCounts = new Map<number, { summary: string; rows: number }>();
 
   const client = await pool.connect();
   try {
@@ -263,16 +284,34 @@ export async function ingestFile(filename: string, content: string): Promise<Upl
       [filename],
     );
     const uploadId = uploadResult.rows[0]!.id;
+    const rules = await listConversionRules();
 
     // A file whose columns we cannot identify is recorded as a failed upload
     // rather than thrown away, so there is a trail of what was attempted.
     if (!parsed.validation.ok) {
-      const message =
-        `Could not find these column(s): ${parsed.validation.missing.join(', ')}. ` +
-        `The columns found were: ${
-          parsed.mapping.mapped.map((entry) => entry.sourceHeader).join(', ') || '(none)'
-        }. Logger files only contain a time and a temperature, so the logger ` +
-        `number, branch and fridge need to be in the file too.`;
+      // Two different situations, and conflating them is what used to send
+      // Summer back to Excel. A file that only lacks labels is perfectly
+      // readable - it just needs her to say which fridge it came from, which
+      // she can do on the upload screen. A file with no readable temperature
+      // or time is a genuine dead end.
+      const needsLabels = parsed.validation.needsLabels
+        ? { missing: parsed.validation.missing, knownLoggers: await listKnownLoggers() }
+        : null;
+
+      const message = needsLabels
+        ? `This looks like a logger file straight off the device: it has readings but ` +
+          `nothing saying which fridge they came from. Tell me which fridge, and I will ` +
+          `import it.`
+        : // Name only what she cannot fix by labelling. Listing "logger, branch,
+          // fridge" alongside the real problem buries it.
+          `Could not find ${describeMissing(
+            parsed.validation.missing.filter(
+              (field) => field === 'temperature' || field === 'time',
+            ),
+            parsed.validation.missing,
+          )}. The columns found were: ${
+            parsed.mapping.mapped.map((entry) => entry.sourceHeader).join(', ') || '(none)'
+          }. A file has to contain at least a time and a temperature.`;
       warnings.push(message);
 
       const report: UploadReport = {
@@ -288,6 +327,8 @@ export async function ingestFile(filename: string, content: string): Promise<Upl
         rejections,
         loggerMoves: [],
         convertedFromFahrenheit: [],
+        appliedRules: [],
+        needsLabels,
       };
       await client.query(`update uploads set report = $1 where id = $2`, [report, uploadId]);
       await client.query('commit');
@@ -341,25 +382,38 @@ export async function ingestFile(filename: string, content: string): Promise<Upl
       }
 
       if (unit === 'C') {
-        const numericValues = loggerRows
-          .map((row) => row.rawNumber)
-          .filter((value): value is number => value !== null);
-        const suspicion = assessDeclaredUnit(loggerCode, 'C', numericValues);
+        const unitForcedByRule = loggerRows.every((row) => {
+          const rule = pickRule(rules, {
+            branchCanonical: row.branchCanonical,
+            fridgeCanonical: row.fridgeCanonical,
+            loggerCode: row.loggerCode,
+          });
+          return rule?.unit === 'C' || rule?.unit === 'F';
+        });
 
-        if (suspicion.level === 'reject') {
-          warnings.push(suspicion.message);
-          for (const row of loggerRows) {
-            rejections.push({
-              row: row.rowNumber,
-              reason: `${loggerCode} unit looks wrong; not imported`,
-              raw: `${row.rawValue} at ${row.recordedAt.toISOString()}`,
-            });
+        // A rule that names the unit is the user telling us how to read the
+        // file, so the median-38 guard must not refuse it.
+        if (!unitForcedByRule) {
+          const numericValues = loggerRows
+            .map((row) => row.rawNumber)
+            .filter((value): value is number => value !== null);
+          const suspicion = assessDeclaredUnit(loggerCode, 'C', numericValues);
+
+          if (suspicion.level === 'reject') {
+            warnings.push(suspicion.message);
+            for (const row of loggerRows) {
+              rejections.push({
+                row: row.rowNumber,
+                reason: `${loggerCode} unit looks wrong; not imported`,
+                raw: `${row.rawValue} at ${row.recordedAt.toISOString()}`,
+              });
+            }
+            rowsByLogger.delete(loggerCode);
+            continue;
           }
-          rowsByLogger.delete(loggerCode);
-          continue;
-        }
-        if (suspicion.level === 'warn') {
-          warnings.push(suspicion.message);
+          if (suspicion.level === 'warn') {
+            warnings.push(suspicion.message);
+          }
         }
       } else {
         convertedFromFahrenheit.push(loggerCode);
@@ -408,12 +462,25 @@ export async function ingestFile(filename: string, content: string): Promise<Upl
 
       for (const row of loggerRows) {
         const fridgeId = fridgeIdByKey.get(`${row.branchCanonical}|${row.fridgeCanonical}`)!;
+        const rule = pickRule(rules, {
+          branchCanonical: row.branchCanonical,
+          fridgeCanonical: row.fridgeCanonical,
+          loggerCode: row.loggerCode,
+        });
         const tempC =
-          row.rawNumber === null
-            ? null
-            : unit === 'F'
-              ? fahrenheitToCelsius(row.rawNumber)
-              : row.rawNumber;
+          row.rawNumber === null ? null : applyConversion(row.rawNumber, unit, rule);
+
+        if (rule && row.rawNumber !== null) {
+          const current = appliedRuleCounts.get(rule.id);
+          if (current) current.rows += 1;
+          else appliedRuleCounts.set(rule.id, { summary: describeRule(rule), rows: 1 });
+        }
+
+        if (rule?.unit === 'F' || (rule?.unit !== 'C' && unit === 'F')) {
+          if (!convertedFromFahrenheit.includes(loggerCode)) {
+            convertedFromFahrenheit.push(loggerCode);
+          }
+        }
 
         readings.push({
           loggerId: logger.id,
@@ -446,6 +513,14 @@ export async function ingestFile(filename: string, content: string): Promise<Upl
       );
     }
 
+    if (appliedRuleCounts.size > 0) {
+      for (const applied of appliedRuleCounts.values()) {
+        warnings.push(
+          `Applied a conversion rule to ${applied.rows} reading${applied.rows === 1 ? '' : 's'}: ${applied.summary}.`,
+        );
+      }
+    }
+
     const report: UploadReport = {
       uploadId,
       filename,
@@ -459,6 +534,12 @@ export async function ingestFile(filename: string, content: string): Promise<Upl
       rejections: rejections.slice(0, 50),
       loggerMoves: moves,
       convertedFromFahrenheit: [...new Set(convertedFromFahrenheit)],
+      appliedRules: [...appliedRuleCounts.entries()].map(([ruleId, applied]) => ({
+        ruleId,
+        summary: applied.summary,
+        rows: applied.rows,
+      })),
+      needsLabels: null,
     };
 
     await client.query(
