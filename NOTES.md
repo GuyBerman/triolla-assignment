@@ -10,7 +10,7 @@ The whole assigment took about 7 hours
 
 **Settings** A settings screen to prevent future problems and let summer control what she needs for example she can choose what degree is the limit so we know to suspect a fridge
 
-**Special calculations** Summer methioned some loggers shows the wrong number and she calculate the real one in her head - I added the rules which she can choose a branch there and define a speical calculation method and then all number are correct
+**Special calculations** Some loggers were showing incorrect values, so Summer was doing the math in her head. You can now pick a branch and give it its own calculation rule, and all readings come out right.
 
 **UI** Summer mentiond she wastes a lot of time looking for problems - I have added easy way to see issues and fix a problem before it actually happens (Too warm , No data , Watch , OK)
 
@@ -25,7 +25,7 @@ time. Reporting that as one six-hour violation would be inventing evidence, in
 a tool whose output goes to a health inspector. Runs break at gaps instead.
 
 **"No data" is its own state, and it is worse than "fine".** A silent logger
-is not a cold fridge.
+is not a working fridge.
 
 **Logger assignments are time windows, not a column on the fridge.** `TL-0417`
 moving to Display 2 is a fact with a date, not an edit. Without this, moving a
@@ -38,7 +38,6 @@ Both assumptions are stated, both are in one place
 (`LOGGER_TIMEZONE`, `ingest/timestamp.ts`), and the app tells her when it had
 to guess. Getting this wrong by a day in an inspector report would be
 embarrassing in a way a bug usually is not.
-
 
 **The judgements are editable; the clamps are not.** How long above the limit
 counts, how long a silence is No data, and what counts as warming up or a gap
@@ -57,8 +56,6 @@ In rough order of how much the answers would change:
 
 1. **What does the Ministry of Health actually require?** How long above five
    degrees is a reportable excursion, and is it five degrees for every fridge?
-   The 30-minute rule is my invention and the whole compliance story rests on
-   it.
 2. **Do all fridges share the same limit?** A walk-in, a dairy fridge and a
    cream cake display plausibly have different requirements. The schema
    already stores a per-fridge threshold, and Settings (and the fridge page)
@@ -89,12 +86,13 @@ In rough order of how much the answers would change:
 
 The date picker on the inspector report and email alerts.
 
-
 ---
 
 ## How I worked with AI tools
 
 I used Cursor, with Claude, for the planning and most of the code.
+
+This was one of the first things we encountered while planning the project. At first the tool wanted no database. Summer uploads a file and looks at that file, so it said keeping the rows for one session was enough. I disagreed.
 
 The first version left the judgements in code: how long above the limit
 counts, how long a silence is No data, what counts as warming up or a gap.
@@ -107,6 +105,7 @@ typo there would call noise a trend.
 
 Where to see it:
 
+- the note above, "DB", and `api/migrations/`
 - the note above, "The judgements are editable; the clamps are not"
 - [`api/src/analysis/settings.ts`](api/src/analysis/settings.ts) and the Settings screen
 - commit `0375f07`
