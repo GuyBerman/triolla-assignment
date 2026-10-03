@@ -10,14 +10,12 @@ The one sentence that is really the spec (her words):
 
 > "Sometimes a fridge will show a jump for one reading, and that is fine. But a fridge that is slowly warming up is not fine."
 
-This is a take-home assignment. It must run on a laptop from the README with **no accounts and no paid services**. Decisions she did not make are written down in `NOTES.md`.
-
 ---
 
 ## Repo Structure
 
 **Package manager:** `npm`
-**Runtime:** Node 20+. Postgres 16 via Docker Compose (host port **5433**, not 5432).
+**Runtime:** Node 20+. Postgres 16 via Docker Compose (host port **5432**).
 
 ```
 api/                  Express 4 + TypeScript (ESM, run with tsx — no build step)
@@ -45,7 +43,7 @@ docker-compose.yml    Postgres 16 only
 From repo root:
 
 ```bash
-docker compose up -d          # Postgres on localhost:5433
+docker compose up -d          # Postgres on localhost:5432
 ```
 
 API (`api/`):
@@ -84,7 +82,7 @@ After **every** code change: `npm run typecheck` in the package you touched. Aft
 - **csv-parse** 7, **multer** 2 (not 1.x — that had a critical advisory)
 - **vitest** 5, `globals: false` — always `import { describe, expect, it } from 'vitest'`
 - Defaults in `src/config.ts` so no `.env` is required:
-  - `DATABASE_URL=postgres://postgres:postgres@localhost:5433/squanchy`
+  - `DATABASE_URL=postgres://postgres:postgres@localhost:5432/squanchy`
   - `LOGGER_TIMEZONE=Asia/Jerusalem`
   - `PORT=4000`
 
@@ -134,7 +132,7 @@ Pipeline is pure functions, then `ingestFile` writes through them. **Seed must g
 | Scale rules  | `conversion.ts`  | Per-branch/fridge/logger `×` and `+` after unit conversion. Most specific match wins.                                                        |
 | Persist      | `ingest.ts`      | Three stages: unit-check → create entities for survivors → convert + insert.                                                                 |
 
-Do not reintroduce a unit picker on the Rules screen. Fahrenheit vs Celsius is inferred (headers, cell suffix, logger registration, median guard). Rules are **multiply / add** only.
+The number in the file is stored as written. A header or a cell suffix does not convert it, and a high median does not refuse the file. Conversion happens only when a rule says so: "treat as Fahrenheit" converts, then × and + run. "As written" multiplies the file number itself.
 
 Sample files in `data/` are traps, not decoration: Fahrenheit + day-first + `ERR` (Haifa), reordered columns, Tel Aviv logger move, Rishon ramp, Jerusalem duplicate row. Do not "clean them up".
 
@@ -144,17 +142,17 @@ Sample files in `data/` are traps, not decoration: Fahrenheit + day-first + `ERR
 
 Mounted at `/api`:
 
-| Method          | Path                                  | Purpose                                                                  |
-| --------------- | ------------------------------------- | ------------------------------------------------------------------------ |
-| GET             | `/health`                             | API + DB                                                                 |
-| GET             | `/fridges`                            | every fridge, worst-first, plain-language `statusReason`                 |
-| GET             | `/fridges/:id?days=`                  | readings, excursions, door events, gaps                                  |
-| PUT             | `/fridges/:id`                        | that fridge's degree limit (`thresholdC`)                                |
-| GET             | `/search?q=&aboveC=`                  | name filter and/or "reached this °C"; status recomputed against `aboveC` |
-| GET             | `/reports/excursions?days=&fridgeId=` | inspector answer; **include fridges with zero excursions**               |
-| POST            | `/uploads`                            | multipart `file`                                                         |
-| GET             | `/uploads`                            | history                                                                  |
-| GET/POST/DELETE | `/rules`                              | ingest conversion rules                                                  |
+| Method          | Path                                  | Purpose                                                                    |
+| --------------- | ------------------------------------- | -------------------------------------------------------------------------- |
+| GET             | `/health`                             | API + DB                                                                   |
+| GET             | `/fridges`                            | every fridge, worst-first, plain-language `statusReason`                   |
+| GET             | `/fridges/:id?days=`                  | readings, excursions, door events, gaps                                    |
+| PUT             | `/fridges/:id`                        | that fridge's degree limit (`thresholdC`)                                  |
+| GET             | `/search?q=&aboveC=`                  | name filter and/or "reached this °C"; status recomputed against `aboveC`   |
+| GET             | `/reports/excursions?days=&fridgeId=` | inspector answer; **include fridges with zero excursions**                 |
+| POST            | `/uploads`                            | multipart `file`                                                           |
+| GET             | `/uploads`                            | history                                                                    |
+| GET/POST/DELETE | `/rules`                              | ingest conversion rules                                                    |
 | GET/PUT         | `/settings`                           | the judgements she can change (how long is too warm, silence, drift, gaps) |
 
 Unparseable date query params **fall back**, they do not become `Invalid Date` (that produces an empty report that looks like a clean record).
@@ -182,7 +180,7 @@ Search is for a different question than the dashboard: "what if I care about 10�
 
 - Status labels: Too warm / No data / Watch / OK — not alarm/warning.
 - Reasons are sentences. Lead with the fact, not a number.
-- Upload failures say what to change (`change the logger's unit to Fahrenheit and upload again`), not `400 Bad Request`.
+- Upload failures say what to change (`That file is empty.`), not `400 Bad Request`.
 
 ### Chart
 

@@ -44,8 +44,8 @@ export function pickRule(rules: ConversionRule[], target: RuleTarget): Conversio
 }
 
 /**
- * The number in the file is the temperature. A header that says Fahrenheit,
- * or a logger registered as Fahrenheit, does not change it.
+ * The number in the file is the temperature. A header that says Fahrenheit
+ * does not change it.
  *
  * A rule is the only conversion. "Treat as Fahrenheit" runs first, then ×
  * and +, so one rule can both convert and scale. "As written" multiplies

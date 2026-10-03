@@ -1,11 +1,5 @@
 # Squanchy Bakery Fridge Monitor
 
-## Scope call
-
-You asked for basic and no login, so: no auth, no users, no push notifications, no PDF export. Single operations user, three screens. The effort goes where the assignment actually grades, which is correctly handling the nine data traps in Summer's sample table and separating "someone opened the door" from "this fridge is dying".
-
-Phases are ordered so you can stop after Phase 3 and still have a coherent, submittable repo.
-
 ## Repo layout
 
 - `api/` - Express + TypeScript, `pg` driver, raw SQL (no ORM, no migration tool)
@@ -101,7 +95,3 @@ Expo React Native, three tabs, `app/src/`. Expo rather than bare React Native be
 - `README.md` - start Docker Desktop, `docker compose up -d`, `npm install && npm run dev` in `api/`, `npm install && npx expo start --web` in `app/`, then seed with `npm run seed`. Docker CLI is installed here but the daemon was not responding, so starting it is step one.
 - `NOTES.md` - time spent; the unasked-for decisions (30-minute sustained rule, drift detection, day-first dates, Asia/Jerusalem, assignment windows, no auth); questions for Summer (do walk-in and cream-cake fridges share the 5-degree limit, what does the Ministry of Health actually require for duration, should she be alerted between uploads, who else needs access); what is unfinished; and one thing an AI tool got wrong with a pointer to where.
 - `PLAN.md` - this plan, committed, since the PDF explicitly asks for planning notes in the repo.
-
-## Deliberately not building
-
-Auth and per-branch users, push or email alerting, PDF export, live logger integration, offline cache, Excel/XLSX parsing (CSV only). Each gets a line in NOTES rather than a half-implementation.

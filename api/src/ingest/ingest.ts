@@ -6,7 +6,6 @@ import { listKnownLoggers } from '../repository';
 import { listConversionRules } from '../ruleStore';
 import type {
   LoggerMove,
-  LoggerRecord,
   NamedRecord,
   ParsedRow,
   PreparedReading,
@@ -74,20 +73,20 @@ async function resolveFridge(
   return row.id;
 }
 
-async function resolveLogger(client: PoolClient, code: string): Promise<LoggerRecord> {
-  const inserted = await client.query<LoggerRecord>(
+async function resolveLogger(client: PoolClient, code: string): Promise<number> {
+  const inserted = await client.query<{ id: number }>(
     `insert into loggers (code) values ($1)
      on conflict (code) do nothing
-     returning id, unit`,
+     returning id`,
     [code],
   );
-  if (inserted.rows[0]) return inserted.rows[0];
+  if (inserted.rows[0]) return inserted.rows[0].id;
 
-  const existing = await client.query<LoggerRecord>(
-    `select id, unit from loggers where code = $1`,
+  const existing = await client.query<{ id: number }>(
+    `select id from loggers where code = $1`,
     [code],
   );
-  return existing.rows[0]!;
+  return existing.rows[0]!.id;
 }
 
 
@@ -356,10 +355,10 @@ export async function ingestFile(
     const readings: PreparedReading[] = [];
 
     for (const [loggerCode, loggerRows] of rowsByLogger) {
-      const logger = await resolveLogger(client, loggerCode);
+      const loggerId = await resolveLogger(client, loggerCode);
 
       moves.push(
-        ...(await syncAssignments(client, logger.id, loggerCode, loggerRows, fridgeIdByKey)),
+        ...(await syncAssignments(client, loggerId, loggerCode, loggerRows, fridgeIdByKey)),
       );
 
       for (const row of loggerRows) {
@@ -382,7 +381,7 @@ export async function ingestFile(
         }
 
         readings.push({
-          loggerId: logger.id,
+          loggerId,
           fridgeId,
           recordedAt: row.recordedAt,
           tempC,

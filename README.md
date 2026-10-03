@@ -25,8 +25,7 @@ install`.
 docker compose up -d
 ```
 
-Postgres comes up on host port **5433** (not 5432, so it will not fight with a
-Postgres you may already have running).
+Postgres comes up on port **5432**.
 
 ### 2. Start the API
 

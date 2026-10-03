@@ -7,7 +7,7 @@ export const config = {
 
   databaseUrl:
     process.env.DATABASE_URL ??
-    'postgres://postgres:postgres@localhost:5433/squanchy',
+    'postgres://postgres:postgres@localhost:5432/squanchy',
 
   /**
    * Logger files carry a wall-clock time with no offset ("2026-09-14 06:00").

@@ -77,11 +77,6 @@ export interface NamedRecord {
   name: string;
 }
 
-export interface LoggerRecord {
-  id: number;
-  unit: TemperatureUnit;
-}
-
 /** One `logger_assignments` row, as stored. */
 export interface StoredAssignment {
   id: number;
