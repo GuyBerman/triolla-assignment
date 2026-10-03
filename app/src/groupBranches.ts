@@ -1,5 +1,5 @@
 import type { FridgeStatus, FridgeSummary } from './api/types';
-import { statusOrder } from './theme';
+import { statusOrder, statusesWorstFirst } from './theme';
 
 export interface BranchGroup {
   name: string;
@@ -7,8 +7,17 @@ export interface BranchGroup {
   status: FridgeStatus;
 }
 
-/** Only the states worth counting; "ok" is the absence of news. */
+/** Only the states worth calling out on their own; "ok" is the absence of news. */
 const SUMMARY_STATUSES: FridgeStatus[] = ['alarm', 'no_data', 'warning'];
+
+export function countStatuses(
+  fridges: Pick<FridgeSummary, 'status'>[],
+): { status: FridgeStatus; count: number }[] {
+  return statusesWorstFirst.map((status) => ({
+    status,
+    count: fridges.filter((fridge) => fridge.status === status).length,
+  }));
+}
 
 export function countProblemStatuses(
   fridges: Pick<FridgeSummary, 'status'>[],

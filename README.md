@@ -1,7 +1,7 @@
 
 ## Running it
 
-
+Node 20 or newer, and Docker already running.
 
 ### 1. Start the database
 
@@ -19,6 +19,8 @@ npm install
 npm run seed      # loads the sample logger files from data/
 npm run dev
 ```
+
+`npm run seed` and `npm run dev` apply the database migrations themselves. There is no separate migrate step. Seed loads the sample files; running it again skips rows it already has.
 
 
 ### 3. Start the app

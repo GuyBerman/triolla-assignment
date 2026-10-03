@@ -3,7 +3,6 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { StatusBar } from 'expo-status-bar';
-import { Pressable, Text } from 'react-native';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 
 import { DashboardScreen } from './src/screens/DashboardScreen';
@@ -12,7 +11,6 @@ import { FridgeDetailScreen } from './src/screens/FridgeDetailScreen';
 import { InspectorScreen } from './src/screens/InspectorScreen';
 import { RulesTabScreen } from './src/screens/RulesTabScreen';
 import { SearchScreen } from './src/screens/SearchScreen';
-import { SettingsScreen } from './src/screens/SettingsScreen';
 import { UploadScreen } from './src/screens/UploadScreen';
 import type {
   FridgesStackParamList,
@@ -39,25 +37,7 @@ function FridgesNavigator() {
       <FridgesStack.Screen
         name="Dashboard"
         component={DashboardScreen}
-        options={({ navigation }) => ({
-          title: 'Branches',
-          headerRight: () => (
-            <Pressable
-              onPress={() => navigation.navigate('Settings')}
-              hitSlop={8}
-              style={{ paddingHorizontal: 16, paddingVertical: 8 }}
-              accessibilityRole="button"
-              accessibilityLabel="Settings"
-            >
-              <Text style={{ color: colors.accent, fontWeight: '700', fontSize: 16 }}>Settings</Text>
-            </Pressable>
-          ),
-        })}
-      />
-      <FridgesStack.Screen
-        name="Settings"
-        component={SettingsScreen}
-        options={{ title: 'Settings' }}
+        options={{ title: 'Branches' }}
       />
       <FridgesStack.Screen
         name="Branch"
@@ -144,15 +124,14 @@ export default function App() {
             }}
           />
           <Tabs.Screen
-            name="RulesTab"
+            name="SettingsTab"
             component={RulesTabScreen}
             options={{
-              title: 'Rules',
-              tabBarLabel: 'Rules',
+              title: 'Settings',
               headerShown: true,
               ...headerStyle,
               tabBarIcon: ({ color, size }) => (
-                <Ionicons name="options-outline" color={color} size={size} />
+                <Ionicons name="settings-outline" color={color} size={size} />
               ),
             }}
           />

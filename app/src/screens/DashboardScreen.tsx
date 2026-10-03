@@ -7,12 +7,11 @@ import type { FridgeListResponse } from '../api/types';
 import { BranchCard } from '../components/BranchCard';
 import { Empty, ErrorMessage, Loading } from '../components/Message';
 import { StatusLegend } from '../components/StatusLegend';
-import { StatusPill } from '../components/StatusPill';
 import { formatDateTime } from '../format';
-import { countProblemStatuses, groupByBranch } from '../groupBranches';
+import { countStatuses, groupByBranch } from '../groupBranches';
 import { useApi } from '../hooks/useApi';
 import type { FridgesStackParamList } from '../navigation/types';
-import { colors, spacing } from '../theme';
+import { colors, spacing, statusColor, statusLabel } from '../theme';
 
 type Props = NativeStackScreenProps<FridgesStackParamList, 'Dashboard'>;
 
@@ -20,8 +19,7 @@ export function DashboardScreen({ navigation }: Props) {
   const { data, error, loading, refreshing, refetch } =
     useApi<FridgeListResponse>('/api/fridges');
 
-  // The tab stays mounted while she uploads a file, so the list she left
-  // behind is stale until something asks again. Coming back is that ask.
+  // The tab stays mounted, so coming back after an upload is what refreshes the list.
   useFocusEffect(
     useCallback(() => {
       refetch();
@@ -43,8 +41,7 @@ export function DashboardScreen({ navigation }: Props) {
   }
 
   const branches = groupByBranch(fridges);
-  const counts = countProblemStatuses(fridges);
-  const allWell = counts.length === 0;
+  const counts = countStatuses(fridges);
 
   return (
     <FlatList
@@ -57,27 +54,32 @@ export function DashboardScreen({ navigation }: Props) {
       }
       ListHeaderComponent={
         <View style={styles.header}>
-          {/* The single most important line on the screen: the dashboard is
-              only as current as the last file Summer uploaded, and pretending
-              otherwise is how a stale fridge looks fine. */}
           <Text style={styles.asOf}>
             {data?.asOf
               ? `Readings up to ${formatDateTime(data.asOf)}`
               : 'No readings uploaded yet'}
           </Text>
-
-          {allWell ? (
-            <Text style={styles.allWell}>
-              All {fridges.length} fridges across {branches.length} branches are behaving.
-            </Text>
-          ) : (
-            <View style={styles.pills}>
-              {counts.map((entry) => (
-                <StatusPill key={entry.status} status={entry.status} count={entry.count} />
-              ))}
-            </View>
-          )}
-
+          <Text style={styles.totals}>
+            {branches.length} {branches.length === 1 ? 'branch' : 'branches'} · {fridges.length}{' '}
+            {fridges.length === 1 ? 'fridge' : 'fridges'}
+          </Text>
+          <View style={styles.summary}>
+            {counts.map((entry) => (
+              <View key={entry.status} style={styles.stat}>
+                <Text
+                  style={[
+                    styles.statCount,
+                    { color: entry.count > 0 ? statusColor[entry.status] : colors.textMuted },
+                  ]}
+                >
+                  {entry.count}
+                </Text>
+                <Text style={styles.statLabel} numberOfLines={1}>
+                  {statusLabel[entry.status]}
+                </Text>
+              </View>
+            ))}
+          </View>
           <StatusLegend />
         </View>
       }
@@ -112,15 +114,34 @@ const styles = StyleSheet.create({
     fontSize: 13,
     color: colors.textMuted,
   },
-  allWell: {
+  totals: {
     fontSize: 15,
     fontWeight: '600',
-    color: colors.ok,
+    color: colors.text,
   },
-  pills: {
+  summary: {
     flexDirection: 'row',
-    flexWrap: 'wrap',
     gap: spacing.sm,
+  },
+  stat: {
+    flex: 1,
+    backgroundColor: colors.surface,
+    borderWidth: 1,
+    borderColor: colors.border,
+    borderRadius: 10,
+    paddingVertical: spacing.sm,
+    paddingHorizontal: spacing.xs,
+    alignItems: 'center',
+    gap: 2,
+  },
+  statCount: {
+    fontSize: 20,
+    fontWeight: '700',
+  },
+  statLabel: {
+    fontSize: 11,
+    fontWeight: '600',
+    color: colors.textMuted,
   },
   separator: {
     height: spacing.md,

@@ -194,16 +194,6 @@ function Outcome({
   return <Report report={outcome.report} />;
 }
 
-/**
- * The step that used to happen in Excel.
- *
- * Summer's own description of her week: "the logger files themselves only have
- * the time and the temperature, I type in the logger number, the branch and the
- * fridge myself when I paste". Refusing those files would leave that work
- * exactly where it is, so she does the typing here instead - and picking a
- * logger she has used before fills in all three, which is both faster and the
- * only way to avoid inventing a second spelling of "Tel Aviv".
- */
 function LabelForm({
   filename,
   needs,
@@ -423,8 +413,6 @@ function Report({ report }: { report: UploadReport }) {
 
       {report.rejections.length > 0 ? (
         <Card title={`Rows that could not be read (${report.rowsRejected})`}>
-          {/* Row numbers match what the spreadsheet shows, so Summer can open
-              the file, go to the row, and see the problem for herself. */}
           {report.rejections.slice(0, 12).map((rejection, index) => (
             <Text key={index} style={styles.body}>
               Row {rejection.row}: {rejection.reason}

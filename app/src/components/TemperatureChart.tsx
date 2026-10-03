@@ -22,14 +22,7 @@ interface Point {
   v: number;
 }
 
-/**
- * Splits the series wherever the analysis reported a hole.
- *
- * This is the whole reason the chart is hand-rolled rather than handed to a
- * charting library: by default they join the points either side of a gap with
- * a straight line, which draws a fridge that was quietly unmonitored for two
- * hours as a fridge that was comfortably cold the whole time.
- */
+/** Break the line at a gap. Joining across it would draw an unmonitored fridge as a cold one. */
 function toSegments(readings: Reading[], gaps: Gap[]): Point[][] {
   const gapStarts = new Set(gaps.map((gap) => gap.startedAt));
   const segments: Point[][] = [];
@@ -72,8 +65,6 @@ export function TemperatureChart({
   const minT = Math.min(...times);
   const maxT = Math.max(...times);
   const temps = points.map((point) => point.v);
-  // The limit is always on screen, so "how far above five was it" is readable
-  // even when every reading is comfortably below it.
   const minV = Math.min(...temps, thresholdC) - 1;
   const maxV = Math.max(...temps, thresholdC) + 1;
 
@@ -92,7 +83,6 @@ export function TemperatureChart({
 
   const yTicks = [minV, (minV + maxV) / 2, maxV];
   const xTicks = [minT, (minT + maxT) / 2, maxT];
-  // Over more than a day, a bare "18:00" appears twice and means nothing.
   const spansMultipleDays = maxT - minT > 26 * 3_600_000;
   const xLabel = (time: number) => {
     const iso = new Date(time).toISOString();
@@ -105,7 +95,6 @@ export function TemperatureChart({
       onLayout={(event) => setWidth(event.nativeEvent.layout.width)}
     >
       <Svg width={width} height={height}>
-        {/* Periods above the limit, behind everything else. */}
         {excursions.map((excursion) => {
           const startX = x(new Date(excursion.startedAt).getTime());
           const endX = x(new Date(excursion.endedAt ?? new Date(maxT).toISOString()).getTime());
@@ -121,7 +110,6 @@ export function TemperatureChart({
           );
         })}
 
-        {/* Holes in the record, drawn as explicitly empty rather than skipped. */}
         {gaps.map((gap) => {
           const startX = x(new Date(gap.startedAt).getTime());
           const endX = x(new Date(gap.endedAt).getTime());
@@ -149,7 +137,6 @@ export function TemperatureChart({
           />
         ))}
 
-        {/* The five-degree line Summer and the inspector both care about. */}
         <Line
           x1={PADDING.left}
           y1={y(thresholdC)}
@@ -170,7 +157,6 @@ export function TemperatureChart({
           />
         ))}
 
-        {/* A lone reading would otherwise be an invisible zero-length path. */}
         {segments
           .filter((segment) => segment.length === 1)
           .map((segment, index) => (

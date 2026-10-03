@@ -42,7 +42,7 @@ embarrassing in a way a bug usually is not.
 
 **The judgements are editable; the clamps are not.** How long above the limit
 counts, how long a silence is No data, and what counts as warming up or a gap
-are on Settings (the Branches header, and Rules → Settings), because those were guesses listed for her to confirm.
+are on Settings → Limits, because those were guesses listed for her to confirm.
 Cadence limits and "at least eight readings" stay in `analysis/config.ts`. A
 box for those would let a typo call noise a trend, and one reading stays a
 door opening because the duration cannot be set to zero. Changing a setting

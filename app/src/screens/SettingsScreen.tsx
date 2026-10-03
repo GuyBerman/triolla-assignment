@@ -1,5 +1,5 @@
 import { useFocusEffect } from '@react-navigation/native';
-import { useCallback, useEffect, useState } from 'react';
+import { useCallback, useEffect, useMemo, useState } from 'react';
 import {
   ActivityIndicator,
   Pressable,
@@ -14,7 +14,8 @@ import { api } from '../api/client';
 import type { AnalysisSettings, FridgeListResponse, SettingsResponse } from '../api/types';
 import { FridgeLimitControl } from '../components/FridgeLimitControl';
 import { ErrorMessage, Loading } from '../components/Message';
-import { describeDuration } from '../format';
+import { Select } from '../components/Select';
+import { describeDuration, formatTemperature } from '../format';
 import { useApi } from '../hooks/useApi';
 import { colors, spacing } from '../theme';
 
@@ -59,6 +60,8 @@ export function SettingsScreen() {
   const settingsApi = useApi<SettingsResponse>('/api/settings');
   const fridgesApi = useApi<FridgeListResponse>('/api/fridges');
   const [draft, setDraft] = useState<Draft | null>(null);
+  const [branch, setBranch] = useState<string | null>(null);
+  const [fridgeId, setFridgeId] = useState<number | null>(null);
   const [saving, setSaving] = useState(false);
   const [formError, setFormError] = useState<string | null>(null);
   const [saved, setSaved] = useState(false);
@@ -99,6 +102,32 @@ export function SettingsScreen() {
     }
   };
 
+  const fridges = fridgesApi.data?.fridges ?? [];
+  const branches = useMemo(
+    () => [...new Set(fridges.map((fridge) => fridge.branchName))].sort((a, b) => a.localeCompare(b)),
+    [fridges],
+  );
+  const fridgesInBranch = useMemo(
+    () =>
+      fridges
+        .filter((fridge) => fridge.branchName === branch)
+        .slice()
+        .sort((a, b) => a.name.localeCompare(b.name)),
+    [fridges, branch],
+  );
+  const selected = fridges.find((fridge) => fridge.id === fridgeId) ?? null;
+
+  useEffect(() => {
+    if (branch && !branches.includes(branch)) {
+      setBranch(null);
+      setFridgeId(null);
+      return;
+    }
+    if (fridgeId !== null && !fridgesInBranch.some((fridge) => fridge.id === fridgeId)) {
+      setFridgeId(fridgesInBranch.length === 1 ? fridgesInBranch[0]!.id : null);
+    }
+  }, [branch, branches, fridgeId, fridgesInBranch]);
+
   if (settingsApi.loading && draft === null) return <Loading label="Loading settings..." />;
   if (settingsApi.error && draft === null) {
     return <ErrorMessage message={settingsApi.error} onRetry={settingsApi.refetch} />;
@@ -125,18 +154,45 @@ export function SettingsScreen() {
           <Text style={styles.hint}>Loading fridges...</Text>
         ) : fridgesApi.error ? (
           <Text style={styles.error}>{fridgesApi.error}</Text>
-        ) : (fridgesApi.data?.fridges.length ?? 0) === 0 ? (
+        ) : fridges.length === 0 ? (
           <Text style={styles.hint}>No fridges yet. They show up here after you upload a file.</Text>
         ) : (
-          fridgesApi.data?.fridges.map((fridge) => (
-            <FridgeLimitControl
-              key={fridge.id}
-              fridgeId={fridge.id}
-              label={`${fridge.branchName} ${fridge.name}`}
-              thresholdC={fridge.thresholdC}
-              onSaved={() => fridgesApi.refetch()}
+          <>
+            <Select
+              label="Branch"
+              value={branch}
+              options={branches.map((name) => ({ value: name, label: name }))}
+              onChange={(next) => {
+                setBranch(next);
+                const inNext = fridges.filter((fridge) => fridge.branchName === next);
+                setFridgeId(inNext.length === 1 ? inNext[0]!.id : null);
+              }}
+              placeholder="Choose a branch"
             />
-          ))
+            {branch ? (
+              <Select
+                label="Fridge"
+                value={fridgeId === null ? null : String(fridgeId)}
+                options={fridgesInBranch.map((fridge) => ({
+                  value: String(fridge.id),
+                  label: `${fridge.name} · ${formatTemperature(fridge.thresholdC)}`,
+                }))}
+                onChange={(next) => setFridgeId(next === null ? null : Number(next))}
+                placeholder="Choose a fridge"
+              />
+            ) : null}
+            {selected ? (
+              <FridgeLimitControl
+                key={selected.id}
+                fridgeId={selected.id}
+                label={`${selected.branchName} ${selected.name}`}
+                thresholdC={selected.thresholdC}
+                onSaved={() => fridgesApi.refetch()}
+              />
+            ) : (
+              <Text style={styles.hint}>Choose a fridge to change its degree limit.</Text>
+            )}
+          </>
         )}
       </View>
 

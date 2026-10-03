@@ -2,8 +2,7 @@
  * Defaults for every judgement, and the clamps that are not a judgement.
  *
  * She can change the judgements (how long is too warm, when a logger is
- * silent, what counts as warming up or a gap) from the Settings button on
- * Branches, and from Rules → Settings. Those
+ * silent, what counts as warming up or a gap) from Settings → Limits. Those
  * saved values are passed into the analysis; this object is what applies
  * until she saves something else. The cadence clamps and the minimum number
  * of readings stay here on purpose: they stop a broken calculation, and

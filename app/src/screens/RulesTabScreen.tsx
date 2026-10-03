@@ -8,24 +8,19 @@ import { RulesScreen } from './RulesScreen';
 import { SettingsScreen } from './SettingsScreen';
 
 const SECTIONS = [
-  { label: 'Files', value: 'files' },
-  { label: 'Settings', value: 'settings' },
+  { label: 'Rules', value: 'rules' },
+  { label: 'Limits', value: 'limits' },
 ] as const;
 
 type Section = (typeof SECTIONS)[number]['value'];
 
-/**
- * One tab, two jobs. A sixth tab truncated every label on a phone, and these
- * two questions are the ones she asks when a number looks wrong: how was this
- * file read, and when does a fridge count as a problem.
- */
 export function RulesTabScreen() {
   const navigation = useNavigation();
-  const [section, setSection] = useState<Section>('files');
+  const [section, setSection] = useState<Section>('rules');
 
   useEffect(() => {
-    navigation.setOptions({ title: section === 'files' ? 'Rules' : 'Settings' });
-  }, [navigation, section]);
+    navigation.setOptions({ title: 'Settings' });
+  }, [navigation]);
 
   return (
     <View style={styles.screen}>
@@ -33,7 +28,7 @@ export function RulesTabScreen() {
         <RangeChips options={SECTIONS} value={section} onChange={setSection} />
       </View>
       <View style={styles.body}>
-        {section === 'files' ? <RulesScreen /> : <SettingsScreen />}
+        {section === 'rules' ? <RulesScreen /> : <SettingsScreen />}
       </View>
     </View>
   );

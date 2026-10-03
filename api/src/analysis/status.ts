@@ -91,17 +91,8 @@ export function determineStatus(input: StatusInput): StatusResult {
     };
   }
 
-  // A breach that has since recovered keeps the fridge amber for the rest of
-  // the period being shown, rather than reverting to green once the
-  // temperature comes back down.
-  //
-  // This started as a 24-hour rule, which quietly turned the Rishon cream
-  // cakes fridge green three days after it had spent nearly four hours at
-  // 8 degrees, under the sentence "nothing above 5.0°C for long enough to
-  // matter". The status was arguably defensible - the fridge was working by
-  // then - but the sentence was false, and Summer scans colours, not
-  // sentences. Stock sat warm for four hours and somebody still has to decide
-  // what to do about it.
+  // A recovered breach stays a warning for the whole period on screen.
+  // A 24-hour cutoff turned Rishon green days after it sat at 8°C.
   const latest = excursions.at(-1);
   if (latest) {
     const earlier = excursions.length - 1;
@@ -136,7 +127,6 @@ export function determineStatus(input: StatusInput): StatusResult {
   };
 }
 
-/** Worst first, so the dashboard answers "is anything wrong" without scrolling. */
 export const STATUS_ORDER: Record<FridgeStatus, number> = {
   alarm: 0,
   no_data: 1,

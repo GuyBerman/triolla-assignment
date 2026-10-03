@@ -100,9 +100,6 @@ export function InspectorScreen({ route }: Props) {
 
       {clean.length > 0 ? (
         <View style={styles.card}>
-          {/* Listed rather than omitted: "this fridge was never above the
-              limit" is usually the answer an inspector is after, and a report
-              showing only problems looks like it found only problems. */}
           <Text style={styles.fridgeTitle}>
             Did not stay above the limit ({clean.length})
           </Text>
@@ -124,13 +121,6 @@ export function InspectorScreen({ route }: Props) {
   );
 }
 
-/**
- * The copyable version. Summer said the inspector asks her questions in person
- * and she needs an answer she can read out or paste into an email, so the text
- * has to stand on its own away from the app - including the caveat about the
- * data it is based on.
- */
-/** The same sentences the screen shows, so the pasted report matches what she read. */
 function describeExcursion(excursion: Excursion): { when: string; detail: string } {
   const length = describeDuration(excursion.durationMinutes);
   const when = excursion.ongoing

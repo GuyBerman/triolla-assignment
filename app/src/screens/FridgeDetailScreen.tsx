@@ -125,9 +125,6 @@ export function FridgeDetailScreen({ route, navigation }: Props) {
 
       {doorEvents.length > 0 ? (
         <Section title={`Door openings (${doorEvents.length})`}>
-          {/* Deliberately listed apart from the violations above. Summer said a
-              one-reading jump for a delivery is fine, so these are shown for
-              completeness and never counted against the fridge. */}
           <Text style={styles.empty}>
             Brief jumps above the limit that came straight back down. Normal for a fridge that gets
             opened.

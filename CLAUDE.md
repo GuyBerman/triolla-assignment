@@ -27,7 +27,7 @@ api/                  Express 4 + TypeScript (ESM, run with tsx — no build ste
   scripts/            seed + sample-data generator
   tests/              vitest, pure functions only (no DB, no HTTP)
 app/                  Expo SDK 57 / React Native 0.86 / React 19
-  src/screens/        Branches, branch fridges, search, detail, upload, rules, inspector
+  src/screens/        Branches, branch fridges, search, detail, upload, settings, inspector
   src/api/            client + hand-mirrored types
 data/                 sample CSVs in deliberately different shapes (~3291 rows)
 PLAN.md               original plan, committed unedited (including mistakes)
@@ -109,7 +109,7 @@ These are load-bearing. A change that typechecks but produces a sentence Summer 
 6. **A recovered breach stays a warning for the period on screen.** Do not turn a fridge green with "nothing above 5.0°C for long enough to matter" days after it sat at 8°C. That sentence is only for fridges that truly had no excursion.
 7. **Drift uses median-of-halves (`robustTrend`), never least-squares.** A door-opening spike tilts OLS and reports a healthy fridge as "warming up: 4.0°C to 3.6°C". Require `driftMinWindowHours` and `driftMinRiseC` as well as slope — 0.1° of noise over 90 minutes is not a trend.
 8. **Displayed numbers must add up.** Derive deltas from the rounded values shown, not from pre-rounded floats (`"4.0°C to 4.4°C (+0.5°)"` is forbidden).
-9. **A rejected upload leaves no phantom fridge.** Resolve units and drop untrusted loggers _before_ creating branches/fridges.
+9. **A rejected upload leaves no phantom fridge.** A file that cannot be read is recorded as a failed upload and creates no branch or fridge.
 10. **Logger-to-fridge is a time window** (`logger_assignments.valid_from` / `valid_to`), not a column on the fridge. Moving `TL-0417` from Walk-in to Display 2 must not rewrite history.
 11. **Dedup is `UNIQUE (logger_id, recorded_at)` + `ON CONFLICT DO NOTHING`.** Application-level "did we see this" is not enough; she re-pastes overlapping files.
 12. **Conversion rules apply at the next ingest, not retroactively.** Re-uploading the same file is skipped as duplicates, so a new rule will not rewrite existing rows.
@@ -126,11 +126,11 @@ Pipeline is pure functions, then `ingestFile` writes through them. **Seed must g
 | ------------ | ---------------- | -------------------------------------------------------------------------------------------------------------------------------------------- |
 | Column names | `headers.ts`     | Synonym match, never positional. Exact before substring.                                                                                     |
 | Dates        | `timestamp.ts`   | ISO + day-first. Wall clock → UTC via `Asia/Jerusalem`. Two-pass DST.                                                                        |
-| Units        | `temperature.ts` | `ERR` refused as a number. Median > 30°C on a "C" logger → reject the file (actionable message). 20–30 → warn (a dead fridge can sit at 22). |
+| Units        | `temperature.ts` | `ERR` refused as a number. A header or a high median does not convert or refuse the file.                                                    |
 | Names        | `names.ts`       | `canonicalize` folds `tel aviv` ≡ `Tel Aviv`, `Be'er Sheva` ≡ `Beer Sheva`.                                                                  |
 | File shape   | `parseFile.ts`   | Detect delimiter (comma/tab/semicolon/pipe). `.xlsx` via exceljs. In-file dedup. Spreadsheet row numbers.                                    |
-| Scale rules  | `conversion.ts`  | Per-branch/fridge/logger `×` and `+` after unit conversion. Most specific match wins.                                                        |
-| Persist      | `ingest.ts`      | Three stages: unit-check → create entities for survivors → convert + insert.                                                                 |
+| Scale rules  | `conversion.ts`  | Per-branch/fridge/logger. No rule leaves the file number. "Treat as Fahrenheit" converts, then × and +. "As written" multiplies the file number. Most specific match wins. |
+| Persist      | `ingest.ts`      | A readable file creates branches and fridges, then converts with a matching rule and inserts. An unreadable file is recorded and creates nothing. |
 
 The number in the file is stored as written. A header or a cell suffix does not convert it, and a high median does not refuse the file. Conversion happens only when a rule says so: "treat as Fahrenheit" converts, then × and + run. "As written" multiplies the file number itself.
 
@@ -166,9 +166,9 @@ Shared types live in `api/src/types/` (`fridge.ts`, `upload.ts`, `rules.ts`, `in
 ### Navigation
 
 ```
-Tabs: Fridges | Search | Upload | Rules | Inspector
-Settings: header button on Branches, and Rules → Settings. Same judgements as `GET/PUT /settings`.
-Fridges stack: Dashboard (branches, worst-first) → Branch (all fridges) → FridgeDetail
+Tabs: Fridges | Search | Upload | Settings | Inspector
+Settings tab: Rules (how a file is read) and Limits (degree limit and the judgements). Same judgements as `GET/PUT /settings`. A degree limit is chosen from a branch dropdown, then a fridge dropdown.
+Fridges stack: Dashboard (branches, worst-first, with a count of every status) → Branch (all fridges) → FridgeDetail
 Search stack: Search (name and/or custom °C) → FridgeDetail
 ```
 
@@ -244,8 +244,8 @@ Comment the **why**, especially judgement calls and bugs already made. Do not na
 for (const row of rows) { ... }
 
 // ✅
-// Deliberately before branches and fridges are created. A file rejected
-// for a bad unit should leave no trace.
+// The number in the file is the temperature. A header that says Fahrenheit
+// does not change it. A rule is the only conversion.
 ```
 
 ### Types
@@ -268,7 +268,7 @@ Repo-local identity only (never `git config --global`). Do not commit `.env` or 
 
 1. `cd api && npm test && npm run typecheck`
 2. `cd app && npm run typecheck`
-3. UI: open `http://localhost:8081`, click through the **actual path you changed** (branch → fridge → upload → rules → inspector). A screenshot of the first paint is not verification.
+3. UI: open `http://localhost:8081`, click through the **actual path you changed** (branch → fridge → upload → settings → inspector). A screenshot of the first paint is not verification.
 4. Read the sentence the dashboard shows. If Summer would be wrong to believe it, it is not done.
 
 The useful review question is not "is this code correct" but **"read me the sentence this shows Summer, and tell me whether she would be right to believe it."**

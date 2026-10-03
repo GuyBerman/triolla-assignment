@@ -79,8 +79,6 @@ const styles = StyleSheet.create({
   cardPressed: {
     opacity: 0.7,
   },
-  // A colour bar rather than a coloured card: readable in sunlight, between
-  // branches, on a phone, which is where Summer said she will be.
   statusEdge: {
     width: 5,
   },

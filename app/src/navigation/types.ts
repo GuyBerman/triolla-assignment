@@ -4,7 +4,6 @@ export type FridgeDetailParams = { fridgeId: number; fridgeName: string };
 
 export type FridgesStackParamList = {
   Dashboard: undefined;
-  Settings: undefined;
   Branch: { branchName: string };
   FridgeDetail: FridgeDetailParams;
 };
@@ -22,6 +21,6 @@ export type RootTabParamList = {
   FridgesTab: NavigatorScreenParams<FridgesStackParamList>;
   SearchTab: NavigatorScreenParams<SearchStackParamList>;
   UploadTab: undefined;
-  RulesTab: undefined;
+  SettingsTab: undefined;
   InspectorTab: NavigatorScreenParams<InspectorStackParamList>;
 };
