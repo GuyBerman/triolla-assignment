@@ -1,7 +1,8 @@
 import type { BottomTabNavigationProp } from '@react-navigation/bottom-tabs';
+import { useFocusEffect } from '@react-navigation/native';
 import type { NativeStackScreenProps } from '@react-navigation/native-stack';
 import type { ReactNode } from 'react';
-import { useState } from 'react';
+import { useCallback, useState } from 'react';
 import { Pressable, RefreshControl, ScrollView, StyleSheet, Text, View } from 'react-native';
 
 import type { FridgeDetail } from '../api/types';
@@ -28,6 +29,12 @@ export function FridgeDetailScreen({ route, navigation }: Props) {
 
   const { data, error, loading, refreshing, refetch } = useApi<FridgeDetail>(
     `/api/fridges/${fridgeId}?days=${days}`,
+  );
+
+  useFocusEffect(
+    useCallback(() => {
+      refetch();
+    }, [refetch]),
   );
 
   if (loading) return <Loading />;

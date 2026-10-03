@@ -1,6 +1,7 @@
+import { useFocusEffect } from '@react-navigation/native';
 import type { NativeStackScreenProps } from '@react-navigation/native-stack';
 import * as Clipboard from 'expo-clipboard';
-import { useMemo, useState } from 'react';
+import { useCallback, useMemo, useState } from 'react';
 import { Pressable, ScrollView, StyleSheet, Text, View } from 'react-native';
 
 import type { Excursion, ExcursionReport, ExcursionReportRow } from '../api/types';
@@ -27,6 +28,12 @@ export function InspectorScreen({ route }: Props) {
   const query = fridgeId === undefined ? `?days=${days}` : `?days=${days}&fridgeId=${fridgeId}`;
   const { data, error, loading, refetch } = useApi<ExcursionReport>(
     `/api/reports/excursions${query}`,
+  );
+
+  useFocusEffect(
+    useCallback(() => {
+      refetch();
+    }, [refetch]),
   );
 
   const plainText = useMemo(() => (data ? toPlainText(data) : ''), [data]);

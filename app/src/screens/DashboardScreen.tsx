@@ -1,4 +1,6 @@
+import { useFocusEffect } from '@react-navigation/native';
 import type { NativeStackScreenProps } from '@react-navigation/native-stack';
+import { useCallback } from 'react';
 import { FlatList, RefreshControl, StyleSheet, Text, View } from 'react-native';
 
 import type { FridgeListResponse } from '../api/types';
@@ -17,6 +19,14 @@ type Props = NativeStackScreenProps<FridgesStackParamList, 'Dashboard'>;
 export function DashboardScreen({ navigation }: Props) {
   const { data, error, loading, refreshing, refetch } =
     useApi<FridgeListResponse>('/api/fridges');
+
+  // The tab stays mounted while she uploads a file, so the list she left
+  // behind is stale until something asks again. Coming back is that ask.
+  useFocusEffect(
+    useCallback(() => {
+      refetch();
+    }, [refetch]),
+  );
 
   if (loading) return <Loading label="Checking every fridge..." />;
   if (error) return <ErrorMessage message={error} onRetry={refetch} />;

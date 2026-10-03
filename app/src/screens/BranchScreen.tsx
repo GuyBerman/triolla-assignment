@@ -1,4 +1,6 @@
+import { useFocusEffect } from '@react-navigation/native';
 import type { NativeStackScreenProps } from '@react-navigation/native-stack';
+import { useCallback } from 'react';
 import { FlatList, RefreshControl, StyleSheet, Text, View } from 'react-native';
 
 import type { FridgeListResponse } from '../api/types';
@@ -14,6 +16,12 @@ export function BranchScreen({ route, navigation }: Props) {
   const { branchName } = route.params;
   const { data, error, loading, refreshing, refetch } =
     useApi<FridgeListResponse>('/api/fridges');
+
+  useFocusEffect(
+    useCallback(() => {
+      refetch();
+    }, [refetch]),
+  );
 
   if (loading) return <Loading label="Checking this branch..." />;
   if (error) return <ErrorMessage message={error} onRetry={refetch} />;
