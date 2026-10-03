@@ -1,4 +1,4 @@
-import type { ConversionRule, TemperatureUnit } from '../types';
+import type { ConversionRule } from '../types';
 import { canonicalize, canonicalizeLoggerCode } from './names';
 import { fahrenheitToCelsius } from './temperature';
 
@@ -44,23 +44,18 @@ export function pickRule(rules: ConversionRule[], target: RuleTarget): Conversio
 }
 
 /**
- * Turns the number in the file into Celsius, after any unit override and
- * after the scale/offset the rule asked for.
+ * The number in the file is the temperature. A header that says Fahrenheit,
+ * or a logger registered as Fahrenheit, does not change it.
  *
- * Order is load-bearing: unit first, then × and +, so "this branch reports
- * Fahrenheit and then needs × 1.5" is one rule rather than two.
+ * A rule is the only conversion. "Treat as Fahrenheit" runs first, then ×
+ * and +, so one rule can both convert and scale. "As written" multiplies
+ * the file number itself.
  */
-export function applyConversion(
-  raw: number,
-  detectedUnit: TemperatureUnit,
-  rule: ConversionRule | null,
-): number {
-  const unit = rule?.unit === 'C' || rule?.unit === 'F' ? rule.unit : detectedUnit;
-  let celsius = unit === 'F' ? fahrenheitToCelsius(raw) : raw;
-  if (rule) {
-    celsius = celsius * rule.multiplyBy + rule.add;
-  }
-  return Math.round(celsius * 100) / 100;
+export function applyConversion(raw: number, rule: ConversionRule | null): number {
+  if (!rule) return raw;
+
+  const value = rule.unit === 'F' ? fahrenheitToCelsius(raw) : raw;
+  return Math.round((value * rule.multiplyBy + rule.add) * 100) / 100;
 }
 
 export function describeRule(rule: ConversionRule): string {

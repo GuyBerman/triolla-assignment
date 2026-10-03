@@ -12,14 +12,12 @@ import type {
   PreparedReading,
   StoredAssignment,
   SuppliedLabels,
-  TemperatureUnit,
   UploadReport,
   UploadRejection,
 } from '../types';
 import { applyConversion, describeRule, pickRule } from './conversion';
 import { preferredDisplayName } from './names';
 import { parseUploadedFile } from './parseFile';
-import { assessDeclaredUnit } from './temperature';
 
 const READING_INSERT_CHUNK = 500;
 
@@ -327,87 +325,7 @@ export async function ingestFile(
       else rowsByLogger.set(row.loggerCode, [row]);
     }
 
-    // --- work out each logger's unit, and drop any file we cannot trust ----
-    //
-    // Deliberately before branches and fridges are created. A file rejected
-    // for a bad unit should leave no trace: creating the branch and fridge
-    // first left a phantom fridge on the dashboard, permanently "no data",
-    // for an upload that was never accepted.
-    const loggerByCode = new Map<string, LoggerRecord>();
-    const unitByLogger = new Map<string, TemperatureUnit>();
-
-    for (const [loggerCode, loggerRows] of rowsByLogger) {
-      const logger = await resolveLogger(client, loggerCode);
-      loggerByCode.set(loggerCode, logger);
-
-      const declaredInFile = new Set(
-        loggerRows
-          .map((row) => row.unitOverride)
-          .filter((unit): unit is TemperatureUnit => unit !== null),
-      );
-
-      let unit: TemperatureUnit = logger.unit;
-      if (declaredInFile.size === 1) {
-        const fromFile = [...declaredInFile][0]!;
-        if (fromFile !== logger.unit) {
-          // The file came off the device, so it outranks our registration.
-          await client.query(`update loggers set unit = $1 where id = $2`, [fromFile, logger.id]);
-          warnings.push(
-            `${loggerCode} was registered as ${logger.unit === 'F' ? 'Fahrenheit' : 'Celsius'} ` +
-              `but this file says ${fromFile === 'F' ? 'Fahrenheit' : 'Celsius'}. ` +
-              `Updated the logger to match the file.`,
-          );
-        }
-        unit = fromFile;
-      } else if (declaredInFile.size > 1) {
-        warnings.push(
-          `${loggerCode} has rows claiming different units in the same file. ` +
-            `Used its registered unit (${logger.unit}) for all of them.`,
-        );
-      }
-
-      if (unit === 'C') {
-        const unitForcedByRule = loggerRows.every((row) => {
-          const rule = pickRule(rules, {
-            branchCanonical: row.branchCanonical,
-            fridgeCanonical: row.fridgeCanonical,
-            loggerCode: row.loggerCode,
-          });
-          return rule?.unit === 'C' || rule?.unit === 'F';
-        });
-
-        // A rule that names the unit is the user telling us how to read the
-        // file, so the median-38 guard must not refuse it.
-        if (!unitForcedByRule) {
-          const numericValues = loggerRows
-            .map((row) => row.rawNumber)
-            .filter((value): value is number => value !== null);
-          const suspicion = assessDeclaredUnit(loggerCode, 'C', numericValues);
-
-          if (suspicion.level === 'reject') {
-            warnings.push(suspicion.message);
-            for (const row of loggerRows) {
-              rejections.push({
-                row: row.rowNumber,
-                reason: `${loggerCode} unit looks wrong; not imported`,
-                raw: `${row.rawValue} at ${row.recordedAt.toISOString()}`,
-              });
-            }
-            rowsByLogger.delete(loggerCode);
-            continue;
-          }
-          if (suspicion.level === 'warn') {
-            warnings.push(suspicion.message);
-          }
-        }
-      } else {
-        convertedFromFahrenheit.push(loggerCode);
-      }
-
-      unitByLogger.set(loggerCode, unit);
-    }
-
-    // --- resolve branches and fridges, for surviving rows only -------------
+    // --- resolve branches and fridges ---------------------------------------
     const branchIdByCanonical = new Map<string, number>();
     const fridgeIdByKey = new Map<string, number>();
 
@@ -438,8 +356,7 @@ export async function ingestFile(
     const readings: PreparedReading[] = [];
 
     for (const [loggerCode, loggerRows] of rowsByLogger) {
-      const logger = loggerByCode.get(loggerCode)!;
-      const unit = unitByLogger.get(loggerCode)!;
+      const logger = await resolveLogger(client, loggerCode);
 
       moves.push(
         ...(await syncAssignments(client, logger.id, loggerCode, loggerRows, fridgeIdByKey)),
@@ -452,8 +369,7 @@ export async function ingestFile(
           fridgeCanonical: row.fridgeCanonical,
           loggerCode: row.loggerCode,
         });
-        const tempC =
-          row.rawNumber === null ? null : applyConversion(row.rawNumber, unit, rule);
+        const tempC = row.rawNumber === null ? null : applyConversion(row.rawNumber, rule);
 
         if (rule && row.rawNumber !== null) {
           const current = appliedRuleCounts.get(rule.id);
@@ -461,10 +377,8 @@ export async function ingestFile(
           else appliedRuleCounts.set(rule.id, { summary: describeRule(rule), rows: 1 });
         }
 
-        if (rule?.unit === 'F' || (rule?.unit !== 'C' && unit === 'F')) {
-          if (!convertedFromFahrenheit.includes(loggerCode)) {
-            convertedFromFahrenheit.push(loggerCode);
-          }
+        if (rule?.unit === 'F' && !convertedFromFahrenheit.includes(loggerCode)) {
+          convertedFromFahrenheit.push(loggerCode);
         }
 
         readings.push({

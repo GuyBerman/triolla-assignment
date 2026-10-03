@@ -45,9 +45,7 @@ describe("the brief's own sample rows", () => {
     const haifa = result.rows.filter((row) => row.loggerCode === 'TL-0231');
     expect(haifa).toHaveLength(3);
     expect(haifa[0]!.recordedAt.toISOString()).toBe('2026-09-14T03:00:00.000Z');
-    // Still in Fahrenheit at this stage: the parser does not know which
-    // loggers report which unit, so conversion happens during ingest using the
-    // logger registry. What matters here is that 38.3 survived intact.
+    // 38.3 is stored as written. A rule is what converts it, not this parser.
     expect(haifa[0]!.rawNumber).toBe(38.3);
   });
 

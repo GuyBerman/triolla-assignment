@@ -51,25 +51,25 @@ describe('picking which rule applies', () => {
   });
 });
 
-describe('turning the file number into Celsius', () => {
+describe('turning the file number into a stored temperature', () => {
   it('leaves a reading alone when no rule matches', () => {
-    expect(applyConversion(3.4, 'C', null)).toBe(3.4);
+    expect(applyConversion(38.3, null)).toBe(38.3);
   });
 
-  it('can scale a branch that is not in Fahrenheit or Celsius', () => {
+  it('scales the number in the file, without converting it first', () => {
     const rule: ConversionRule = {
       id: 1,
-      matchBranch: 'Tel Aviv',
+      matchBranch: 'Haifa',
       matchLogger: null,
       matchFridge: null,
       unit: 'as_written',
-      multiplyBy: 1.5,
+      multiplyBy: 10,
       add: 0,
     };
-    expect(applyConversion(4, 'C', rule)).toBe(6);
+    expect(applyConversion(38.3, rule)).toBe(383);
   });
 
-  it('converts Fahrenheit first, then applies the scale', () => {
+  it('converts Fahrenheit only when the rule says to, then applies the scale', () => {
     // 38.3 F is 3.5 C; then × 1.5 is 5.25.
     const rule: ConversionRule = {
       id: 1,
@@ -80,7 +80,7 @@ describe('turning the file number into Celsius', () => {
       multiplyBy: 1.5,
       add: 0,
     };
-    expect(applyConversion(38.3, 'C', rule)).toBe(5.25);
+    expect(applyConversion(38.3, rule)).toBe(5.25);
   });
 
   it('can add a calibration offset after the scale', () => {
@@ -93,6 +93,6 @@ describe('turning the file number into Celsius', () => {
       multiplyBy: 1,
       add: -0.3,
     };
-    expect(applyConversion(4.0, 'C', rule)).toBe(3.7);
+    expect(applyConversion(4.0, rule)).toBe(3.7);
   });
 });
