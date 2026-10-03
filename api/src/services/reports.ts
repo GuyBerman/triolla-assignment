@@ -1,6 +1,7 @@
 import { analyseReadings } from '../analysis';
 import { config } from '../config';
 import { getAsOf, listFridges, readingsByFridge } from '../repository';
+import { getAnalysisSettings } from '../settingsStore';
 import type { ExcursionReport, ExcursionReportRow } from '../types';
 
 /**
@@ -14,9 +15,10 @@ export async function buildExcursionReport(
   fridgeId: number | null,
 ): Promise<ExcursionReport | null> {
   const asOf = (await getAsOf()) ?? new Date();
-  const [allFridges, readings] = await Promise.all([
+  const [allFridges, readings, settings] = await Promise.all([
     listFridges(),
     readingsByFridge(from, to),
+    getAnalysisSettings(),
   ]);
 
   const fridges =
@@ -30,6 +32,7 @@ export async function buildExcursionReport(
       thresholdC: fridge.thresholdC,
       asOfMs: Math.min(asOf.getTime(), to.getTime()),
       timeZone: config.timezone,
+      settings,
     });
 
     return {
@@ -55,5 +58,6 @@ export async function buildExcursionReport(
     generatedAt: new Date().toISOString(),
     rows,
     totalExcursions: rows.reduce((total, row) => total + row.excursions.length, 0),
+    excursionMinDurationMinutes: settings.excursionMinDurationMinutes,
   };
 }

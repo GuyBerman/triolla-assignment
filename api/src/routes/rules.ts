@@ -1,6 +1,7 @@
 import { Router } from 'express';
 
-import { isNoOpRule, type RuleUnit } from '../ingest/conversion';
+import { isNoOpRule } from '../ingest/conversion';
+import type { RuleUnit } from '../types';
 import {
   deleteConversionRule,
   insertConversionRule,

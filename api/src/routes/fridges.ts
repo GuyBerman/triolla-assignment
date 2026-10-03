@@ -1,6 +1,7 @@
 import { Router } from 'express';
 
-import { getAsOf } from '../repository';
+import { parseThresholdC } from '../fridgeLimit';
+import { getAsOf, updateFridgeThreshold } from '../repository';
 import { getFridgeDetail, listFridgeSummaries } from '../services/fridges';
 import { asyncHandler } from './asyncHandler';
 import { clamp, daysBefore, parseDateParam, parseIntParam } from './params';
@@ -21,6 +22,36 @@ fridgesRouter.get(
   asyncHandler(async (req, res) => {
     const days = clamp(Number(req.query.days ?? LIST_WINDOW_DAYS) || LIST_WINDOW_DAYS, 1, 90);
     res.json(await listFridgeSummaries(days));
+  }),
+);
+
+/**
+ * The degree limit for this fridge. Separate from "minutes above the limit",
+ * which is how long a warmer reading has to last.
+ */
+fridgesRouter.put(
+  '/fridges/:id',
+  asyncHandler(async (req, res) => {
+    const id = parseIntParam(req.params.id);
+    if (id === null) {
+      res.status(400).json({ error: 'Fridge id must be a number.' });
+      return;
+    }
+
+    const body = req.body as { thresholdC?: unknown } | null;
+    const parsed = parseThresholdC(body?.thresholdC);
+    if ('error' in parsed) {
+      res.status(400).json({ error: parsed.error });
+      return;
+    }
+
+    const fridge = await updateFridgeThreshold(id, parsed.thresholdC);
+    if (fridge === null) {
+      res.status(404).json({ error: `No fridge with id ${id}.` });
+      return;
+    }
+
+    res.json({ fridge });
   }),
 );
 

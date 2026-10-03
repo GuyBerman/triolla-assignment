@@ -1,7 +1,7 @@
 /**
  * Wire types for the API.
  *
- * These are hand-mirrored from `api/src/types.ts` rather than shared through a
+ * These are hand-mirrored from `api/src/types/` rather than shared through a
  * workspace package. With one backend and one client, a shared package costs
  * more setup than it saves - but it does mean the two files have to be edited
  * together. See NOTES.md.
@@ -176,6 +176,22 @@ export interface ExcursionReport {
   generatedAt: string;
   rows: ExcursionReportRow[];
   totalExcursions: number;
+  excursionMinDurationMinutes: number;
+}
+
+export interface AnalysisSettings {
+  excursionMinDurationMinutes: number;
+  staleAfterHours: number;
+  recentGapHours: number;
+  driftWindowHours: number;
+  driftMinWindowHours: number;
+  driftMinRiseC: number;
+  driftMinSlopeCPerHour: number;
+  gapMinMinutes: number;
+}
+
+export interface SettingsResponse {
+  settings: AnalysisSettings;
 }
 
 type RuleUnit = 'as_written' | 'C' | 'F';

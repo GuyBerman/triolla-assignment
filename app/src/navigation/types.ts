@@ -4,6 +4,7 @@ export type FridgeDetailParams = { fridgeId: number; fridgeName: string };
 
 export type FridgesStackParamList = {
   Dashboard: undefined;
+  Settings: undefined;
   Branch: { branchName: string };
   FridgeDetail: FridgeDetailParams;
 };

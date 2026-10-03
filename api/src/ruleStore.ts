@@ -1,17 +1,6 @@
-import type { ConversionRule } from './ingest/conversion';
-import { describeRule, type RuleUnit } from './ingest/conversion';
+import { describeRule } from './ingest/conversion';
 import { pool } from './db/pool';
-
-interface RuleRow {
-  id: number;
-  match_branch: string | null;
-  match_logger: string | null;
-  match_fridge: string | null;
-  unit: RuleUnit;
-  multiply_by: number;
-  add_c: number;
-  created_at: Date;
-}
+import type { ConversionRule, NewConversionRule, RuleRow } from './types';
 
 function toRule(row: RuleRow): ConversionRule & { createdAt: string; summary: string } {
   const rule: ConversionRule = {
@@ -38,15 +27,6 @@ const SELECT = `select id, match_branch, match_logger, match_fridge, unit,
 export async function listConversionRules() {
   const result = await pool.query<RuleRow>(SELECT);
   return result.rows.map(toRule);
-}
-
-interface NewConversionRule {
-  matchBranch: string | null;
-  matchLogger: string | null;
-  matchFridge: string | null;
-  unit: RuleUnit;
-  multiplyBy: number;
-  add: number;
 }
 
 export async function insertConversionRule(input: NewConversionRule) {

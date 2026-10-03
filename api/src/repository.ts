@@ -1,22 +1,18 @@
 import { pool } from './db/pool';
 import { formatDate } from './format';
-import type { KnownLogger, Reading, UploadHistoryEntry, UploadReport } from './types';
-
-interface FridgeRow {
-  id: number;
-  name: string;
-  branchName: string;
-  thresholdC: number;
-}
-
-interface AssignmentRow {
-  loggerId: number;
-  loggerCode: string;
-  fridgeId: number;
-  fridgeLabel: string;
-  validFrom: Date;
-  validTo: Date | null;
-}
+import type {
+  AssignmentContext,
+  AssignmentQueryRow,
+  AssignmentRow,
+  FridgeQueryRow,
+  FridgeRow,
+  KnownLogger,
+  KnownLoggerQueryRow,
+  Reading,
+  ReadingRow,
+  UploadHistoryEntry,
+  UploadHistoryQueryRow,
+} from './types';
 
 /**
  * The newest reading anywhere in the data.
@@ -33,12 +29,7 @@ export async function getAsOf(): Promise<Date | null> {
 }
 
 export async function listFridges(): Promise<FridgeRow[]> {
-  const result = await pool.query<{
-    id: number;
-    name: string;
-    branch_name: string;
-    threshold_c: number;
-  }>(
+  const result = await pool.query<FridgeQueryRow>(
     `select f.id, f.name, b.name as branch_name, f.threshold_c
        from fridges f
        join branches b on b.id = f.branch_id
@@ -54,12 +45,7 @@ export async function listFridges(): Promise<FridgeRow[]> {
 }
 
 export async function getFridge(id: number): Promise<FridgeRow | null> {
-  const result = await pool.query<{
-    id: number;
-    name: string;
-    branch_name: string;
-    threshold_c: number;
-  }>(
+  const result = await pool.query<FridgeQueryRow>(
     `select f.id, f.name, b.name as branch_name, f.threshold_c
        from fridges f
        join branches b on b.id = f.branch_id
@@ -77,6 +63,19 @@ export async function getFridge(id: number): Promise<FridgeRow | null> {
   };
 }
 
+/** Her edit. Does not touch readings; the next look recomputes against the new number. */
+export async function updateFridgeThreshold(
+  id: number,
+  thresholdC: number,
+): Promise<FridgeRow | null> {
+  const result = await pool.query(`update fridges set threshold_c = $2 where id = $1`, [
+    id,
+    thresholdC,
+  ]);
+  if (result.rowCount === 0) return null;
+  return getFridge(id);
+}
+
 /**
  * Every logger we have seen, with the fridge it is in now. Offered on the
  * upload screen when a file does not say which fridge it is from, so Summer
@@ -84,11 +83,7 @@ export async function getFridge(id: number): Promise<FridgeRow | null> {
  * differently and inventing a second "Tel Aviv".
  */
 export async function listKnownLoggers(): Promise<KnownLogger[]> {
-  const result = await pool.query<{
-    code: string;
-    branch_name: string | null;
-    fridge_name: string | null;
-  }>(
+  const result = await pool.query<KnownLoggerQueryRow>(
     `select l.code, b.name as branch_name, f.name as fridge_name
        from loggers l
        left join logger_assignments la
@@ -106,15 +101,7 @@ export async function listKnownLoggers(): Promise<KnownLogger[]> {
 }
 
 export async function listAssignments(): Promise<AssignmentRow[]> {
-  const result = await pool.query<{
-    logger_id: number;
-    code: string;
-    fridge_id: number;
-    branch_name: string;
-    fridge_name: string;
-    valid_from: Date;
-    valid_to: Date | null;
-  }>(
+  const result = await pool.query<AssignmentQueryRow>(
     `select la.logger_id, l.code, la.fridge_id,
             b.name as branch_name, f.name as fridge_name,
             la.valid_from, la.valid_to
@@ -133,14 +120,6 @@ export async function listAssignments(): Promise<AssignmentRow[]> {
     validFrom: row.valid_from,
     validTo: row.valid_to,
   }));
-}
-
-interface ReadingRow {
-  fridge_id: number;
-  recorded_at: Date;
-  temp_c: number | null;
-  raw_value: string;
-  status: 'ok' | 'error';
 }
 
 function toReading(row: ReadingRow): Reading {
@@ -192,12 +171,6 @@ export async function readingsForFridge(
   return result.rows.map(toReading);
 }
 
-interface AssignmentContext {
-  loggerCodeByFridge: Map<number, string>;
-  /** Why a fridge has no logger, when we can explain it. */
-  noDataHintByFridge: Map<number, string>;
-}
-
 /**
  * Works out which logger is in which fridge now, and - for a fridge that has
  * been left without one - where its logger went.
@@ -242,16 +215,7 @@ export function buildAssignmentContext(
 
 /** Newest uploads only — enough for Summer to see what she already sent. */
 export async function listRecentUploads(limit = 20): Promise<UploadHistoryEntry[]> {
-  const result = await pool.query<{
-    id: number;
-    filename: string;
-    uploaded_at: Date;
-    rows_total: number;
-    rows_accepted: number;
-    rows_rejected: number;
-    rows_duplicate: number;
-    report: UploadReport | null;
-  }>(
+  const result = await pool.query<UploadHistoryQueryRow>(
     `select id, filename, uploaded_at, rows_total, rows_accepted,
             rows_rejected, rows_duplicate, report
        from uploads

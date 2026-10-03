@@ -38,6 +38,7 @@ async function main() {
   await migrateUp();
 
   if (process.argv.includes('--reset')) {
+    // analysis_settings stays. It is her configuration, not the sample files.
     await pool.query(
       'truncate readings, logger_assignments, uploads, loggers, fridges, branches, ingest_rules restart identity cascade',
     );

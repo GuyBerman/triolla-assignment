@@ -1,6 +1,6 @@
 import { describeDuration, formatDateTime, formatTemperature } from '../format';
-import type { Drift, Excursion, FridgeStatus, Gap, Sample } from '../types';
-import { ANALYSIS } from './config';
+import type { AnalysisSettings, Drift, Excursion, FridgeStatus, Gap, Sample } from '../types';
+import { defaultAnalysisSettings } from './settings';
 
 interface StatusInput {
   /** Readings with a usable temperature, in time order. */
@@ -14,6 +14,7 @@ interface StatusInput {
   timeZone: string;
   /** Extra context for an unmonitored fridge, e.g. its logger was moved out. */
   noDataHint?: string | null;
+  settings?: AnalysisSettings;
 }
 
 interface StatusResult {
@@ -32,6 +33,7 @@ interface StatusResult {
  */
 export function determineStatus(input: StatusInput): StatusResult {
   const { samples, asOfMs, thresholdC, excursions, gaps, drift, timeZone } = input;
+  const settings = input.settings ?? defaultAnalysisSettings();
 
   if (samples.length === 0) {
     return {
@@ -41,7 +43,7 @@ export function determineStatus(input: StatusInput): StatusResult {
   }
 
   const last = samples[samples.length - 1]!;
-  const staleMs = ANALYSIS.staleAfterHours * 3_600_000;
+  const staleMs = settings.staleAfterHours * 3_600_000;
   const silentForMs = asOfMs - last.at;
 
   if (silentForMs > staleMs) {
@@ -114,7 +116,7 @@ export function determineStatus(input: StatusInput): StatusResult {
   }
 
   const recentGap = gaps.find(
-    (gap) => new Date(gap.endedAt).getTime() >= asOfMs - ANALYSIS.recentGapHours * 3_600_000,
+    (gap) => new Date(gap.endedAt).getTime() >= asOfMs - settings.recentGapHours * 3_600_000,
   );
   if (recentGap) {
     return {

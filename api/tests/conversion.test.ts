@@ -1,6 +1,7 @@
 import { describe, expect, it } from 'vitest';
 
-import { applyConversion, pickRule, type ConversionRule } from '../src/ingest/conversion';
+import { applyConversion, pickRule } from '../src/ingest/conversion';
+import type { ConversionRule } from '../src/types';
 
 const telAviv = {
   branchCanonical: 'tel aviv',

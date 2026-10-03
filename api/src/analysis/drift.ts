@@ -1,5 +1,6 @@
-import type { Drift, Sample } from '../types';
+import type { AnalysisSettings, Drift, Sample } from '../types';
 import { ANALYSIS } from './config';
+import { defaultAnalysisSettings } from './settings';
 import { robustTrend } from './series';
 
 /**
@@ -13,10 +14,16 @@ import { robustTrend } from './series';
  * The window is the most recent `driftWindowHours`, because the question being
  * answered is "is this fridge in trouble right now", not "was it ever".
  */
-export function findDrift(samples: Sample[], asOfMs: number): Drift | null {
-  const windowStartMs = asOfMs - ANALYSIS.driftWindowHours * 3_600_000;
+export function findDrift(
+  samples: Sample[],
+  asOfMs: number,
+  settings: AnalysisSettings = defaultAnalysisSettings(),
+): Drift | null {
+  const windowStartMs = asOfMs - settings.driftWindowHours * 3_600_000;
   const window = samples.filter((sample) => sample.at >= windowStartMs && sample.at <= asOfMs);
 
+  // How many points are enough to trust a median stays a code clamp. It
+  // depends on the logger, and a box for it would not mean anything to her.
   if (window.length < ANALYSIS.driftMinReadings) return null;
 
   // A slope on its own is not enough evidence.
@@ -26,11 +33,11 @@ export function findDrift(samples: Sample[], asOfMs: number): Drift | null {
   // after an upload is a tenth of a degree - noise, reported as "warming up".
   // Both a long enough window and a large enough actual rise are required.
   const spanHours = (window[window.length - 1]!.at - window[0]!.at) / 3_600_000;
-  if (spanHours < ANALYSIS.driftMinWindowHours) return null;
+  if (spanHours < settings.driftMinWindowHours) return null;
 
   const trend = robustTrend(window);
-  if (trend === null || trend.slopeCPerHour < ANALYSIS.driftMinSlopeCPerHour) return null;
-  if (trend.secondHalfC - trend.firstHalfC < ANALYSIS.driftMinRiseC) return null;
+  if (trend === null || trend.slopeCPerHour < settings.driftMinSlopeCPerHour) return null;
+  if (trend.secondHalfC - trend.firstHalfC < settings.driftMinRiseC) return null;
 
   return {
     slopeCPerHour: Math.round(trend.slopeCPerHour * 1000) / 1000,

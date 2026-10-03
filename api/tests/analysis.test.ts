@@ -9,6 +9,7 @@ import {
   inferCadenceMinutes,
   robustTrend,
 } from '../src/analysis';
+import { defaultAnalysisSettings } from '../src/analysis/settings';
 import type { Reading, Sample } from '../src/types';
 
 const TZ = 'Asia/Jerusalem';
@@ -505,5 +506,25 @@ describe('thresholds are per fridge', () => {
 
     expect(result.status).toBe('ok');
     expect(result.excursions).toEqual([]);
+  });
+});
+
+describe('she can change how long counts as too warm', () => {
+  it('treats a fifteen-minute warm spell as too warm once she says fifteen minutes is enough', () => {
+    // Two warm readings, fifteen minutes apart, then back under the limit.
+    // Under the default thirty minutes this is a door opening. Her saved
+    // setting is what the dashboard uses.
+    const brief = series('2026-09-14T06:00:00Z', 15, [4.1, 6.0, 6.1, 4.2]);
+    const result = analyseReadings({
+      readings: brief,
+      thresholdC: 5,
+      asOfMs: lastAt(brief),
+      timeZone: TZ,
+      settings: { ...defaultAnalysisSettings(), excursionMinDurationMinutes: 15 },
+    });
+
+    expect(result.excursions).toHaveLength(1);
+    expect(result.doorEvents).toEqual([]);
+    expect(result.status).toBe('warning');
   });
 });

@@ -1,5 +1,7 @@
 import ExcelJS from 'exceljs';
 
+import type { SpreadsheetSheet } from '../types';
+
 /**
  * Excel dates are a day-count with no timezone. exceljs hands back a Date
  * whose UTC clock matches the wall time in the cell, so we format the UTC
@@ -47,11 +49,6 @@ export function isSpreadsheetFilename(filename: string): boolean {
 /** Old binary Excel. exceljs cannot read it; ask her to re-save. */
 export function isLegacyExcelFilename(filename: string): boolean {
   return /\.xls$/i.test(filename) && !isSpreadsheetFilename(filename);
-}
-
-export interface SpreadsheetSheet {
-  name: string;
-  records: string[][];
 }
 
 export async function readSpreadsheet(buffer: Buffer): Promise<SpreadsheetSheet[]> {

@@ -35,11 +35,16 @@ export function inferCadenceMinutes(timestampsMs: number[]): number {
   );
 }
 
-/** How long a hole has to be, for this logger, before it counts as missing data. */
-export function gapThresholdMs(cadenceMinutes: number): number {
-  return (
-    Math.max(cadenceMinutes * ANALYSIS.gapCadenceMultiple, ANALYSIS.gapMinMinutes) * MINUTE
-  );
+/**
+ * How long a hole has to be, for this logger, before it counts as missing data.
+ * `gapMinMinutes` is her floor; the multiple of the logger's own cadence stays
+ * in code so an hourly logger is not full of holes next to a fifteen-minute one.
+ */
+export function gapThresholdMs(
+  cadenceMinutes: number,
+  gapMinMinutes: number = ANALYSIS.gapMinMinutes,
+): number {
+  return Math.max(cadenceMinutes * ANALYSIS.gapCadenceMultiple, gapMinMinutes) * MINUTE;
 }
 
 /**

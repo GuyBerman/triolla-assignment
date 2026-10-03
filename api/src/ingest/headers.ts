@@ -1,18 +1,11 @@
-import type { ColumnMapping, TemperatureUnit } from '../types';
-
-/**
- * The fields we need out of a logger file. `timestamp` is the normal case;
- * `date` + `time` cover the files that split them into two columns.
- */
-type IngestField =
-  | 'logger'
-  | 'branch'
-  | 'fridge'
-  | 'timestamp'
-  | 'date'
-  | 'time'
-  | 'temperature'
-  | 'unit';
+import type {
+  ColumnMapping,
+  HeaderMapping,
+  HeaderValidation,
+  IngestField,
+  SuppliedLabels,
+  TemperatureUnit,
+} from '../types';
 
 /**
  * Header synonyms, longest/most-specific first within each field. Summer said
@@ -93,19 +86,6 @@ export function normalizeHeader(header: string): string {
     .trim();
 }
 
-export interface HeaderMapping {
-  /** field -> column index in the row array */
-  columns: Partial<Record<IngestField, number>>;
-  mapped: ColumnMapping[];
-  /** Reported back to Summer rather than silently dropped. */
-  unmapped: string[];
-  /**
-   * A header like "Temp F" or "Fahrenheit" declares the file's unit. Trusted
-   * over the logger's registered unit, because it came from the device.
-   */
-  unitHint: TemperatureUnit | null;
-}
-
 function matchField(normalized: string): IngestField | null {
   // Exact match wins, so a column literally called "time" is a time column
   // and not accidentally a "datetime" column.
@@ -153,30 +133,6 @@ export function mapHeaders(headers: string[]): HeaderMapping {
   });
 
   return { columns, mapped, unmapped, unitHint };
-}
-
-export interface HeaderValidation {
-  ok: boolean;
-  missing: string[];
-  /** True when the file has separate date and time columns to be joined. */
-  splitDateTime: boolean;
-  /**
-   * True when the only thing wrong is that nobody said which fridge this is.
-   * The file is readable; it just needs labelling, which Summer can do in the
-   * app instead of in Excel first.
-   */
-  needsLabels: boolean;
-}
-
-/**
- * Which of logger, branch and fridge Summer can supply by hand at upload time.
- * She already does exactly this in Excel: "I type in the logger number, the
- * branch and the fridge myself when I paste".
- */
-export interface SuppliedLabels {
-  loggerCode?: string | null;
-  branchName?: string | null;
-  fridgeName?: string | null;
 }
 
 function supplied(value: string | null | undefined): boolean {

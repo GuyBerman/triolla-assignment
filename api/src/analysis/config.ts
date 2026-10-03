@@ -1,9 +1,17 @@
 /**
- * Every judgement the app makes is tuned from here, so there is one place to
- * review and one place to argue about. None of these numbers came from Summer:
- * she gave us "above five degrees", "a jump for one reading is fine" and "a
- * fridge that's slowly warming up is not fine". The rest is inference, and
- * each one is listed in NOTES.md as something to confirm with her.
+ * Defaults for every judgement, and the clamps that are not a judgement.
+ *
+ * She can change the judgements (how long is too warm, when a logger is
+ * silent, what counts as warming up or a gap) from the Settings button on
+ * Branches, and from Rules → Settings. Those
+ * saved values are passed into the analysis; this object is what applies
+ * until she saves something else. The cadence clamps and the minimum number
+ * of readings stay here on purpose: they stop a broken calculation, and
+ * putting them on a form would let a typo call noise a trend.
+ *
+ * None of these numbers came from Summer. She gave us "above five degrees",
+ * "a jump for one reading is fine" and "a fridge that's slowly warming up is
+ * not fine". The rest is inference, listed in NOTES.md.
  */
 export const ANALYSIS = {
   /**

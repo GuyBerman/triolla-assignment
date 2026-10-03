@@ -1,13 +1,13 @@
 import { parse } from 'csv-parse/sync';
 
-import type { TemperatureUnit, UploadRejection } from '../types';
-import {
-  mapHeaders,
-  validateHeaders,
-  type HeaderMapping,
-  type HeaderValidation,
-  type SuppliedLabels,
-} from './headers';
+import type {
+  HeaderMapping,
+  HeaderValidation,
+  ParsedRow,
+  SuppliedLabels,
+  UploadRejection,
+} from '../types';
+import { mapHeaders, validateHeaders } from './headers';
 import { canonicalize, canonicalizeLoggerCode } from './names';
 import {
   isLegacyExcelFilename,
@@ -16,24 +16,6 @@ import {
 } from './spreadsheet';
 import { parseTemperature } from './temperature';
 import { parseSplitDateTime, parseTimestamp } from './timestamp';
-
-export interface ParsedRow {
-  /** 1-based row number as a human would count it in a spreadsheet. */
-  rowNumber: number;
-  loggerCode: string;
-  branchName: string;
-  branchCanonical: string;
-  fridgeName: string;
-  fridgeCanonical: string;
-  recordedAt: Date;
-  /** Exactly what the cell contained. */
-  rawValue: string;
-  /** The number as written, still in the file's own unit. */
-  rawNumber: number | null;
-  /** A unit declared by the cell or the column header, if any. */
-  unitOverride: TemperatureUnit | null;
-  status: 'ok' | 'error';
-}
 
 interface ParseFileResult {
   rows: ParsedRow[];

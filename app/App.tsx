@@ -3,14 +3,16 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { StatusBar } from 'expo-status-bar';
+import { Pressable, Text } from 'react-native';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 
 import { DashboardScreen } from './src/screens/DashboardScreen';
 import { BranchScreen } from './src/screens/BranchScreen';
 import { FridgeDetailScreen } from './src/screens/FridgeDetailScreen';
 import { InspectorScreen } from './src/screens/InspectorScreen';
-import { RulesScreen } from './src/screens/RulesScreen';
+import { RulesTabScreen } from './src/screens/RulesTabScreen';
 import { SearchScreen } from './src/screens/SearchScreen';
+import { SettingsScreen } from './src/screens/SettingsScreen';
 import { UploadScreen } from './src/screens/UploadScreen';
 import type {
   FridgesStackParamList,
@@ -37,7 +39,25 @@ function FridgesNavigator() {
       <FridgesStack.Screen
         name="Dashboard"
         component={DashboardScreen}
-        options={{ title: 'Branches' }}
+        options={({ navigation }) => ({
+          title: 'Branches',
+          headerRight: () => (
+            <Pressable
+              onPress={() => navigation.navigate('Settings')}
+              hitSlop={8}
+              style={{ paddingHorizontal: 16, paddingVertical: 8 }}
+              accessibilityRole="button"
+              accessibilityLabel="Settings"
+            >
+              <Text style={{ color: colors.accent, fontWeight: '700', fontSize: 16 }}>Settings</Text>
+            </Pressable>
+          ),
+        })}
+      />
+      <FridgesStack.Screen
+        name="Settings"
+        component={SettingsScreen}
+        options={{ title: 'Settings' }}
       />
       <FridgesStack.Screen
         name="Branch"
@@ -125,9 +145,10 @@ export default function App() {
           />
           <Tabs.Screen
             name="RulesTab"
-            component={RulesScreen}
+            component={RulesTabScreen}
             options={{
               title: 'Rules',
+              tabBarLabel: 'Rules',
               headerShown: true,
               ...headerStyle,
               tabBarIcon: ({ color, size }) => (

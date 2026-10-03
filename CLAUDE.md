@@ -116,7 +116,7 @@ These are load-bearing. A change that typechecks but produces a sentence Summer 
 11. **Dedup is `UNIQUE (logger_id, recorded_at)` + `ON CONFLICT DO NOTHING`.** Application-level "did we see this" is not enough; she re-pastes overlapping files.
 12. **Conversion rules apply at the next ingest, not retroactively.** Re-uploading the same file is skipped as duplicates, so a new rule will not rewrite existing rows.
 
-All analysis tunables live in `api/src/analysis/config.ts`. Do not scatter magic numbers. Only "above five degrees" came from Summer; everything else is a guess listed in `NOTES.md`.
+Defaults and the clamps that are not a judgement (cadence, minimum readings) live in `api/src/analysis/config.ts`. The judgements she can change are a row in `analysis_settings`, edited on the Settings tab, and passed into `analyseReadings`. Analysis does not read the database. Do not scatter magic numbers. Only "above five degrees" came from Summer; everything else is a guess listed in `NOTES.md`.
 
 ---
 
@@ -149,15 +149,17 @@ Mounted at `/api`:
 | GET             | `/health`                             | API + DB                                                                 |
 | GET             | `/fridges`                            | every fridge, worst-first, plain-language `statusReason`                 |
 | GET             | `/fridges/:id?days=`                  | readings, excursions, door events, gaps                                  |
+| PUT             | `/fridges/:id`                        | that fridge's degree limit (`thresholdC`)                                |
 | GET             | `/search?q=&aboveC=`                  | name filter and/or "reached this °C"; status recomputed against `aboveC` |
 | GET             | `/reports/excursions?days=&fridgeId=` | inspector answer; **include fridges with zero excursions**               |
 | POST            | `/uploads`                            | multipart `file`                                                         |
 | GET             | `/uploads`                            | history                                                                  |
 | GET/POST/DELETE | `/rules`                              | ingest conversion rules                                                  |
+| GET/PUT         | `/settings`                           | the judgements she can change (how long is too warm, silence, drift, gaps) |
 
 Unparseable date query params **fall back**, they do not become `Invalid Date` (that produces an empty report that looks like a clean record).
 
-Wire types live in `api/src/types.ts` and are **hand-mirrored** in `app/src/api/types.ts`. Edit both. There is no shared package on purpose.
+Shared types live in `api/src/types/` (`fridge.ts`, `upload.ts`, `rules.ts`, `ingest.ts`, `analysis.ts`, `report.ts`, `settings.ts`), including the Postgres row shapes. The JSON the app sees is **hand-mirrored** in `app/src/api/types.ts`. Edit both. There is no shared package on purpose.
 
 ---
 
@@ -167,6 +169,7 @@ Wire types live in `api/src/types.ts` and are **hand-mirrored** in `app/src/api/
 
 ```
 Tabs: Fridges | Search | Upload | Rules | Inspector
+Settings: header button on Branches, and Rules → Settings. Same judgements as `GET/PUT /settings`.
 Fridges stack: Dashboard (branches, worst-first) → Branch (all fridges) → FridgeDetail
 Search stack: Search (name and/or custom °C) → FridgeDetail
 ```

@@ -9,7 +9,14 @@ import {
   readingsByFridge,
   readingsForFridge,
 } from '../repository';
-import type { FridgeDetail, FridgeListResponse, FridgeSummary, Reading } from '../types';
+import { getAnalysisSettings } from '../settingsStore';
+import type {
+  AnalysisSettings,
+  FridgeDetail,
+  FridgeListResponse,
+  FridgeSummary,
+  Reading,
+} from '../types';
 
 const DAY_MS = 86_400_000;
 
@@ -30,6 +37,7 @@ export function summarise(
   asOfMs: number,
   loggerCode: string | null,
   noDataHint: string | null,
+  settings: AnalysisSettings,
 ): { summary: FridgeSummary; analysis: ReturnType<typeof analyseReadings> } {
   const analysis = analyseReadings({
     readings,
@@ -37,6 +45,7 @@ export function summarise(
     asOfMs,
     timeZone: config.timezone,
     noDataHint,
+    settings,
   });
 
   return {
@@ -77,10 +86,11 @@ export async function listFridgeSummaries(days: number): Promise<FridgeListRespo
   if (asOf === null) return EMPTY_LIST;
 
   const from = daysBefore(asOf, days);
-  const [fridges, assignments, readings] = await Promise.all([
+  const [fridges, assignments, readings, settings] = await Promise.all([
     listFridges(),
     listAssignments(),
     readingsByFridge(from, asOf),
+    getAnalysisSettings(),
   ]);
   const context = buildAssignmentContext(assignments, config.timezone);
 
@@ -92,6 +102,7 @@ export async function listFridgeSummaries(days: number): Promise<FridgeListRespo
         asOf.getTime(),
         context.loggerCodeByFridge.get(fridge.id) ?? null,
         context.noDataHintByFridge.get(fridge.id) ?? null,
+        settings,
       ).summary,
   );
 
@@ -118,9 +129,10 @@ export async function getFridgeDetail(
   if (fridge === null) return null;
 
   const asOf = (await getAsOf()) ?? new Date();
-  const [assignments, readings] = await Promise.all([
+  const [assignments, readings, settings] = await Promise.all([
     listAssignments(),
     readingsForFridge(id, from, to),
+    getAnalysisSettings(),
   ]);
   const context = buildAssignmentContext(assignments, config.timezone);
 
@@ -130,6 +142,7 @@ export async function getFridgeDetail(
     Math.min(asOf.getTime(), to.getTime()),
     context.loggerCodeByFridge.get(id) ?? null,
     context.noDataHintByFridge.get(id) ?? null,
+    settings,
   );
 
   return {

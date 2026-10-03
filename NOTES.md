@@ -102,10 +102,22 @@ fridge can sit at 22°C and refusing that data would hide a real emergency.
 is a gap rather than a decision — see below.
 
 **Routes do not decide what a fridge is doing.** HTTP lives in `src/routes/`,
-orchestration in `src/services/`, SQL in `repository.ts` / `ruleStore.ts`.
+orchestration in `src/services/`, SQL in `repository.ts` / `ruleStore.ts` /
+`settingsStore.ts`.
 The actual rules are still in `ingest/` and `analysis/` — a `FridgeService`
 class that only forwarded to those would have been a third name for the same
 work. Rules stay route → `ruleStore` because there is nothing to orchestrate.
+Settings are the same shape: the form saves a row, and the fridge services
+pass that row into `analyseReadings`. Analysis itself never opens the database.
+
+**The judgements are editable; the clamps are not.** How long above the limit
+counts, how long a silence is No data, and what counts as warming up or a gap
+are on Settings (the Branches header, and Rules → Settings), because those were guesses listed for her to confirm.
+Cadence limits and "at least eight readings" stay in `analysis/config.ts`. A
+box for those would let a typo call noise a trend, and one reading stays a
+door opening because the duration cannot be set to zero. Changing a setting
+recomputes every fridge on the next look, including files she already
+uploaded. It does not change a fridge's own degree limit.
 
 ---
 
@@ -119,8 +131,8 @@ In rough order of how much the answers would change:
    it.
 2. **Do all fridges share the same limit?** A walk-in, a dairy fridge and a
    cream cake display plausibly have different requirements. The schema
-   already stores a per-fridge threshold; the UI has no way to set it, because
-   I do not know what the right values are.
+   already stores a per-fridge threshold, and Settings (and the fridge page)
+   can change it. A new fridge still starts at 5° until she says otherwise.
 3. **Should she be told between uploads?** Today the tool only knows what has
    been uploaded, so a fridge can fail on Tuesday and go unseen until Sunday.
    That is the same weekly blind spot she has now, just with a nicer view of
@@ -148,16 +160,18 @@ In rough order of how much the answers would change:
 - **No alerting.** No email, no push. The tool is silent until she opens it.
 - **Old `.xls` files are refused.** `.xlsx` and `.xlsm` are read; the
   pre-2007 binary format is not.
-- **No way to edit anything in the UI** — thresholds, branch names, fridge
-  names, logger assignments are all inferred from files or set to defaults.
+- **No way to rename a fridge or move its logger in the UI.** Those still
+  come from the file. The degree limit is editable on Settings and on the
+  fridge page. Settings also covers the shared judgements (how long is too
+  warm, when a logger is silent, warming up, gaps).
 - **No pagination.** Twenty fridges and ~3,300 readings are fine; twenty
   thousand would not be.
 - **Date range on the inspector report is fixed buttons** (7/30/90 days)
   rather than a real date picker, so "what about last March" is not
   answerable in the UI, though the API accepts arbitrary `from` and `to`.
-- **The API types are hand-mirrored** in `api/src/types.ts` and
+- **The API types are hand-mirrored** in `api/src/types/` and
   `app/src/api/types.ts`. One backend and one client did not justify a shared
-  package, but the two files have to be edited together and nothing enforces
+  package, but the two sides have to be edited together and nothing enforces
   that.
 - **`npm audit` reports 10 moderate advisories in `app/`.** They are all the
   same underlying `uuid` advisory, surfacing ten times along one chain
@@ -171,9 +185,8 @@ In rough order of how much the answers would change:
 
 ### What one more hour would buy
 
-The date picker on the inspector report, and per-fridge thresholds editable in
-the UI. Both are small, and both are currently papered over by an assumption I
-cannot verify.
+The date picker on the inspector report. The per-fridge degree limit is
+editable now; the right number for each fridge is still hers to decide.
 
 If I had a second hour I would spend it on **email ingestion** rather than
 anything in the app. Every remaining weakness in this tool traces back to the

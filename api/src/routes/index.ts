@@ -5,6 +5,7 @@ import { healthRouter } from './health';
 import { reportsRouter } from './reports';
 import { rulesRouter } from './rules';
 import { searchRouter } from './search';
+import { settingsRouter } from './settings';
 import { uploadsRouter } from './uploads';
 
 export function registerRoutes(app: Express): void {
@@ -13,5 +14,6 @@ export function registerRoutes(app: Express): void {
   app.use('/api', uploadsRouter);
   app.use('/api', reportsRouter);
   app.use('/api', rulesRouter);
+  app.use('/api', settingsRouter);
   app.use('/api', searchRouter);
 }

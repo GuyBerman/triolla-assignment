@@ -7,6 +7,7 @@ import {
   listFridges,
   readingsByFridge,
 } from '../repository';
+import { getAnalysisSettings } from '../settingsStore';
 import type { FridgeListResponse, FridgeSummary } from '../types';
 import { summarise } from './fridges';
 
@@ -33,10 +34,11 @@ export async function searchFridges(input: {
   if (asOf === null) return EMPTY_LIST;
 
   const from = daysBefore(asOf, input.days);
-  const [fridges, assignments, readings] = await Promise.all([
+  const [fridges, assignments, readings, settings] = await Promise.all([
     listFridges(),
     listAssignments(),
     readingsByFridge(from, asOf),
+    getAnalysisSettings(),
   ]);
   const context = buildAssignmentContext(assignments, config.timezone);
   const needle = input.query.toLowerCase();
@@ -57,6 +59,7 @@ export async function searchFridges(input: {
       asOf.getTime(),
       context.loggerCodeByFridge.get(fridge.id) ?? null,
       context.noDataHintByFridge.get(fridge.id) ?? null,
+      settings,
     );
 
     if (input.aboveC !== null && (summary.peakC === null || summary.peakC < input.aboveC)) {

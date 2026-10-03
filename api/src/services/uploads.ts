@@ -1,6 +1,6 @@
 import { ingestFile } from '../ingest/ingest';
 import { listRecentUploads } from '../repository';
-import type { SuppliedLabels } from '../ingest/headers';
+import type { SuppliedLabels } from '../types';
 import type { UploadHistoryEntry, UploadReport } from '../types';
 
 /** Same path seed uses. If uploading works, seeding works. */

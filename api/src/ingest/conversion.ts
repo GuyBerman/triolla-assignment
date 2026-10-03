@@ -1,18 +1,6 @@
-import type { TemperatureUnit } from '../types';
+import type { ConversionRule, TemperatureUnit } from '../types';
 import { canonicalize, canonicalizeLoggerCode } from './names';
 import { fahrenheitToCelsius } from './temperature';
-
-export type RuleUnit = 'as_written' | 'C' | 'F';
-
-export interface ConversionRule {
-  id: number;
-  matchBranch: string | null;
-  matchLogger: string | null;
-  matchFridge: string | null;
-  unit: RuleUnit;
-  multiplyBy: number;
-  add: number;
-}
 
 interface RuleTarget {
   branchCanonical: string;

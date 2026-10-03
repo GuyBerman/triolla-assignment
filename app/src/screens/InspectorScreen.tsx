@@ -44,6 +44,7 @@ export function InspectorScreen({ route }: Props) {
 
   const withExcursions = data.rows.filter((row) => row.excursions.length > 0);
   const clean = data.rows.filter((row) => row.excursions.length === 0);
+  const lasted = describeDuration(data.excursionMinDurationMinutes);
 
   const copy = async () => {
     await Clipboard.setStringAsync(plainText);
@@ -61,7 +62,7 @@ export function InspectorScreen({ route }: Props) {
         </Text>
         <Text style={styles.headline}>
           {data.totalExcursions === 0
-            ? `No fridge stayed above its limit for 30 minutes or more. All ${data.rows.length} checked.`
+            ? `No fridge stayed above its limit for ${lasted} or more. All ${data.rows.length} checked.`
             : `${data.totalExcursions} ${
                 data.totalExcursions === 1 ? 'period' : 'periods'
               } above the limit, on ${withExcursions.length} of ${data.rows.length} ${
@@ -69,7 +70,7 @@ export function InspectorScreen({ route }: Props) {
               }.`}
         </Text>
         <Text style={styles.muted}>
-          A jump that lasted under 30 minutes is a door opening. It is not listed here.
+          A jump that lasted under {lasted} is a door opening. It is not listed here.
         </Text>
       </View>
 
@@ -105,7 +106,7 @@ export function InspectorScreen({ route }: Props) {
           <Text style={styles.fridgeTitle}>
             Did not stay above the limit ({clean.length})
           </Text>
-          <Text style={styles.muted}>Nothing lasting 30 minutes or more in this period.</Text>
+          <Text style={styles.muted}>Nothing lasting {lasted} or more in this period.</Text>
           {clean.map((row) => (
             <Text key={row.fridgeId} style={styles.cleanName}>
               {row.branchName} {row.fridgeName}
@@ -147,7 +148,7 @@ function toPlainText(report: ExcursionReport): string {
     'Squanchy Bakery - fridge temperature record',
     `Period: ${formatDate(report.from)} to ${formatDate(report.to)}`,
     `Produced: ${formatDateTime(report.generatedAt)}`,
-    'Only stretches of 30 minutes or more above the limit are listed. A shorter jump is a door opening.',
+    `Only stretches of ${describeDuration(report.excursionMinDurationMinutes)} or more above the limit are listed. A shorter jump is a door opening.`,
     '',
   ];
 
@@ -155,7 +156,7 @@ function toPlainText(report: ExcursionReport): string {
 
   if (withExcursions.length === 0) {
     lines.push(
-      `No fridge stayed above its limit for 30 minutes or more. ${report.rows.length} fridges checked.`,
+      `No fridge stayed above its limit for ${describeDuration(report.excursionMinDurationMinutes)} or more. ${report.rows.length} fridges checked.`,
     );
     lines.push('');
   } else {

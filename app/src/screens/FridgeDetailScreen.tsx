@@ -6,6 +6,7 @@ import { useCallback, useState } from 'react';
 import { Pressable, RefreshControl, ScrollView, StyleSheet, Text, View } from 'react-native';
 
 import type { FridgeDetail } from '../api/types';
+import { FridgeLimitControl } from '../components/FridgeLimitControl';
 import { Empty, ErrorMessage, Loading } from '../components/Message';
 import { RangeChips } from '../components/RangeChips';
 import { StatusPill } from '../components/StatusPill';
@@ -61,9 +62,14 @@ export function FridgeDetailScreen({ route, navigation }: Props) {
       <View style={styles.section}>
         <StatusPill status={fridge.status} />
         <Text style={styles.reason}>{fridge.statusReason}</Text>
+        <FridgeLimitControl
+          fridgeId={fridge.id}
+          label="Limit (°)"
+          thresholdC={fridge.thresholdC}
+          onSaved={() => refetch()}
+        />
         <Text style={styles.meta}>
-          Limit {formatTemperature(fridge.thresholdC)}
-          {fridge.loggerCode ? ` · logger ${fridge.loggerCode}` : ' · no logger fitted'}
+          {fridge.loggerCode ? `Logger ${fridge.loggerCode}` : 'No logger fitted'}
         </Text>
       </View>
 

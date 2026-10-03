@@ -4,19 +4,24 @@ import { config } from '../config';
 import { pool } from '../db/pool';
 import { listKnownLoggers } from '../repository';
 import { listConversionRules } from '../ruleStore';
-import type { LoggerMove, TemperatureUnit, UploadReport, UploadRejection } from '../types';
+import type {
+  LoggerMove,
+  LoggerRecord,
+  NamedRecord,
+  ParsedRow,
+  PreparedReading,
+  StoredAssignment,
+  SuppliedLabels,
+  TemperatureUnit,
+  UploadReport,
+  UploadRejection,
+} from '../types';
 import { applyConversion, describeRule, pickRule } from './conversion';
-import type { SuppliedLabels } from './headers';
 import { preferredDisplayName } from './names';
-import { parseUploadedFile, type ParsedRow } from './parseFile';
+import { parseUploadedFile } from './parseFile';
 import { assessDeclaredUnit } from './temperature';
 
 const READING_INSERT_CHUNK = 500;
-
-interface NamedRecord {
-  id: number;
-  name: string;
-}
 
 async function resolveBranch(
   client: PoolClient,
@@ -71,11 +76,6 @@ async function resolveFridge(
   return row.id;
 }
 
-interface LoggerRecord {
-  id: number;
-  unit: TemperatureUnit;
-}
-
 async function resolveLogger(client: PoolClient, code: string): Promise<LoggerRecord> {
   const inserted = await client.query<LoggerRecord>(
     `insert into loggers (code) values ($1)
@@ -92,12 +92,6 @@ async function resolveLogger(client: PoolClient, code: string): Promise<LoggerRe
   return existing.rows[0]!;
 }
 
-interface Assignment {
-  id: number;
-  fridge_id: number;
-  valid_from: Date;
-  valid_to: Date | null;
-}
 
 /**
  * Keeps `logger_assignments` in step with what the files say, and reports any
@@ -141,7 +135,7 @@ async function syncAssignments(
   }
 
   for (const segment of segments) {
-    const openResult = await client.query<Assignment>(
+    const openResult = await client.query<StoredAssignment>(
       `select id, fridge_id, valid_from, valid_to
          from logger_assignments
         where logger_id = $1 and valid_to is null
@@ -199,15 +193,6 @@ async function syncAssignments(
   }
 
   return moves;
-}
-
-interface PreparedReading {
-  loggerId: number;
-  fridgeId: number;
-  recordedAt: Date;
-  tempC: number | null;
-  rawValue: string;
-  status: 'ok' | 'error';
 }
 
 async function insertReadings(
